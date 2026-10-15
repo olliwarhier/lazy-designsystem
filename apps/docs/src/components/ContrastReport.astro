@@ -1,0 +1,118 @@
+---
+/**
+ * Kontrast-Report der Farbrollen – dieselben Prüfregeln wie der Lazy Theme Builder,
+ * gerechnet mit @lazy-designsystem/core auf den Werten aus tokens.json.
+ */
+import data from '@lazy-designsystem/tokens/tokens.json';
+import { apca, wcag, parseHex } from '@lazy-designsystem/core';
+
+interface Props {
+  /** text: Schrift auf Fläche (Regel 1 und 3) · surface: Flächen auf Surface (Regel 2) */
+  kind: 'text' | 'surface';
+}
+const { kind } = Astro.props;
+
+const byName = new Map(data.tokens.filter((t) => t.type === 'color').map((t) => [t.css, t]));
+const modes = Object.keys(byName.get('--color-surface-default-base')!.modes);
+const opaque = (hex: unknown) => typeof hex === 'string' && hex.length === 7;
+const NON_ROLES = ['surface', 'outline', 'hovered', 'pressed', 'focused', 'shadow', 'scrim'];
+
+type Pair = { fg: string; bg: string; rule: string };
+const pairs: Pair[] = [];
+for (const css of byName.keys()) {
+  const m = css.match(/^--color-(on-)?([a-z]+)-(default|inverted)-([a-z]+)$/);
+  if (!m) continue;
+  const [, on, role, polarity, emphasis] = m;
+  if (kind === 'text' && on) {
+    const bg = role === 'surface' ? `--color-surface-${polarity}-base` : `--color-${role}-${polarity}-${emphasis}`;
+    if (byName.has(bg)) pairs.push({ fg: css, bg, rule: role === 'surface' ? '3' : '1' });
+  }
+  if (kind === 'surface' && !on && !NON_ROLES.includes(role)) {
+    pairs.push({ fg: css, bg: '--color-surface-default-base', rule: '2' });
+  }
+}
+
+const rate = (lc: number) => {
+  const v = Math.abs(lc);
+  if (v >= 75) return ['Fließtext', 'good'];
+  if (v >= 60) return ['Text, UI', 'good'];
+  if (v >= 45) return ['große Schrift', 'ok'];
+  if (v >= 30) return ['nur Deko', 'weak'];
+  return ['zu gering', 'bad'];
+};
+
+const rows = pairs.map((p) => ({
+  ...p,
+  results: modes.map((mode) => {
+    const fg = byName.get(p.fg)!.modes[mode];
+    const bg = byName.get(p.bg)!.modes[mode];
+    if (!opaque(fg) || !opaque(bg)) return null;
+    const lc = apca(parseHex(fg as string), parseHex(bg as string));
+    return { fg, bg, lc: Math.round(lc), ratio: wcag(parseHex(fg as string), parseHex(bg as string)).toFixed(1), rating: rate(lc) };
+  }),
+}));
+---
+
+<table class="contrast">
+  <thead>
+    <tr>
+      <th>{kind === 'text' ? 'Schrift' : 'Fläche'}</th>
+      <th>{kind === 'text' ? 'auf Fläche' : 'auf'}</th>
+      {modes.map((m) => <th>{m}</th>)}
+    </tr>
+  </thead>
+  <tbody>
+    {
+      rows.map((r) => (
+        <tr>
+          <td><code>{r.fg.replace('--color-', '')}</code></td>
+          <td><code>{r.bg.replace('--color-', '')}</code></td>
+          {r.results.map((x) =>
+            x ? (
+              <td>
+                <span class="sample" style={`color:${x.fg};background:${x.bg}`}>Aa</span>
+                <span class:list={['lc', x.rating[1]]}>Lc {x.lc}</span>
+                <small>{x.rating[0]} · {x.ratio}:1</small>
+              </td>
+            ) : (
+              <td>–</td>
+            ),
+          )}
+        </tr>
+      ))
+    }
+  </tbody>
+</table>
+
+<style>
+  .contrast td {
+    white-space: nowrap;
+  }
+  .sample {
+    display: inline-block;
+    padding: 0.125rem 0.5rem;
+    border-radius: 0.25rem;
+    border: 1px solid var(--sl-color-gray-5);
+    font-weight: 600;
+    margin-right: 0.375rem;
+  }
+  .lc {
+    font-weight: 600;
+    margin-right: 0.25rem;
+  }
+  .lc.good {
+    color: var(--sl-color-green);
+  }
+  .lc.ok {
+    color: var(--sl-color-blue);
+  }
+  .lc.weak {
+    color: var(--sl-color-orange);
+  }
+  .lc.bad {
+    color: var(--sl-color-red);
+  }
+  small {
+    color: var(--sl-color-gray-3);
+  }
+</style>

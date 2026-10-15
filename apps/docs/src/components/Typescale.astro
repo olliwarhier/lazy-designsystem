@@ -1,0 +1,70 @@
+---
+/**
+ * Typescale-Rechner und Vergleich mit den Werten im DS Template.
+ * <Typescale view="calculator" /> · <Typescale view="comparison" />
+ */
+import data from '@lazy-designsystem/tokens/tokens.json';
+import responsive from '@lazy-designsystem/tokens/src/responsive.json';
+import { typescale } from '@lazy-designsystem/core';
+import TypescaleCalculator from './TypescaleCalculator.svelte';
+
+interface Props {
+  view: 'calculator' | 'comparison';
+}
+const { view } = Astro.props;
+
+const baseScale = [
+  ...new Set(data.tokens.filter((t) => t.css.startsWith('--base-scale-')).map((t) => Number(Object.values(t.modes)[0]))),
+]
+  .filter((px) => px < 1000)
+  .sort((a, b) => a - b);
+
+// Typescale/Specs aus Figma: Root-Größe und Skalenfaktor je Modus
+const specs = (responsive as any).typescale.specs;
+const modeValue = (token: any, mode: string) => (mode === 'Desktop' ? token.$value : token.$extensions.lazy.modes[mode]);
+const calc = Object.fromEntries(
+  ['Desktop', 'Mobile'].map((mode) => [mode, typescale(modeValue(specs.rootsize, mode), modeValue(specs.scaleratio, mode), baseScale)]),
+);
+const template = (group: string, slot: string, mode: string) =>
+  data.tokens.find((t) => t.css === `--typescale-${group}-${slot}-size`)?.modes[mode] as number | undefined;
+
+const rows = ['display', 'heading', 'body'].flatMap((group) =>
+  Object.keys(calc.Desktop.styles[group])
+    .reverse()
+    .map((slot) => ({
+      style: `${group}-${slot}`,
+      modes: ['Desktop', 'Mobile'].map((mode) => ({ template: template(group, slot, mode), calc: calc[mode].styles[group][slot].px })),
+    }))
+    .filter((r) => r.modes.some((m) => m.template !== undefined)),
+);
+---
+
+{
+  view === 'calculator' ? (
+    <TypescaleCalculator client:visible baseScale={baseScale} viewport={data.viewport} />
+  ) : (
+    <table>
+      <thead>
+        <tr>
+          <th>Stil</th>
+          <th>Desktop: Template / Rechnung</th>
+          <th>Mobile: Template / Rechnung</th>
+        </tr>
+      </thead>
+      <tbody>
+        {rows.map((r) => (
+          <tr>
+            <td>
+              <code>{r.style}</code>
+            </td>
+            {r.modes.map((m) => (
+              <td>
+                {m.template ?? '–'} / {m.calc} px {m.template !== undefined && m.template !== m.calc && <strong>≠</strong>}
+              </td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  )
+}
