@@ -1,0 +1,49 @@
+---
+title: Farbformate
+description: OKLCH als Standard, Hex als optionaler Export.
+sidebar:
+  order: 4
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+## OKLCH als Standard
+
+Alle Farben werden als `oklch()` ausgegeben. Paletten werden im OKLCH-Farbraum erzeugt, daher bleibt die Information über Helligkeit, Sättigung und Farbton im Code lesbar und berechenbar.
+
+```css
+--palette-clay-70: oklch(0.7 0.01 127);
+```
+
+Rundung: Lightness auf 2–3, Chroma auf 3 Nachkommastellen, Hue auf ganze Grad.
+
+## Abgeleitete Farben mit Deckkraft
+
+Outline, Interaction (Hovered, Pressed), Shadow und Scrim sind in Figma Aliase auf eine Palettenstufe **mit eigener Deckkraft**. Im CSS werden sie mit relativer Farbsyntax ausgegeben, damit der Bezug zur Palette erhalten bleibt:
+
+```css
+--color-outline-default-base: oklch(from var(--palette-clay-70) l c h / 0.64);
+--color-hovered-default-base: oklch(from var(--palette-clay-10) l c h / 0.08);
+```
+
+## Interaction-Overlay
+
+Hover und Pressed werden als halbtransparente Ebene über die Grundfarbe gelegt – nicht als neue Farbe. Komponenten mischen sie mit `color-mix()`:
+
+```css
+background-color: color-mix(
+  in oklch,
+  var(--background),
+  oklch(from var(--color-hovered-default-base) l c h / 1) 8%
+);
+```
+
+Auf dunklen Flächen wird die `inverted`-Variante verwendet (heller statt dunkler).
+
+## Hex als optionaler Export
+
+Für Umgebungen ohne OKLCH-Unterstützung (ältere Tools, E-Mail, Diagramm-Bibliotheken) kann der Build eine zusätzliche Datei mit Hex-Werten erzeugen. Abgeleitete Farben werden dabei vorab ausgerechnet (`#rrggbbaa`).
+
+<Aside>
+  Die Hex-Werte entstehen mit demselben Gamut-Mapping wie im Browser (CSS Color 4, MINDE-Verfahren). Eine OKLCH-Farbe und ihr Hex-Gegenstück sehen daher identisch aus.
+</Aside>

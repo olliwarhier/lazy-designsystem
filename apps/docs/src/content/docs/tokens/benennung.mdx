@@ -1,0 +1,78 @@
+---
+title: Benennung
+description: Wie aus einem Figma-Variablennamen ein CSS-Variablenname wird.
+sidebar:
+  order: 2
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+Token-Namen gehen immer **vom Allgemeinen zum Spezifischen**. Die Übersetzung von Figma nach CSS folgt wenigen festen Regeln, damit jeder Name vorhersagbar ist – auch für ein LLM, das nur die Figma-Variable kennt.
+
+## Allgemeine Regeln
+
+1. Pfadsegmente werden mit `-` verbunden: `Base/Scale/200` → `--base-scale-200`.
+2. Alles wird kleingeschrieben, Leerzeichen werden zu `-`.
+3. Es gibt **kein Präfix** wie `--lazy-`. Bei Konflikten in einem Projekt kann der Build ein Präfix ergänzen.
+4. Größenbezeichnungen folgen immer derselben Reihe: `4xsmall`, `3xsmall`, `2xsmall`, `xsmall`, `small`, `medium`, `large`, `xlarge`, `2xlarge`, `3xlarge`, `4xlarge`.
+5. Emphasis-Stufen folgen immer derselben Reihe: `subtler`, `subtle`, `base`, `bold`, `bolder`.
+
+## Primitives
+
+| Figma | CSS | Wert |
+| --- | --- | --- |
+| `Base/Scale/200` | `--base-scale-200` | `1rem` (16 px) |
+| `Base/Border/Width/Small` | `--base-border-width-small` | `var(--base-scale-15)` |
+| `Base/Border/Radius/Medium` | `--base-border-radius-medium` | `var(--base-scale-150)` |
+| `Font/Family/Brand` | `--font-family-brand` | `'IBM Plex Sans'` |
+| `Font/Weight/SemiBold` | `--font-weight-semibold` | `600` |
+| `Palette/Clay/70` | `--palette-clay-70` | `oklch(0.7 0.01 127)` |
+
+Die Zahl der Base-Scale ist **px × 12,5** (`Base/Scale/200` = 16 px). Die Zahl einer Palettenstufe ist ihre **Lightness × 100** (`Clay/70` hat L = 0,70).
+
+Nicht ausgegeben werden: `Palette/*/Specs/*` und `Palette/Scale/*` – sie beschreiben, *wie* eine Palette erzeugt wurde (siehe [Paletten](../../foundations/farbe/)).
+
+## System Farbe
+
+Figma-Pfade haben die Form `Color/<Kategorie>/<Rolle>/<Polarität>/<Emphasis>`. Im CSS **entfallen `Color` und die Kategorie** – die Kategorie (Corporate, Basic, Feedback …) dient nur der Ordnung in Figma.
+
+`--color-<rolle>-<polarität>-<emphasis>`
+
+| Figma | CSS |
+| --- | --- |
+| `Color/Corporate/Brand/Default/Base` | `--color-brand-default-base` |
+| `Color/Corporate/On-Brand/Default/Subtle` | `--color-on-brand-default-subtle` |
+| `Color/Basic/Surface/Inverted/Bold` | `--color-surface-inverted-bold` |
+| `Color/Basic/On-Surface/Default/Brand` | `--color-on-surface-default-brand` |
+| `Color/Feedback/Error/Default/Base` | `--color-error-default-base` |
+| `Color/Interaction/Hovered/Default/Base` | `--color-hovered-default-base` |
+| `Color/Interaction/Disabled/Opacity` | `--color-disabled-opacity` |
+| `Color/Effects/Shadow/Default/Bold` | `--color-shadow-default-bold` |
+
+<Aside type="caution" title="Regel für neue Farbrollen">
+  Weil die Kategorie entfällt, muss jeder **Rollenname über alle Kategorien hinweg eindeutig** sein. Eine zusätzliche Rolle (z. B. `Tertiary` oder `Accent`) braucht immer ihr Paar `On-Tertiary` und folgt derselben Polaritäts- und Emphasis-Struktur.
+</Aside>
+
+## System Responsive
+
+| Figma | CSS |
+| --- | --- |
+| `Typescale/Heading/Large/Size` | `--typescale-heading-large-size` |
+| `Typescale/Body/Medium/Bold/Weight` | `--typescale-body-medium-bold-weight` |
+| `Spacing/Dynamic/Small` | `--spacing-dynamic-small` |
+| `Spacing/Static/Small` | `--spacing-static-small` |
+| `Spacing/Presets/Wrapper` | `--spacing-presets-wrapper` |
+| `Sizing/Icon/Medium` | `--sizing-icon-medium` |
+| `Sizing/Max-Width/Text` | `--sizing-max-width-text` |
+
+Nicht ausgegeben werden: `Mode`, `Breakpoint`, `Clamp`, `Typescale/Specs/*` – sie steuern, wie Werte zwischen den Geräte-Modi interpoliert werden (siehe [Modi](../modi/#responsive)).
+
+## Components und Shapes
+
+Component-Variablen werden nicht global ausgegeben, sondern **lokal in der Komponente** unter demselben Namen definiert: `Button/Padding-X` → `--button-padding-x`. Siehe [Komponenten-Größen](../komponenten-groessen/).
+
+Shapes werden zu einem einzigen Regler `--shape` und daraus abgeleiteten Radien. Siehe [Shape](../shape/).
+
+## Figma Code Syntax
+
+Damit Figma Dev Mode und der Figma-MCP-Server direkt die CSS-Namen anzeigen, sollte jede Variable in Figma unter *Code Syntax → Web* ihren CSS-Namen tragen, z. B. `var(--color-brand-default-base)`. Das kann der Export automatisch setzen.
