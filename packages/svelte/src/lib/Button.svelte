@@ -1,98 +1,144 @@
 <script>
   /**
    * Button – löst eine Aktion aus.
-   * Spezifikation: https://olliwarhier.github.io/lazy-designsystem/komponenten/button/
+   * Figma: Components/Button · Spezifikation: Doku → Komponenten → Button
    *
    * @typedef {Object} Props
-   * @property {'primary' | 'secondary' | 'ghost'} [variant='primary'] Visuelle Gewichtung der Aktion
-   * @property {'sm' | 'md' | 'lg'} [size='md'] Größe
-   * @property {boolean} [disabled=false] Deaktiviert den Button
-   * @property {'button' | 'submit' | 'reset'} [type='button'] Natives button-type-Attribut
-   * @property {import('svelte').Snippet} [children] Beschriftung
+   * @property {'filled' | 'outlined' | 'text'} [variant='filled'] Figma: Type
+   * @property {import('./size.js').Size} [size] Small, Medium, Large – sonst vom umgebenden Bereich
+   * @property {'darker' | 'lighter'} [interaction='darker'] Figma: Interaction – Hover dunkler oder heller
+   * @property {boolean} [disabled=false]
+   * @property {'button' | 'submit' | 'reset'} [type='button']
+   * @property {import('svelte').Snippet} [leading] Icon vor dem Label
+   * @property {import('svelte').Snippet} [trailing] Icon nach dem Label
+   * @property {import('svelte').Snippet} [children] Label
    */
+  import { resolveSize } from './size.js';
 
   /** @type {Props & import('svelte/elements').HTMLButtonAttributes} */
   let {
-    variant = 'primary',
-    size = 'md',
+    variant = 'filled',
+    size,
+    interaction = 'darker',
     disabled = false,
     type = 'button',
+    leading,
+    trailing,
     children,
     ...rest
   } = $props();
+
+  const currentSize = $derived(resolveSize(size));
 </script>
 
 <button
   {...rest}
   {type}
   {disabled}
-  class="lazy-button lazy-button--{variant} lazy-button--{size}"
+  class="lazy-button"
+  data-variant={variant}
+  data-size={currentSize}
+  data-interaction={interaction}
 >
+  {#if leading}<span class="icon">{@render leading()}</span>{/if}
   {@render children?.()}
+  {#if trailing}<span class="icon">{@render trailing()}</span>{/if}
 </button>
 
 <style>
   .lazy-button {
+    /* Components/Button – Medium */
+    --button-gap: var(--spacing-dynamic-2xsmall);
+    --button-padding-y: var(--spacing-dynamic-xsmall);
+    --button-padding-x: var(--spacing-dynamic-small);
+    --button-icon-size: var(--sizing-icon-medium);
+    --button-font-size: var(--typescale-body-medium-size);
+    --button-content-min-height: var(--sizing-icon-medium);
+
+    --button-height: calc(var(--button-content-min-height) + 2 * var(--button-padding-y));
+    --button-background: var(--color-action-default-base);
+    --button-foreground: var(--color-on-action-default-base);
+    --button-border: transparent;
+    --button-hovered: var(--color-hovered-default-base);
+    --button-pressed: var(--color-pressed-default-base);
+    --button-overlay: transparent;
+
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: var(--lazy-space-2);
-    border: 1px solid transparent;
-    border-radius: var(--lazy-radius-md);
-    font-family: var(--lazy-font-family-base);
-    font-weight: var(--lazy-font-weight-medium);
-    line-height: var(--lazy-font-line-height-tight);
+    gap: var(--button-gap);
+    min-height: var(--button-height);
+    padding: var(--button-padding-y) var(--button-padding-x);
+    border: var(--base-border-width-xsmall) solid var(--button-border);
+    border-radius: calc(var(--shape) * var(--button-height) / 2);
+    background-color: var(--button-background);
+    background-image: linear-gradient(var(--button-overlay), var(--button-overlay));
+    color: var(--button-foreground);
+    font-family: var(--typescale-body-medium-family);
+    font-size: var(--button-font-size);
+    font-weight: var(--typescale-body-medium-bold-weight);
+    line-height: 1;
     cursor: pointer;
-    transition: background-color 120ms ease, border-color 120ms ease;
+    transition: border-radius 120ms ease;
+  }
+
+  .lazy-button[data-size='large'] {
+    --button-gap: var(--spacing-dynamic-xsmall);
+    --button-padding-y: var(--spacing-dynamic-small);
+    --button-padding-x: var(--spacing-dynamic-medium);
+    --button-icon-size: var(--sizing-icon-large);
+    --button-font-size: var(--typescale-body-large-size);
+    --button-content-min-height: var(--sizing-icon-large);
+  }
+
+  .lazy-button[data-size='small'] {
+    --button-gap: var(--spacing-static-3xsmall);
+    --button-padding-y: var(--spacing-static-2xsmall);
+    --button-padding-x: var(--spacing-dynamic-xsmall);
+    --button-icon-size: var(--sizing-icon-small);
+    --button-font-size: var(--typescale-body-small-size);
+    --button-content-min-height: var(--sizing-icon-small);
+  }
+
+  .lazy-button[data-variant='outlined'] {
+    --button-background: transparent;
+    --button-foreground: var(--color-on-surface-default-base);
+    --button-border: var(--color-outline-default-base);
+  }
+
+  .lazy-button[data-variant='text'] {
+    --button-background: transparent;
+    --button-foreground: var(--color-on-surface-default-action);
+  }
+
+  .lazy-button[data-interaction='lighter'] {
+    --button-hovered: var(--color-hovered-inverted-base);
+    --button-pressed: var(--color-pressed-inverted-base);
+  }
+
+  .lazy-button:hover:not(:disabled) {
+    --button-overlay: var(--button-hovered);
+  }
+
+  .lazy-button:active:not(:disabled) {
+    --button-overlay: var(--button-pressed);
   }
 
   .lazy-button:focus-visible {
-    outline: 2px solid var(--lazy-color-focus-ring);
-    outline-offset: 2px;
+    outline: var(--base-border-width-focus) solid var(--color-focused-default-base);
+    outline-offset: var(--base-border-width-focus);
   }
 
   .lazy-button:disabled {
-    opacity: 0.5;
+    opacity: var(--color-disabled-opacity);
     cursor: not-allowed;
   }
 
-  /* Größen */
-  .lazy-button--sm {
-    padding: var(--lazy-space-1) var(--lazy-space-3);
-    font-size: var(--lazy-font-size-sm);
-  }
-  .lazy-button--md {
-    padding: var(--lazy-space-2) var(--lazy-space-4);
-    font-size: var(--lazy-font-size-md);
-  }
-  .lazy-button--lg {
-    padding: var(--lazy-space-3) var(--lazy-space-6);
-    font-size: var(--lazy-font-size-lg);
-  }
-
-  /* Varianten */
-  .lazy-button--primary {
-    background: var(--lazy-color-action-primary-default);
-    color: var(--lazy-color-text-on-action);
-  }
-  .lazy-button--primary:hover:not(:disabled) {
-    background: var(--lazy-color-action-primary-hover);
-  }
-
-  .lazy-button--secondary {
-    background: var(--lazy-color-action-secondary-default);
-    color: var(--lazy-color-text-default);
-    border-color: var(--lazy-color-border-default);
-  }
-  .lazy-button--secondary:hover:not(:disabled) {
-    background: var(--lazy-color-action-secondary-hover);
-  }
-
-  .lazy-button--ghost {
-    background: transparent;
-    color: var(--lazy-color-action-primary-default);
-  }
-  .lazy-button--ghost:hover:not(:disabled) {
-    background: var(--lazy-color-bg-subtle);
+  .icon {
+    display: inline-grid;
+    place-items: center;
+    width: var(--button-icon-size);
+    height: var(--button-icon-size);
+    font-size: var(--button-icon-size);
   }
 </style>

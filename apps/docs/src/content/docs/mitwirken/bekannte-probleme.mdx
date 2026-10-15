@@ -14,11 +14,11 @@ Beim Dokumentieren gefundene Fehler. Ein Eintrag wird entfernt, sobald er behobe
 | 1 | **Action-Bold im Dark Mode vertauscht.** In der System-Collection verweist `Color/Corporate/Action/Default/Bold` (Dark) auf `Dark-Mode/On-Action/Default/Bold` und `On-Action/Default/Bold` (Dark) auf `Dark-Mode/Action/Default/Bold`. | bestätigt, offen |
 | 2 | **Error nutzt teilweise die Bordeaux-Palette.** `Color/Feedback/On-Error/Default/Subtle` (Light) → `Palette/Bordeaux/28` und `Color/Basic/On-Surface/Inverted/Error` (Light) → `Palette/Bordeaux/86` statt Red. | bestätigt, offen |
 | 3 | **Shape-Werte nicht linear.** Die Werte der Shapes-Modi weichen von den Formeln des Shape-Reglers ab (siehe [Shape](../../tokens/shape/)). | offen |
-| 4 | **Variable `Clamp` ohne Wirkung.** Beide Modi sind Aliase (Desktop → `Spacing/Presets/Wrapper` = 64, Mobile → `Breakpoint`). Das Typescale-Plugin liest nur feste Zahlen und verwendet daher immer 375–1440 px; der Mobile-Breakpoint ist aber 430 px. Die Viewport-Breiten sollten direkt aus `Breakpoint` kommen. | offen |
+| 4 | **Variable `Clamp` ohne Wirkung.** Beide Modi sind Aliase (Desktop → `Spacing/Presets/Wrapper` = 64, Mobile → `Breakpoint`). Das Typescale-Plugin liest nur feste Zahlen und verwendet daher immer 375–1440 px; der Mobile-Breakpoint ist aber 430 px. Die Viewport-Breiten sollten direkt aus `Breakpoint` kommen. | Token-Build nutzt `Breakpoint` (430–1440 px); Plugin offen |
 
 ## Lazy-Plugins
 
 | # | Plugin | Problem | Status |
 | --- | --- | --- | --- |
-| 5 | Theme Builder | **Farben mit eigener Deckkraft fehlen im Export.** Outline, Hovered, Pressed, Shadow und Scrim sind Aliase mit Deckkraft; der Export kennt diesen Werttyp nicht und schreibt `/* unknown value */`. | offen |
+| 5 | Theme Builder | **Farben mit eigener Deckkraft fehlen im Export.** Outline, Hovered, Pressed, Shadow und Scrim sind Aliase mit Deckkraft; der Export kennt diesen Werttyp nicht und schreibt `/* unknown value */`. | Token-Build gibt sie korrekt aus; Plugin-Export offen |
 | 6 | Tints / Theme Builder | **Kontrastmethode hängt am Paletten-Zentrum.** Zentrum 70 bedeutet APCA, Zentrum 60 WCAG. Die Methode sollte eine eigene Einstellung sein. | offen |

@@ -1,0 +1,495 @@
+{
+  "$extensions": {
+    "lazy": {
+      "collection": "Theme",
+      "modes": [
+        "Main-Theme",
+        "Wireframe"
+      ]
+    }
+  },
+  "light-mode": {
+    "on-action": {
+      "default": {
+        "subtle": {
+          "$type": "color",
+          "$value": "{palette.lime.38}",
+          "$extensions": {
+            "lazy": {
+              "figma": "Light-Mode/On-Action/Default/Subtle",
+              "modes": {
+                "Wireframe": "{palette.clay.28}"
+              }
+            }
+          }
+        },
+        "bold": {
+          "$type": "color",
+          "$value": "{palette.lime.100}",
+          "$extensions": {
+            "lazy": {
+              "figma": "Light-Mode/On-Action/Default/Bold",
+              "modes": {
+                "Wireframe": "{palette.clay.91}"
+              }
+            }
+          }
+        },
+        "base": {
+          "$type": "color",
+          "$value": "{palette.lime.10}",
+          "$extensions": {
+            "lazy": {
+              "figma": "Light-Mode/On-Action/Default/Base",
+              "modes": {
+                "Wireframe": "{palette.clay.100}"
+              }
+            }
+          }
+        }
+      }
+    },
+    "action": {
+      "default": {
+        "subtle": {
+          "$type": "color",
+          "$value": "{palette.lime.98}",
+          "$extensions": {
+            "lazy": {
+              "figma": "Light-Mode/Action/Default/Subtle",
+              "modes": {
+                "Wireframe": "{palette.clay.95}"
+              }
+            }
+          }
+        },
+        "bold": {
+          "$type": "color",
+          "$value": "{palette.lime.28}",
+          "$extensions": {
+            "lazy": {
+              "figma": "Light-Mode/Action/Default/Bold",
+              "modes": {
+                "Wireframe": "{palette.clay.10}"
+              }
+            }
+          }
+        },
+        "base": {
+          "$type": "color",
+          "$value": "{palette.lime.79}",
+          "$extensions": {
+            "lazy": {
+              "figma": "Light-Mode/Action/Default/Base",
+              "modes": {
+                "Wireframe": "{palette.clay.18}"
+              }
+            }
+          }
+        }
+      }
+    },
+    "on-brand": {
+      "default": {
+        "subtle": {
+          "$type": "color",
+          "$value": "{palette.bordeaux.18}",
+          "$extensions": {
+            "lazy": {
+              "figma": "Light-Mode/On-Brand/Default/Subtle",
+              "modes": {
+                "Wireframe": "{palette.clay.18}"
+              }
+            }
+          }
+        },
+        "bold": {
+          "$type": "color",
+          "$value": "{palette.bordeaux.91}",
+          "$extensions": {
+            "lazy": {
+              "figma": "Light-Mode/On-Brand/Default/Bold",
+              "modes": {
+                "Wireframe": "{palette.clay.98}"
+              }
+            }
+          }
+        },
+        "base": {
+          "$type": "color",
+          "$value": "{palette.bordeaux.100}",
+          "$extensions": {
+            "lazy": {
+              "figma": "Light-Mode/On-Brand/Default/Base",
+              "modes": {
+                "Wireframe": "{palette.clay.10}"
+              }
+            }
+          }
+        }
+      }
+    },
+    "brand": {
+      "default": {
+        "base": {
+          "$type": "color",
+          "$value": "{palette.bordeaux.38}",
+          "$extensions": {
+            "lazy": {
+              "figma": "Light-Mode/Brand/Default/Base",
+              "modes": {
+                "Wireframe": "{palette.clay.79}"
+              }
+            }
+          }
+        },
+        "bold": {
+          "$type": "color",
+          "$value": "{palette.bordeaux.18}",
+          "$extensions": {
+            "lazy": {
+              "figma": "Light-Mode/Brand/Default/Bold",
+              "modes": {
+                "Wireframe": "{palette.clay.28}"
+              }
+            }
+          }
+        },
+        "subtle": {
+          "$type": "color",
+          "$value": "{palette.bordeaux.95}",
+          "$extensions": {
+            "lazy": {
+              "figma": "Light-Mode/Brand/Default/Subtle",
+              "modes": {
+                "Wireframe": "{palette.clay.91}"
+              }
+            }
+          }
+        }
+      }
+    },
+    "signal": {
+      "default": {
+        "bold": {
+          "$type": "color",
+          "$value": "{light-mode.action.default.bold}",
+          "$extensions": {
+            "lazy": {
+              "figma": "Light-Mode/Signal/Default/Bold",
+              "modes": {
+                "Wireframe": "{light-mode.action.default.bold}"
+              }
+            }
+          }
+        },
+        "base": {
+          "$type": "color",
+          "$value": "{light-mode.action.default.base}",
+          "$extensions": {
+            "lazy": {
+              "figma": "Light-Mode/Signal/Default/Base",
+              "modes": {
+                "Wireframe": "{light-mode.action.default.base}"
+              }
+            }
+          }
+        },
+        "subtle": {
+          "$type": "color",
+          "$value": "{light-mode.action.default.subtle}",
+          "$extensions": {
+            "lazy": {
+              "figma": "Light-Mode/Signal/Default/Subtle",
+              "modes": {
+                "Wireframe": "{light-mode.action.default.subtle}"
+              }
+            }
+          }
+        }
+      }
+    },
+    "on-signal": {
+      "default": {
+        "bold": {
+          "$type": "color",
+          "$value": "{light-mode.on-action.default.bold}",
+          "$extensions": {
+            "lazy": {
+              "figma": "Light-Mode/On-Signal/Default/Bold",
+              "modes": {
+                "Wireframe": "{light-mode.on-action.default.bold}"
+              }
+            }
+          }
+        },
+        "base": {
+          "$type": "color",
+          "$value": "{light-mode.on-action.default.base}",
+          "$extensions": {
+            "lazy": {
+              "figma": "Light-Mode/On-Signal/Default/Base",
+              "modes": {
+                "Wireframe": "{light-mode.on-action.default.base}"
+              }
+            }
+          }
+        },
+        "subtle": {
+          "$type": "color",
+          "$value": "{light-mode.on-action.default.subtle}",
+          "$extensions": {
+            "lazy": {
+              "figma": "Light-Mode/On-Signal/Default/Subtle",
+              "modes": {
+                "Wireframe": "{light-mode.on-action.default.subtle}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "dark-mode": {
+    "brand": {
+      "default": {
+        "subtle": {
+          "$type": "color",
+          "$value": "{palette.bordeaux.18}",
+          "$extensions": {
+            "lazy": {
+              "figma": "Dark-Mode/Brand/Default/Subtle",
+              "modes": {
+                "Wireframe": "{palette.clay.18}"
+              }
+            }
+          }
+        },
+        "base": {
+          "$type": "color",
+          "$value": "{palette.bordeaux.38}",
+          "$extensions": {
+            "lazy": {
+              "figma": "Dark-Mode/Brand/Default/Base",
+              "modes": {
+                "Wireframe": "{palette.clay.38}"
+              }
+            }
+          }
+        },
+        "bold": {
+          "$type": "color",
+          "$value": "{palette.bordeaux.95}",
+          "$extensions": {
+            "lazy": {
+              "figma": "Dark-Mode/Brand/Default/Bold",
+              "modes": {
+                "Wireframe": "{palette.clay.91}"
+              }
+            }
+          }
+        }
+      }
+    },
+    "on-brand": {
+      "default": {
+        "subtle": {
+          "$type": "color",
+          "$value": "{palette.bordeaux.91}",
+          "$extensions": {
+            "lazy": {
+              "figma": "Dark-Mode/On-Brand/Default/Subtle",
+              "modes": {
+                "Wireframe": "{palette.clay.91}"
+              }
+            }
+          }
+        },
+        "base": {
+          "$type": "color",
+          "$value": "{palette.clay.100}",
+          "$extensions": {
+            "lazy": {
+              "figma": "Dark-Mode/On-Brand/Default/Base",
+              "modes": {
+                "Wireframe": "{palette.clay.100}"
+              }
+            }
+          }
+        },
+        "bold": {
+          "$type": "color",
+          "$value": "{palette.bordeaux.28}",
+          "$extensions": {
+            "lazy": {
+              "figma": "Dark-Mode/On-Brand/Default/Bold",
+              "modes": {
+                "Wireframe": "{palette.clay.10}"
+              }
+            }
+          }
+        }
+      }
+    },
+    "action": {
+      "default": {
+        "subtle": {
+          "$type": "color",
+          "$value": "{palette.lime.18}",
+          "$extensions": {
+            "lazy": {
+              "figma": "Dark-Mode/Action/Default/Subtle",
+              "modes": {
+                "Wireframe": "{palette.clay.18}"
+              }
+            }
+          }
+        },
+        "base": {
+          "$type": "color",
+          "$value": "{palette.lime.79}",
+          "$extensions": {
+            "lazy": {
+              "figma": "Dark-Mode/Action/Default/Base",
+              "modes": {
+                "Wireframe": "{palette.clay.91}"
+              }
+            }
+          }
+        },
+        "bold": {
+          "$type": "color",
+          "$value": "{palette.lime.95}",
+          "$extensions": {
+            "lazy": {
+              "figma": "Dark-Mode/Action/Default/Bold",
+              "modes": {
+                "Wireframe": "{palette.clay.100}"
+              }
+            }
+          }
+        }
+      }
+    },
+    "on-action": {
+      "default": {
+        "subtle": {
+          "$type": "color",
+          "$value": "{palette.lime.95}",
+          "$extensions": {
+            "lazy": {
+              "figma": "Dark-Mode/On-Action/Default/Subtle",
+              "modes": {
+                "Wireframe": "{palette.clay.95}"
+              }
+            }
+          }
+        },
+        "base": {
+          "$type": "color",
+          "$value": "{palette.lime.10}",
+          "$extensions": {
+            "lazy": {
+              "figma": "Dark-Mode/On-Action/Default/Base",
+              "modes": {
+                "Wireframe": "{palette.clay.18}"
+              }
+            }
+          }
+        },
+        "bold": {
+          "$type": "color",
+          "$value": "{palette.lime.28}",
+          "$extensions": {
+            "lazy": {
+              "figma": "Dark-Mode/On-Action/Default/Bold",
+              "modes": {
+                "Wireframe": "{palette.clay.18}"
+              }
+            }
+          }
+        }
+      }
+    },
+    "signal": {
+      "default": {
+        "bold": {
+          "$type": "color",
+          "$value": "{dark-mode.action.default.bold}",
+          "$extensions": {
+            "lazy": {
+              "figma": "Dark-Mode/Signal/Default/Bold",
+              "modes": {
+                "Wireframe": "{dark-mode.action.default.bold}"
+              }
+            }
+          }
+        },
+        "base": {
+          "$type": "color",
+          "$value": "{dark-mode.action.default.base}",
+          "$extensions": {
+            "lazy": {
+              "figma": "Dark-Mode/Signal/Default/Base",
+              "modes": {
+                "Wireframe": "{dark-mode.action.default.base}"
+              }
+            }
+          }
+        },
+        "subtle": {
+          "$type": "color",
+          "$value": "{dark-mode.action.default.subtle}",
+          "$extensions": {
+            "lazy": {
+              "figma": "Dark-Mode/Signal/Default/Subtle",
+              "modes": {
+                "Wireframe": "{dark-mode.action.default.subtle}"
+              }
+            }
+          }
+        }
+      }
+    },
+    "on-signal": {
+      "default": {
+        "bold": {
+          "$type": "color",
+          "$value": "{dark-mode.on-action.default.bold}",
+          "$extensions": {
+            "lazy": {
+              "figma": "Dark-Mode/On-Signal/Default/Bold",
+              "modes": {
+                "Wireframe": "{dark-mode.on-action.default.bold}"
+              }
+            }
+          }
+        },
+        "base": {
+          "$type": "color",
+          "$value": "{dark-mode.on-action.default.base}",
+          "$extensions": {
+            "lazy": {
+              "figma": "Dark-Mode/On-Signal/Default/Base",
+              "modes": {
+                "Wireframe": "{dark-mode.on-action.default.base}"
+              }
+            }
+          }
+        },
+        "subtle": {
+          "$type": "color",
+          "$value": "{dark-mode.on-action.default.subtle}",
+          "$extensions": {
+            "lazy": {
+              "figma": "Dark-Mode/On-Signal/Default/Subtle",
+              "modes": {
+                "Wireframe": "{dark-mode.on-action.default.subtle}"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

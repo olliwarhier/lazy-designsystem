@@ -31,22 +31,23 @@ Ohne Attribut folgt die Seite der Systemeinstellung. Ein Attribut überschreibt 
 <section data-color-scheme="dark">…</section>
 ```
 
-Der Build erzeugt dafür diese Struktur:
+Der Build schreibt jede Farbe, die sich zwischen Light und Dark unterscheidet, mit `light-dark()`. Welcher Wert gilt, entscheidet die CSS-Eigenschaft `color-scheme` des Elements – deshalb funktioniert das Umschalten auch für einzelne Bereiche und beliebig verschachtelt:
 
 ```css
-:root { /* Light-Werte */ }
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-color-scheme='light']) { /* Dark-Werte */ }
+:root {
+  color-scheme: light dark; /* folgt prefers-color-scheme */
+  --color-surface-default-base: light-dark(var(--palette-clay-98), var(--palette-clay-18));
 }
-[data-color-scheme='dark'] { /* Dark-Werte */ }
-[data-color-scheme='light'] { /* Light-Werte */ }
+[data-color-scheme='light'] { color-scheme: light; }
+[data-color-scheme='dark']  { color-scheme: dark; }
 ```
 
-Kontrast-Modi folgen demselben Muster mit `prefers-contrast` und `data-contrast`. Sie überschreiben nur die Tokens, die sich ändern – alle anderen erben vom aktiven Farbschema.
+`color-scheme` sorgt zugleich dafür, dass Scrollbars, Formularelemente und Systemfarben des Browsers passen.
+
+Kontrast-Modi folgen dem Muster mit `prefers-contrast: more` und `data-contrast`. Sie überschreiben nur die Tokens, die sich ändern. Das DS Template hat noch keine Kontrast-Modi; sobald es sie gibt, erzeugt der Build sie.
 
 <Aside>
-  Jeder Block setzt zusätzlich die CSS-Eigenschaft `color-scheme`, damit Scrollbars, Formularelemente und Systemfarben des Browsers passen.
+  `light-dark()` und die relative Farbsyntax werden seit 2024 von allen aktuellen Browsern unterstützt. Ältere Browser zeigen die Farben nicht an.
 </Aside>
 
 ## Theme
@@ -57,15 +58,25 @@ Ein Theme tauscht die Paletten der Marken-Rollen (Brand, Action, Signal). Das er
 <body data-theme="wireframe">
 ```
 
-Ein Theme kombiniert sich automatisch mit Farbschema und Kontrast – `data-theme="wireframe"` im Dark Mode nutzt die Dark-Werte des Wireframe-Themes.
+Ein Theme kombiniert sich automatisch mit Farbschema und Kontrast – `data-theme="wireframe"` im Dark Mode nutzt die Dark-Werte des Wireframe-Themes. Der Theme-Block enthält nur die Farben, die sich ändern, sowie alle, die auf andere Farben verweisen. Auch ein Theme kann deshalb auf einzelne Bereiche gesetzt werden.
+
+## Shape
+
+Der [Shape-Regler](../shape/) lässt sich über ein Attribut auf die Figma-Modi setzen – für die ganze Seite oder einen Bereich:
+
+```html
+<body data-shape="rounded-medium">
+```
+
+Werte: `square`, `rounded-subtle`, `rounded-medium`, `rounded-bold`, `pill`. Zwischenwerte gehen direkt über `--shape`.
 
 ## Responsive
 
 Responsive-Tokens springen nicht an Breakpoints, sondern **wachsen fließend** zwischen dem Mobile- und dem Desktop-Wert. Der Build erzeugt dafür `clamp()`:
 
 ```css
-/* Spacing/Dynamic/Small: Mobile 12 px, Desktop 16 px */
---spacing-dynamic-small: clamp(0.75rem, calc(0.3756vw + 0.662rem), 1rem);
+/* Spacing/Dynamic/Small: Mobile 12 px (bei 430 px), Desktop 16 px (bei 1440 px) */
+--spacing-dynamic-small: clamp(0.75rem, calc(0.396vw + 0.6436rem), 1rem);
 ```
 
 Die Formel:
@@ -74,8 +85,8 @@ Die Formel:
 - Achsenabschnitt = Mobile − Steigung × Viewport Mobile
 - Ergebnis: `clamp(Mobile, Steigung × 100vw + Achsenabschnitt, Desktop)`, alle px-Werte in `rem` (÷ 16)
 
-Die Viewport-Breiten kommen aus `Breakpoint` der Responsive-Collection (Desktop- und Mobile-Modus). Sind beide Werte gleich, wird ein fester `rem`-Wert ausgegeben.
+Die Viewport-Breiten kommen aus `Breakpoint` der Responsive-Collection (Desktop- und Mobile-Modus, im DS Template 1440 und 430 px). Sind beide Werte gleich, wird ein fester Wert ausgegeben – bei gleichem Verweis in beiden Modi bleibt der Verweis erhalten (`var(--base-scale-200)`).
 
 **Mit Tablet-Modus** wird in zwei Abschnitten interpoliert: Mobile → Tablet und Tablet → Desktop, umgeschaltet per Media Query an der Tablet-Breite.
 
-**Einheiten:** Größen und Abstände in `rem`, Zeilenhöhen ohne Einheit (`130%` → `1.3`), Laufweite in `em`.
+**Einheiten:** Größen, Abstände und Laufweite in `rem`, Zeilenhöhen ohne Einheit (`130%` → `1.3`).

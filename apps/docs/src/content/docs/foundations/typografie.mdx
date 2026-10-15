@@ -1,28 +1,43 @@
 ---
 title: Typografie
-description: Schriftfamilie, Größen und Gewichte.
+description: Schriften, Schriftschnitte und Typescale.
 sidebar:
   order: 3
 ---
 
-import { Aside } from '@astrojs/starlight/components';
 import TokenTable from '../../../components/TokenTable.astro';
+import TypeSpecimen from '../../../components/TypeSpecimen.astro';
 
-<Aside type="caution" title="Platzhalter">
-  Die Werte auf dieser Seite sind noch Platzhalter. Sie werden im nächsten Schritt durch die Variablen aus dem DS Template ersetzt und folgen dann der [Token-Spezifikation](../../tokens/uebersicht/).
-</Aside>
+Textstile gibt es in drei Gruppen. Jeder Stil besteht aus Schriftfamilie, Größe, Schnitt, Zeilenhöhe und Laufweite – alle als Token, und alle Größen wachsen fließend zwischen Mobile und Desktop.
 
+- **Display** – die größten Stile, für kurze, wichtige Texte oder Zahlen. Darf expressiv sein.
+- **Heading** – gliedert Inhalte in Abschnitte und trägt die Hierarchie.
+- **Body** – Fließtext und Labels in Komponenten. Muss auch klein gut lesbar sein.
 
-## Schriftfamilie
+Für ein harmonisches Verhältnis gilt: `Body/Medium` ≤ `Heading/Small`, `Body/Large` ≤ `Heading/Medium`.
 
-<TokenTable prefix="font.family" />
+## Schriften
 
-## Größen
+<TokenTable prefix="--font-family-" />
+<TokenTable prefix="--font-weight-" />
 
-<TokenTable prefix="font.size" />
+## Display
 
-## Gewichte & Zeilenhöhe
+<TypeSpecimen group="display" />
+<TokenTable prefix="--typescale-display-" suffix="-size" />
 
-<TokenTable prefix="font.weight" />
+## Heading
 
-<TokenTable prefix="font.line-height" />
+<TypeSpecimen group="heading" />
+<TokenTable prefix="--typescale-heading-" suffix="-size" />
+
+## Body
+
+<TypeSpecimen group="body" text="Body-Text findet vor allem in längeren Textpassagen Verwendung und muss deshalb auch in kleinen Größen gut lesbar sein." />
+<TokenTable prefix="--typescale-body-" suffix="-size" />
+
+## Alle Typescale-Tokens
+
+Pro Stil gibt es außerdem `-family`, `-weight`, `-line-height`, `-letter-spacing` und `-paragraph-spacing`; Body-Stile zusätzlich `-bold-weight`.
+
+<TokenTable prefix="--typescale-" suffix="-line-height" />

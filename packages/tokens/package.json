@@ -1,20 +1,21 @@
 {
   "name": "@lazy-designsystem/tokens",
-  "version": "0.1.0",
-  "description": "Design Tokens des Lazy Design Systems (Quelle: Figma Variables)",
+  "version": "0.2.0",
+  "description": "Design Tokens des Lazy Design Systems, generiert aus den Figma Variables",
   "type": "module",
   "files": [
-    "dist"
+    "dist",
+    "src"
   ],
   "exports": {
     "./tokens.css": "./dist/tokens.css",
-    "./tokens.js": "./dist/tokens.js",
-    "./docs.json": "./dist/docs.json"
+    "./tokens.json": "./dist/tokens.json"
   },
   "scripts": {
-    "build": "node build.mjs"
+    "build": "node build.mjs",
+    "check": "node scripts/write-export.mjs --check"
   },
   "devDependencies": {
-    "style-dictionary": "^4.4.0"
+    "@lazy-designsystem/core": "workspace:^"
   }
 }

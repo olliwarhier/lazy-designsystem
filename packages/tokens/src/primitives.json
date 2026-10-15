@@ -1,0 +1,1674 @@
+{
+  "$extensions": {
+    "lazy": {
+      "collection": "Primitives",
+      "modes": [
+        "Mode 1"
+      ]
+    }
+  },
+  "font": {
+    "family": {
+      "brand": {
+        "$type": "string",
+        "$value": "IBM Plex Sans",
+        "$extensions": {
+          "lazy": {
+            "figma": "Font/Family/Brand"
+          }
+        }
+      },
+      "plain": {
+        "$type": "string",
+        "$value": "Inter",
+        "$extensions": {
+          "lazy": {
+            "figma": "Font/Family/Plain"
+          }
+        }
+      },
+      "display": {
+        "$type": "string",
+        "$value": "IBM Plex Sans Condensed",
+        "$extensions": {
+          "lazy": {
+            "figma": "Font/Family/Display"
+          }
+        }
+      }
+    },
+    "weight": {
+      "thin": {
+        "$type": "string",
+        "$value": "100",
+        "$extensions": {
+          "lazy": {
+            "figma": "Font/Weight/Thin"
+          }
+        }
+      },
+      "extralight": {
+        "$type": "string",
+        "$value": "200",
+        "$extensions": {
+          "lazy": {
+            "figma": "Font/Weight/ExtraLight"
+          }
+        }
+      },
+      "light": {
+        "$type": "string",
+        "$value": "300",
+        "$extensions": {
+          "lazy": {
+            "figma": "Font/Weight/Light"
+          }
+        }
+      },
+      "regular": {
+        "$type": "string",
+        "$value": "400",
+        "$extensions": {
+          "lazy": {
+            "figma": "Font/Weight/Regular"
+          }
+        }
+      },
+      "medium": {
+        "$type": "string",
+        "$value": "500",
+        "$extensions": {
+          "lazy": {
+            "figma": "Font/Weight/Medium"
+          }
+        }
+      },
+      "semibold": {
+        "$type": "string",
+        "$value": "600",
+        "$extensions": {
+          "lazy": {
+            "figma": "Font/Weight/SemiBold"
+          }
+        }
+      },
+      "bold": {
+        "$type": "string",
+        "$value": "700",
+        "$extensions": {
+          "lazy": {
+            "figma": "Font/Weight/Bold"
+          }
+        }
+      },
+      "extrabold": {
+        "$type": "string",
+        "$value": "800",
+        "$extensions": {
+          "lazy": {
+            "figma": "Font/Weight/ExtraBold"
+          }
+        }
+      },
+      "black": {
+        "$type": "string",
+        "$value": "900",
+        "$extensions": {
+          "lazy": {
+            "figma": "Font/Weight/Black"
+          }
+        }
+      }
+    }
+  },
+  "base": {
+    "border": {
+      "width": {
+        "none": {
+          "$type": "number",
+          "$value": "{base.scale.0}",
+          "$extensions": {
+            "lazy": {
+              "figma": "Base/Border/Width/None"
+            }
+          }
+        },
+        "xsmall": {
+          "$type": "number",
+          "$value": "{base.scale.13}",
+          "$extensions": {
+            "lazy": {
+              "figma": "Base/Border/Width/xSmall"
+            }
+          }
+        },
+        "small": {
+          "$type": "number",
+          "$value": "{base.scale.15}",
+          "$extensions": {
+            "lazy": {
+              "figma": "Base/Border/Width/Small"
+            }
+          }
+        },
+        "medium": {
+          "$type": "number",
+          "$value": "{base.scale.19}",
+          "$extensions": {
+            "lazy": {
+              "figma": "Base/Border/Width/Medium"
+            }
+          }
+        },
+        "focus": {
+          "$type": "number",
+          "$value": "{base.scale.25}",
+          "$extensions": {
+            "lazy": {
+              "figma": "Base/Border/Width/Focus"
+            }
+          }
+        },
+        "large": {
+          "$type": "number",
+          "$value": "{base.scale.25}",
+          "$extensions": {
+            "lazy": {
+              "figma": "Base/Border/Width/Large"
+            }
+          }
+        },
+        "xlarge": {
+          "$type": "number",
+          "$value": "{base.scale.38}",
+          "$extensions": {
+            "lazy": {
+              "figma": "Base/Border/Width/xLarge"
+            }
+          }
+        }
+      },
+      "radius": {
+        "none": {
+          "$type": "number",
+          "$value": "{base.scale.0}",
+          "$extensions": {
+            "lazy": {
+              "figma": "Base/Border/Radius/None"
+            }
+          }
+        },
+        "2xsmall": {
+          "$type": "number",
+          "$value": "{base.scale.25}",
+          "$extensions": {
+            "lazy": {
+              "figma": "Base/Border/Radius/2xSmall"
+            }
+          }
+        },
+        "xsmall": {
+          "$type": "number",
+          "$value": "{base.scale.50}",
+          "$extensions": {
+            "lazy": {
+              "figma": "Base/Border/Radius/xSmall"
+            }
+          }
+        },
+        "small": {
+          "$type": "number",
+          "$value": "{base.scale.100}",
+          "$extensions": {
+            "lazy": {
+              "figma": "Base/Border/Radius/Small"
+            }
+          }
+        },
+        "medium": {
+          "$type": "number",
+          "$value": "{base.scale.150}",
+          "$extensions": {
+            "lazy": {
+              "figma": "Base/Border/Radius/Medium"
+            }
+          }
+        },
+        "large": {
+          "$type": "number",
+          "$value": "{base.scale.200}",
+          "$extensions": {
+            "lazy": {
+              "figma": "Base/Border/Radius/Large"
+            }
+          }
+        },
+        "xlarge": {
+          "$type": "number",
+          "$value": "{base.scale.300}",
+          "$extensions": {
+            "lazy": {
+              "figma": "Base/Border/Radius/xLarge"
+            }
+          }
+        },
+        "2xlarge": {
+          "$type": "number",
+          "$value": "{base.scale.400}",
+          "$extensions": {
+            "lazy": {
+              "figma": "Base/Border/Radius/2xLarge"
+            }
+          }
+        },
+        "full": {
+          "$type": "number",
+          "$value": "{base.scale.9999}",
+          "$extensions": {
+            "lazy": {
+              "figma": "Base/Border/Radius/Full"
+            }
+          }
+        }
+      }
+    },
+    "scale": {
+      "0": {
+        "$type": "number",
+        "$value": 0,
+        "$extensions": {
+          "lazy": {
+            "figma": "Base/Scale/0"
+          }
+        }
+      },
+      "13": {
+        "$type": "number",
+        "$value": 1,
+        "$extensions": {
+          "lazy": {
+            "figma": "Base/Scale/13"
+          }
+        }
+      },
+      "15": {
+        "$type": "number",
+        "$value": 1.25,
+        "$extensions": {
+          "lazy": {
+            "figma": "Base/Scale/15"
+          }
+        }
+      },
+      "19": {
+        "$type": "number",
+        "$value": 1.5,
+        "$extensions": {
+          "lazy": {
+            "figma": "Base/Scale/19"
+          }
+        }
+      },
+      "25": {
+        "$type": "number",
+        "$value": 2,
+        "$extensions": {
+          "lazy": {
+            "figma": "Base/Scale/25"
+          }
+        }
+      },
+      "38": {
+        "$type": "number",
+        "$value": 3,
+        "$extensions": {
+          "lazy": {
+            "figma": "Base/Scale/38"
+          }
+        }
+      },
+      "50": {
+        "$type": "number",
+        "$value": 4,
+        "$extensions": {
+          "lazy": {
+            "figma": "Base/Scale/50"
+          }
+        }
+      },
+      "75": {
+        "$type": "number",
+        "$value": 6,
+        "$extensions": {
+          "lazy": {
+            "figma": "Base/Scale/75"
+          }
+        }
+      },
+      "100": {
+        "$type": "number",
+        "$value": 8,
+        "$extensions": {
+          "lazy": {
+            "figma": "Base/Scale/100"
+          }
+        }
+      },
+      "125": {
+        "$type": "number",
+        "$value": 10,
+        "$extensions": {
+          "lazy": {
+            "figma": "Base/Scale/125"
+          }
+        }
+      },
+      "150": {
+        "$type": "number",
+        "$value": 12,
+        "$extensions": {
+          "lazy": {
+            "figma": "Base/Scale/150"
+          }
+        }
+      },
+      "175": {
+        "$type": "number",
+        "$value": 14,
+        "$extensions": {
+          "lazy": {
+            "figma": "Base/Scale/175"
+          }
+        }
+      },
+      "200": {
+        "$type": "number",
+        "$value": 16,
+        "$extensions": {
+          "lazy": {
+            "figma": "Base/Scale/200"
+          }
+        }
+      },
+      "225": {
+        "$type": "number",
+        "$value": 18,
+        "$extensions": {
+          "lazy": {
+            "figma": "Base/Scale/225"
+          }
+        }
+      },
+      "250": {
+        "$type": "number",
+        "$value": 20,
+        "$extensions": {
+          "lazy": {
+            "figma": "Base/Scale/250"
+          }
+        }
+      },
+      "275": {
+        "$type": "number",
+        "$value": 22,
+        "$extensions": {
+          "lazy": {
+            "figma": "Base/Scale/275"
+          }
+        }
+      },
+      "300": {
+        "$type": "number",
+        "$value": 24,
+        "$extensions": {
+          "lazy": {
+            "figma": "Base/Scale/300"
+          }
+        }
+      },
+      "350": {
+        "$type": "number",
+        "$value": 28,
+        "$extensions": {
+          "lazy": {
+            "figma": "Base/Scale/350"
+          }
+        }
+      },
+      "400": {
+        "$type": "number",
+        "$value": 32,
+        "$extensions": {
+          "lazy": {
+            "figma": "Base/Scale/400"
+          }
+        }
+      },
+      "450": {
+        "$type": "number",
+        "$value": 36,
+        "$extensions": {
+          "lazy": {
+            "figma": "Base/Scale/450"
+          }
+        }
+      },
+      "500": {
+        "$type": "number",
+        "$value": 40,
+        "$extensions": {
+          "lazy": {
+            "figma": "Base/Scale/500"
+          }
+        }
+      },
+      "550": {
+        "$type": "number",
+        "$value": 44,
+        "$extensions": {
+          "lazy": {
+            "figma": "Base/Scale/550"
+          }
+        }
+      },
+      "600": {
+        "$type": "number",
+        "$value": 48,
+        "$extensions": {
+          "lazy": {
+            "figma": "Base/Scale/600"
+          }
+        }
+      },
+      "650": {
+        "$type": "number",
+        "$value": 52,
+        "$extensions": {
+          "lazy": {
+            "figma": "Base/Scale/650"
+          }
+        }
+      },
+      "700": {
+        "$type": "number",
+        "$value": 56,
+        "$extensions": {
+          "lazy": {
+            "figma": "Base/Scale/700"
+          }
+        }
+      },
+      "750": {
+        "$type": "number",
+        "$value": 60,
+        "$extensions": {
+          "lazy": {
+            "figma": "Base/Scale/750"
+          }
+        }
+      },
+      "800": {
+        "$type": "number",
+        "$value": 64,
+        "$extensions": {
+          "lazy": {
+            "figma": "Base/Scale/800"
+          }
+        }
+      },
+      "900": {
+        "$type": "number",
+        "$value": 72,
+        "$extensions": {
+          "lazy": {
+            "figma": "Base/Scale/900"
+          }
+        }
+      },
+      "1000": {
+        "$type": "number",
+        "$value": 80,
+        "$extensions": {
+          "lazy": {
+            "figma": "Base/Scale/1000"
+          }
+        }
+      },
+      "1200": {
+        "$type": "number",
+        "$value": 96,
+        "$extensions": {
+          "lazy": {
+            "figma": "Base/Scale/1200"
+          }
+        }
+      },
+      "1400": {
+        "$type": "number",
+        "$value": 112,
+        "$extensions": {
+          "lazy": {
+            "figma": "Base/Scale/1400"
+          }
+        }
+      },
+      "1600": {
+        "$type": "number",
+        "$value": 128,
+        "$extensions": {
+          "lazy": {
+            "figma": "Base/Scale/1600"
+          }
+        }
+      },
+      "1800": {
+        "$type": "number",
+        "$value": 144,
+        "$extensions": {
+          "lazy": {
+            "figma": "Base/Scale/1800"
+          }
+        }
+      },
+      "2000": {
+        "$type": "number",
+        "$value": 160,
+        "$extensions": {
+          "lazy": {
+            "figma": "Base/Scale/2000"
+          }
+        }
+      },
+      "2400": {
+        "$type": "number",
+        "$value": 192,
+        "$extensions": {
+          "lazy": {
+            "figma": "Base/Scale/2400"
+          }
+        }
+      },
+      "2800": {
+        "$type": "number",
+        "$value": 224,
+        "$extensions": {
+          "lazy": {
+            "figma": "Base/Scale/2800"
+          }
+        }
+      },
+      "3200": {
+        "$type": "number",
+        "$value": 256,
+        "$extensions": {
+          "lazy": {
+            "figma": "Base/Scale/3200"
+          }
+        }
+      },
+      "4000": {
+        "$type": "number",
+        "$value": 320,
+        "$extensions": {
+          "lazy": {
+            "figma": "Base/Scale/4000"
+          }
+        }
+      },
+      "9999": {
+        "$type": "number",
+        "$value": 9999,
+        "$extensions": {
+          "lazy": {
+            "figma": "Base/Scale/9999"
+          }
+        }
+      }
+    }
+  },
+  "palette": {
+    "clay": {
+      "10": {
+        "$type": "color",
+        "$value": "#030303",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Clay/10"
+          }
+        }
+      },
+      "18": {
+        "$type": "color",
+        "$value": "#111210",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Clay/18"
+          }
+        }
+      },
+      "28": {
+        "$type": "color",
+        "$value": "#282926",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Clay/28"
+          }
+        }
+      },
+      "38": {
+        "$type": "color",
+        "$value": "#41433f",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Clay/38"
+          }
+        }
+      },
+      "49": {
+        "$type": "color",
+        "$value": "#5f615c",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Clay/49"
+          }
+        }
+      },
+      "60": {
+        "$type": "color",
+        "$value": "#7e817b",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Clay/60"
+          }
+        }
+      },
+      "70": {
+        "$type": "color",
+        "$value": "#9da099",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Clay/70"
+          }
+        }
+      },
+      "79": {
+        "$type": "color",
+        "$value": "#b9bcb5",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Clay/79"
+          }
+        }
+      },
+      "86": {
+        "$type": "color",
+        "$value": "#cfd2cc",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Clay/86"
+          }
+        }
+      },
+      "91": {
+        "$type": "color",
+        "$value": "#e0e2dd",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Clay/91"
+          }
+        }
+      },
+      "95": {
+        "$type": "color",
+        "$value": "#edefeb",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Clay/95"
+          }
+        }
+      },
+      "98": {
+        "$type": "color",
+        "$value": "#f8f9f7",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Clay/98"
+          }
+        }
+      },
+      "100": {
+        "$type": "color",
+        "$value": "#ffffff",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Clay/100"
+          }
+        }
+      },
+      "specs": {
+        "type": {
+          "$type": "string",
+          "$value": "Neutral",
+          "$extensions": {
+            "lazy": {
+              "figma": "Palette/Clay/Specs/Type"
+            }
+          }
+        },
+        "hue": {
+          "$type": "number",
+          "$value": 127,
+          "$extensions": {
+            "lazy": {
+              "figma": "Palette/Clay/Specs/Hue"
+            }
+          }
+        },
+        "chromamin": {
+          "$type": "number",
+          "$value": 0,
+          "$extensions": {
+            "lazy": {
+              "figma": "Palette/Clay/Specs/ChromaMin"
+            }
+          }
+        },
+        "chromamax": {
+          "$type": "number",
+          "$value": 0.009999999776482582,
+          "$extensions": {
+            "lazy": {
+              "figma": "Palette/Clay/Specs/ChromaMax"
+            }
+          }
+        },
+        "chromaharm": {
+          "$type": "boolean",
+          "$value": true,
+          "$extensions": {
+            "lazy": {
+              "figma": "Palette/Clay/Specs/ChromaHarm"
+            }
+          }
+        }
+      }
+    },
+    "bordeaux": {
+      "10": {
+        "$type": "color",
+        "$value": "#090103",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Bordeaux/10"
+          }
+        }
+      },
+      "18": {
+        "$type": "color",
+        "$value": "#25040f",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Bordeaux/18"
+          }
+        }
+      },
+      "28": {
+        "$type": "color",
+        "$value": "#4a1025",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Bordeaux/28"
+          }
+        }
+      },
+      "38": {
+        "$type": "color",
+        "$value": "#6f223d",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Bordeaux/38"
+          }
+        }
+      },
+      "49": {
+        "$type": "color",
+        "$value": "#983c59",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Bordeaux/49"
+          }
+        }
+      },
+      "60": {
+        "$type": "color",
+        "$value": "#c15978",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Bordeaux/60"
+          }
+        }
+      },
+      "70": {
+        "$type": "color",
+        "$value": "#e47696",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Bordeaux/70"
+          }
+        }
+      },
+      "79": {
+        "$type": "color",
+        "$value": "#ff93b2",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Bordeaux/79"
+          }
+        }
+      },
+      "86": {
+        "$type": "color",
+        "$value": "#ffb4ca",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Bordeaux/86"
+          }
+        }
+      },
+      "91": {
+        "$type": "color",
+        "$value": "#ffcedc",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Bordeaux/91"
+          }
+        }
+      },
+      "95": {
+        "$type": "color",
+        "$value": "#ffe1eb",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Bordeaux/95"
+          }
+        }
+      },
+      "98": {
+        "$type": "color",
+        "$value": "#fff0f6",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Bordeaux/98"
+          }
+        }
+      },
+      "100": {
+        "$type": "color",
+        "$value": "#ffffff",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Bordeaux/100"
+          }
+        }
+      },
+      "specs": {
+        "type": {
+          "$type": "string",
+          "$value": "Color",
+          "$extensions": {
+            "lazy": {
+              "figma": "Palette/Bordeaux/Specs/Type"
+            }
+          }
+        },
+        "hue": {
+          "$type": "number",
+          "$value": 3,
+          "$extensions": {
+            "lazy": {
+              "figma": "Palette/Bordeaux/Specs/Hue"
+            }
+          }
+        },
+        "chromamin": {
+          "$type": "number",
+          "$value": 0.02500000037252903,
+          "$extensions": {
+            "lazy": {
+              "figma": "Palette/Bordeaux/Specs/ChromaMin"
+            }
+          }
+        },
+        "chromamax": {
+          "$type": "number",
+          "$value": 0.14000000059604645,
+          "$extensions": {
+            "lazy": {
+              "figma": "Palette/Bordeaux/Specs/ChromaMax"
+            }
+          }
+        },
+        "chromaharm": {
+          "$type": "boolean",
+          "$value": true,
+          "$extensions": {
+            "lazy": {
+              "figma": "Palette/Bordeaux/Specs/ChromaHarm"
+            }
+          }
+        }
+      }
+    },
+    "lime": {
+      "10": {
+        "$type": "color",
+        "$value": "#010500",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Lime/10"
+          }
+        }
+      },
+      "18": {
+        "$type": "color",
+        "$value": "#091600",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Lime/18"
+          }
+        }
+      },
+      "28": {
+        "$type": "color",
+        "$value": "#1c3000",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Lime/28"
+          }
+        }
+      },
+      "38": {
+        "$type": "color",
+        "$value": "#314d00",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Lime/38"
+          }
+        }
+      },
+      "49": {
+        "$type": "color",
+        "$value": "#496e00",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Lime/49"
+          }
+        }
+      },
+      "60": {
+        "$type": "color",
+        "$value": "#639200",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Lime/60"
+          }
+        }
+      },
+      "70": {
+        "$type": "color",
+        "$value": "#7db300",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Lime/70"
+          }
+        }
+      },
+      "79": {
+        "$type": "color",
+        "$value": "#98d020",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Lime/79"
+          }
+        }
+      },
+      "86": {
+        "$type": "color",
+        "$value": "#b1e652",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Lime/86"
+          }
+        }
+      },
+      "91": {
+        "$type": "color",
+        "$value": "#c4f578",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Lime/91"
+          }
+        }
+      },
+      "95": {
+        "$type": "color",
+        "$value": "#d6ff9c",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Lime/95"
+          }
+        }
+      },
+      "98": {
+        "$type": "color",
+        "$value": "#e7ffbf",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Lime/98"
+          }
+        }
+      },
+      "100": {
+        "$type": "color",
+        "$value": "#ffffff",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Lime/100"
+          }
+        }
+      },
+      "specs": {
+        "type": {
+          "$type": "string",
+          "$value": "Color",
+          "$extensions": {
+            "lazy": {
+              "figma": "Palette/Lime/Specs/Type"
+            }
+          }
+        },
+        "hue": {
+          "$type": "number",
+          "$value": 127,
+          "$extensions": {
+            "lazy": {
+              "figma": "Palette/Lime/Specs/Hue"
+            }
+          }
+        },
+        "chromamin": {
+          "$type": "number",
+          "$value": 0.05000000074505806,
+          "$extensions": {
+            "lazy": {
+              "figma": "Palette/Lime/Specs/ChromaMin"
+            }
+          }
+        },
+        "chromamax": {
+          "$type": "number",
+          "$value": 0.20000000298023224,
+          "$extensions": {
+            "lazy": {
+              "figma": "Palette/Lime/Specs/ChromaMax"
+            }
+          }
+        },
+        "chromaharm": {
+          "$type": "boolean",
+          "$value": true,
+          "$extensions": {
+            "lazy": {
+              "figma": "Palette/Lime/Specs/ChromaHarm"
+            }
+          }
+        }
+      }
+    },
+    "red": {
+      "10": {
+        "$type": "color",
+        "$value": "#0f0000",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Red/10"
+          }
+        }
+      },
+      "18": {
+        "$type": "color",
+        "$value": "#2f0000",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Red/18"
+          }
+        }
+      },
+      "28": {
+        "$type": "color",
+        "$value": "#590004",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Red/28"
+          }
+        }
+      },
+      "38": {
+        "$type": "color",
+        "$value": "#840012",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Red/38"
+          }
+        }
+      },
+      "49": {
+        "$type": "color",
+        "$value": "#b1192a",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Red/49"
+          }
+        }
+      },
+      "60": {
+        "$type": "color",
+        "$value": "#dd3d45",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Red/60"
+          }
+        }
+      },
+      "70": {
+        "$type": "color",
+        "$value": "#ff5e61",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Red/70"
+          }
+        }
+      },
+      "79": {
+        "$type": "color",
+        "$value": "#ff928e",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Red/79"
+          }
+        }
+      },
+      "86": {
+        "$type": "color",
+        "$value": "#ffb8b3",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Red/86"
+          }
+        }
+      },
+      "91": {
+        "$type": "color",
+        "$value": "#ffd0cc",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Red/91"
+          }
+        }
+      },
+      "95": {
+        "$type": "color",
+        "$value": "#ffe3e0",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Red/95"
+          }
+        }
+      },
+      "98": {
+        "$type": "color",
+        "$value": "#fff1ef",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Red/98"
+          }
+        }
+      },
+      "100": {
+        "$type": "color",
+        "$value": "#ffffff",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Red/100"
+          }
+        }
+      },
+      "specs": {
+        "type": {
+          "$type": "string",
+          "$value": "Color",
+          "$extensions": {
+            "lazy": {
+              "figma": "Palette/Red/Specs/Type"
+            }
+          }
+        },
+        "hue": {
+          "$type": "number",
+          "$value": 23,
+          "$extensions": {
+            "lazy": {
+              "figma": "Palette/Red/Specs/Hue"
+            }
+          }
+        },
+        "chromamin": {
+          "$type": "number",
+          "$value": 0.05000000074505806,
+          "$extensions": {
+            "lazy": {
+              "figma": "Palette/Red/Specs/ChromaMin"
+            }
+          }
+        },
+        "chromamax": {
+          "$type": "number",
+          "$value": 0.20000000298023224,
+          "$extensions": {
+            "lazy": {
+              "figma": "Palette/Red/Specs/ChromaMax"
+            }
+          }
+        },
+        "chromaharm": {
+          "$type": "boolean",
+          "$value": true,
+          "$extensions": {
+            "lazy": {
+              "figma": "Palette/Red/Specs/ChromaHarm"
+            }
+          }
+        }
+      }
+    },
+    "yellow": {
+      "10": {
+        "$type": "color",
+        "$value": "#080200",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Yellow/10"
+          }
+        }
+      },
+      "18": {
+        "$type": "color",
+        "$value": "#1d0e00",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Yellow/18"
+          }
+        }
+      },
+      "28": {
+        "$type": "color",
+        "$value": "#3b2400",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Yellow/28"
+          }
+        }
+      },
+      "38": {
+        "$type": "color",
+        "$value": "#5b3c00",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Yellow/38"
+          }
+        }
+      },
+      "49": {
+        "$type": "color",
+        "$value": "#815800",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Yellow/49"
+          }
+        }
+      },
+      "60": {
+        "$type": "color",
+        "$value": "#a97600",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Yellow/60"
+          }
+        }
+      },
+      "70": {
+        "$type": "color",
+        "$value": "#cf9200",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Yellow/70"
+          }
+        }
+      },
+      "79": {
+        "$type": "color",
+        "$value": "#f2ad00",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Yellow/79"
+          }
+        }
+      },
+      "86": {
+        "$type": "color",
+        "$value": "#ffc300",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Yellow/86"
+          }
+        }
+      },
+      "91": {
+        "$type": "color",
+        "$value": "#ffd972",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Yellow/91"
+          }
+        }
+      },
+      "95": {
+        "$type": "color",
+        "$value": "#ffeaa6",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Yellow/95"
+          }
+        }
+      },
+      "98": {
+        "$type": "color",
+        "$value": "#fff6c9",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Yellow/98"
+          }
+        }
+      },
+      "100": {
+        "$type": "color",
+        "$value": "#ffffff",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Yellow/100"
+          }
+        }
+      },
+      "specs": {
+        "type": {
+          "$type": "string",
+          "$value": "Color",
+          "$extensions": {
+            "lazy": {
+              "figma": "Palette/Yellow/Specs/Type"
+            }
+          }
+        },
+        "hue": {
+          "$type": "number",
+          "$value": 83,
+          "$extensions": {
+            "lazy": {
+              "figma": "Palette/Yellow/Specs/Hue"
+            }
+          }
+        },
+        "chromamin": {
+          "$type": "number",
+          "$value": 0.05000000074505806,
+          "$extensions": {
+            "lazy": {
+              "figma": "Palette/Yellow/Specs/ChromaMin"
+            }
+          }
+        },
+        "chromamax": {
+          "$type": "number",
+          "$value": 0.20000000298023224,
+          "$extensions": {
+            "lazy": {
+              "figma": "Palette/Yellow/Specs/ChromaMax"
+            }
+          }
+        },
+        "chromaharm": {
+          "$type": "boolean",
+          "$value": true,
+          "$extensions": {
+            "lazy": {
+              "figma": "Palette/Yellow/Specs/ChromaHarm"
+            }
+          }
+        }
+      }
+    },
+    "blue": {
+      "10": {
+        "$type": "color",
+        "$value": "#000213",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Blue/10"
+          }
+        }
+      },
+      "18": {
+        "$type": "color",
+        "$value": "#000d3a",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Blue/18"
+          }
+        }
+      },
+      "28": {
+        "$type": "color",
+        "$value": "#002465",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Blue/28"
+          }
+        }
+      },
+      "38": {
+        "$type": "color",
+        "$value": "#003e93",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Blue/38"
+          }
+        }
+      },
+      "49": {
+        "$type": "color",
+        "$value": "#005dc3",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Blue/49"
+          }
+        }
+      },
+      "60": {
+        "$type": "color",
+        "$value": "#007ff0",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Blue/60"
+          }
+        }
+      },
+      "70": {
+        "$type": "color",
+        "$value": "#38a0ff",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Blue/70"
+          }
+        }
+      },
+      "79": {
+        "$type": "color",
+        "$value": "#7bbfff",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Blue/79"
+          }
+        }
+      },
+      "86": {
+        "$type": "color",
+        "$value": "#a6d5ff",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Blue/86"
+          }
+        }
+      },
+      "91": {
+        "$type": "color",
+        "$value": "#c3e5ff",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Blue/91"
+          }
+        }
+      },
+      "95": {
+        "$type": "color",
+        "$value": "#d9f1ff",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Blue/95"
+          }
+        }
+      },
+      "98": {
+        "$type": "color",
+        "$value": "#eafaff",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Blue/98"
+          }
+        }
+      },
+      "100": {
+        "$type": "color",
+        "$value": "#ffffff",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Blue/100"
+          }
+        }
+      },
+      "specs": {
+        "type": {
+          "$type": "string",
+          "$value": "Color",
+          "$extensions": {
+            "lazy": {
+              "figma": "Palette/Blue/Specs/Type"
+            }
+          }
+        },
+        "hue": {
+          "$type": "number",
+          "$value": 253,
+          "$extensions": {
+            "lazy": {
+              "figma": "Palette/Blue/Specs/Hue"
+            }
+          }
+        },
+        "chromamin": {
+          "$type": "number",
+          "$value": 0.05000000074505806,
+          "$extensions": {
+            "lazy": {
+              "figma": "Palette/Blue/Specs/ChromaMin"
+            }
+          }
+        },
+        "chromamax": {
+          "$type": "number",
+          "$value": 0.20000000298023224,
+          "$extensions": {
+            "lazy": {
+              "figma": "Palette/Blue/Specs/ChromaMax"
+            }
+          }
+        },
+        "chromaharm": {
+          "$type": "boolean",
+          "$value": true,
+          "$extensions": {
+            "lazy": {
+              "figma": "Palette/Blue/Specs/ChromaHarm"
+            }
+          }
+        }
+      }
+    },
+    "scale": {
+      "distribution": {
+        "$type": "string",
+        "$value": "Dynamic",
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Scale/Distribution"
+          }
+        }
+      },
+      "steps": {
+        "$type": "number",
+        "$value": 13,
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Scale/Steps"
+          }
+        }
+      },
+      "lightnessmax": {
+        "$type": "number",
+        "$value": 1,
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Scale/LightnessMax"
+          }
+        }
+      },
+      "lightnessmin": {
+        "$type": "number",
+        "$value": 0.10000000149011612,
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Scale/LightnessMin"
+          }
+        }
+      },
+      "center": {
+        "$type": "number",
+        "$value": 70,
+        "$extensions": {
+          "lazy": {
+            "figma": "Palette/Scale/Center"
+          }
+        }
+      }
+    }
+  }
+}

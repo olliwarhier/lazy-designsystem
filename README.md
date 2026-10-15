@@ -8,7 +8,8 @@ Design Tokens, Komponenten und Dokumentation des Lazy Design Systems. Quelle der
 
 ```
 packages/
-  tokens/    @lazy-designsystem/tokens – Tokens aus Figma → CSS, JS, Doku-JSON
+  core/      @lazy-designsystem/core – gemeinsame Logik (Farbräume, Kontrast, clamp)
+  tokens/    @lazy-designsystem/tokens – Figma-Variablen (JSON) → tokens.css, tokens.json
   svelte/    @lazy-designsystem/svelte – Svelte-5-Komponenten
 apps/
   docs/      Astro + Starlight – die Doku-Website
@@ -28,7 +29,7 @@ pnpm build      # baut alles
 
 ## Arbeitsweise
 
-- **Tokens** ändern sich in Figma und werden nach `packages/tokens/src/` exportiert → `pnpm tokens`.
+- **Tokens** ändern sich in Figma und werden nach `packages/tokens/src/` exportiert → `pnpm tokens` (siehe `packages/tokens/README.md`).
 - **Komponenten**: erst Spezifikation in der Doku, dann Implementierung. Siehe Doku → Mitwirken.
 - **Versionen**: jede Paketänderung bekommt einen Changeset (`pnpm changeset`).
 - **Deployment**: jeder Push auf `master` baut die Doku und veröffentlicht sie über GitHub Pages.

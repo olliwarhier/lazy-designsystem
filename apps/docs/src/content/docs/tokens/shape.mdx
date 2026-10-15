@@ -42,6 +42,12 @@ Im CSS:
 }
 ```
 
+Der Startwert von `--shape` entspricht dem Standard-Modus der Figma-Collection `Shapes` (im DS Template *Square* = `0`). Für eine Seite oder einen Bereich lässt er sich über ein Attribut setzen:
+
+```html
+<body data-shape="pill">
+```
+
 ## Verschachtelte Radien
 
 Liegt ein gerundetes Element in einem anderen, wird der innere Radius aus dem äußeren abgeleitet, damit die Abstände gleichmäßig wirken:

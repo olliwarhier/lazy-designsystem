@@ -10,11 +10,11 @@ Svelte-5-Implementierung des Lazy Design Systems.
   import { Button } from '@lazy-designsystem/svelte';
 </script>
 
-<Button variant="primary">Speichern</Button>
+<Button>Speichern</Button>
 ```
 
 ## Regeln
 
-- Komponenten verwenden **nur** semantische Tokens (`var(--lazy-color-action-primary-default)`), nie Hex-Werte oder Primitives.
+- Komponenten verwenden **nur** System- und Shape-Tokens (`var(--color-action-default-base)`), nie Hex-Werte oder Primitives. Component-Tokens werden lokal in der Komponente mit dem Figma-Namen definiert (`--button-padding-x`).
 - Props, Varianten und Zustände folgen der framework-neutralen Spezifikation in der Doku (`apps/docs/src/content/docs/komponenten/`).
 - Neue Komponente: Datei in `src/lib/`, Export in `src/lib/index.js`, Doku-Seite anlegen, Changeset schreiben.
