@@ -16,6 +16,8 @@ Beim Dokumentieren gefundene Fehler. Ein Eintrag wird entfernt, sobald er behobe
 | 3 | **Shape-Werte nicht linear.** Die Werte der Shapes-Modi weichen von den Formeln des Shape-Reglers ab (siehe [Shape](../../tokens/shape/)). | offen |
 | 4 | **Variable `Clamp` ohne Wirkung.** Beide Modi sind Aliase (Desktop → `Spacing/Presets/Wrapper` = 64, Mobile → `Breakpoint`). Das Typescale-Plugin liest nur feste Zahlen und verwendet daher immer 375–1440 px; der Mobile-Breakpoint ist aber 430 px. Die Viewport-Breiten sollten direkt aus `Breakpoint` kommen. | Token-Build nutzt `Breakpoint` (430–1440 px); Plugin offen |
 
+| 7 | **Farbige On-Surface-Töne ignorieren das Theme.** `On-Surface/*/Brand`, `…/Action` und `…/Signal` verweisen direkt auf Paletten (Bordeaux, Lime) statt über die Theme-Collection. Im Theme *Wireframe* bleiben Links und Akzente auf neutralem Grund deshalb farbig. | offen |
+
 ## Lazy-Plugins
 
 | # | Plugin | Problem | Status |
