@@ -1,0 +1,20 @@
+{
+  "name": "lazy-designsystem",
+  "private": true,
+  "description": "Lazy Design System – Tokens, Komponenten und Dokumentation",
+  "packageManager": "pnpm@10.28.0",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "pnpm -r build",
+    "build:packages": "pnpm --filter \"./packages/**\" build",
+    "dev": "pnpm build:packages && pnpm --filter @lazy-designsystem/docs dev",
+    "tokens": "pnpm --filter @lazy-designsystem/tokens build",
+    "changeset": "changeset",
+    "version-packages": "changeset version"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.29.0"
+  }
+}

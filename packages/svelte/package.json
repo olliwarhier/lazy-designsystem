@@ -1,0 +1,32 @@
+{
+  "name": "@lazy-designsystem/svelte",
+  "version": "0.1.0",
+  "description": "Svelte-Implementierung des Lazy Design Systems",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "svelte": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "svelte": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "svelte-package -i src/lib -o dist"
+  },
+  "dependencies": {
+    "@lazy-designsystem/tokens": "workspace:^"
+  },
+  "peerDependencies": {
+    "svelte": "^5.0.0"
+  },
+  "devDependencies": {
+    "@sveltejs/package": "^2.3.0",
+    "svelte": "^5.20.0",
+    "typescript": "^5.8.0"
+  }
+}

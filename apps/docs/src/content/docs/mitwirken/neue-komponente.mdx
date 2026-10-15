@@ -1,0 +1,30 @@
+---
+title: Neue Komponente
+description: Ablauf und Vorlage für eine neue Komponente.
+sidebar:
+  order: 1
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+<Steps>
+
+1. **In Figma gestalten** – mit Varianten, Zuständen und ausschließlich gebundenen Variables.
+
+2. **Doku-Seite anlegen** – `docs-templates/komponente.mdx` nach `apps/docs/src/content/docs/komponenten/<name>.mdx` kopieren und die Spezifikation ausfüllen. Die Spezifikation kommt **vor** dem Code.
+
+3. **Implementieren** – in `packages/svelte/src/lib/` umsetzen, in `index.js` exportieren. Nur semantische Tokens verwenden.
+
+4. **Live-Demo und Svelte-Tab ergänzen** auf der Doku-Seite.
+
+5. **Changeset anlegen** (`pnpm changeset`) und Pull Request öffnen.
+
+</Steps>
+
+## Checkliste
+
+- [ ] Namen in Figma, Code und Doku identisch
+- [ ] Alle Varianten und Zustände dokumentiert
+- [ ] Tastaturbedienung und Fokus geprüft
+- [ ] Keine hartcodierten Farben, Abstände oder Schriftgrößen
+- [ ] Changeset vorhanden

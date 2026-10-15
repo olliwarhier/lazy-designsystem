@@ -1,0 +1,14 @@
+---
+/**
+ * Rahmen für Live-Demos. `not-content` verhindert, dass Starlight-Typografie
+ * die Komponenten beeinflusst.
+ */
+interface Props {
+  column?: boolean;
+}
+const { column = false } = Astro.props;
+---
+
+<div class:list={['lazy-demo', 'not-content', { 'lazy-demo--column': column }]}>
+  <slot />
+</div>

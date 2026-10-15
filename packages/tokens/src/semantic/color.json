@@ -1,0 +1,32 @@
+{
+  "color": {
+    "bg": {
+      "default": { "$type": "color", "$value": "{color.neutral.0}", "$description": "Standard-Hintergrund von Flächen" },
+      "subtle": { "$type": "color", "$value": "{color.neutral.50}", "$description": "Zurückgenommene Flächen, z. B. Sektionen" }
+    },
+    "text": {
+      "default": { "$type": "color", "$value": "{color.neutral.900}", "$description": "Fließtext und Überschriften" },
+      "muted": { "$type": "color", "$value": "{color.neutral.600}", "$description": "Sekundärer Text, Hilfetexte" },
+      "on-action": { "$type": "color", "$value": "{color.neutral.0}", "$description": "Text auf primären Aktionsflächen" }
+    },
+    "border": {
+      "default": { "$type": "color", "$value": "{color.neutral.200}", "$description": "Standard-Rahmen" }
+    },
+    "action": {
+      "primary": {
+        "default": { "$type": "color", "$value": "{color.brand.600}", "$description": "Primäre Aktion" },
+        "hover": { "$type": "color", "$value": "{color.brand.700}", "$description": "Primäre Aktion im Hover" }
+      },
+      "secondary": {
+        "default": { "$type": "color", "$value": "{color.neutral.100}", "$description": "Sekundäre Aktion" },
+        "hover": { "$type": "color", "$value": "{color.neutral.200}", "$description": "Sekundäre Aktion im Hover" }
+      }
+    },
+    "focus": {
+      "ring": { "$type": "color", "$value": "{color.brand.500}", "$description": "Fokus-Indikator für Tastaturbedienung" }
+    },
+    "feedback": {
+      "danger": { "$type": "color", "$value": "{color.red.600}", "$description": "Fehler und destruktive Aktionen" }
+    }
+  }
+}

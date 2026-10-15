@@ -1,0 +1,72 @@
+---
+title: Komponentenname
+description: Ein Satz, was die Komponente tut.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Komponentenname } from '@lazy-designsystem/svelte';
+import Demo from '../../../components/Demo.astro';
+
+Wofür wird die Komponente verwendet – und wofür nicht?
+
+<Demo>
+  <Komponentenname />
+</Demo>
+
+## Spezifikation
+
+Dieser Abschnitt gilt für **alle** Frameworks.
+
+### Anatomie
+
+1. …
+
+### Varianten
+
+| Variante | Verwendung |
+| --- | --- |
+| … | … |
+
+### Zustände
+
+| Zustand | Verhalten |
+| --- | --- |
+| Default | … |
+| Hover | … |
+| Focus | … |
+| Disabled | … |
+
+### Do & Don't
+
+- **Do:** …
+- **Don't:** …
+
+### Accessibility
+
+- Rolle / natives Element: …
+- Tastaturbedienung: …
+- Kontrast: …
+
+### Tokens
+
+`--lazy-…`
+
+## Implementierung
+
+<Tabs syncKey="framework">
+  <TabItem label="Svelte">
+
+```svelte
+<script>
+  import { Komponentenname } from '@lazy-designsystem/svelte';
+</script>
+
+<Komponentenname />
+```
+
+| Prop | Typ | Standard | Beschreibung |
+| --- | --- | --- | --- |
+| … | … | … | … |
+
+  </TabItem>
+</Tabs>
