@@ -1,0 +1,33 @@
+---
+title: Aufbau & Benennung
+description: Wie die Design Tokens strukturiert und benannt sind.
+sidebar:
+  order: 1
+---
+
+Tokens sind die gemeinsame Sprache zwischen Figma und Code. Jedes Framework nutzt dieselben Tokens – das ist die Grundlage dafür, dass das System überall gleich aussieht.
+
+## Ebenen
+
+| Ebene | Beispiel | Verwendung |
+| --- | --- | --- |
+| Primitive | `color.brand.600` | Rohwert. Nur von semantischen Tokens referenziert. |
+| Semantisch | `color.action.primary.default` | Rolle im Interface. Wird von Komponenten verwendet. |
+
+## Benennung
+
+Der Pfad eines Tokens ergibt seinen Namen in jedem Format:
+
+| Figma Variable | JSON-Pfad | CSS | JS |
+| --- | --- | --- | --- |
+| `color/action/primary/default` | `color.action.primary.default` | `--lazy-color-action-primary-default` | `colorActionPrimaryDefault` |
+
+Die Namen in Figma und im JSON müssen übereinstimmen – nur so bleiben Design und Code synchron.
+
+## Ausgabeformate
+
+Der Build (`pnpm tokens`) erzeugt aus `packages/tokens/src/` mit Style Dictionary:
+
+- `tokens.css` – CSS Custom Properties, für alle Frameworks
+- `tokens.js` – ES-Modul, z. B. für Charts oder Canvas
+- `docs.json` – speist die Token-Tabellen dieser Doku

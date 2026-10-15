@@ -1,0 +1,63 @@
+---
+/**
+ * Zeigt Tokens direkt aus @lazy-designsystem/tokens an – die Doku kann daher
+ * nie von den echten Werten abweichen.
+ *
+ * <TokenTable prefix="color.action" />
+ */
+import tokens from '@lazy-designsystem/tokens/docs.json';
+
+interface Props {
+  /** Token-Pfad, z. B. "color", "color.text" oder "space" */
+  prefix: string;
+  /** Verweisende Tokens (Referenzen) ausblenden bzw. nur diese zeigen */
+  only?: 'primitive' | 'semantic';
+}
+
+const { prefix, only } = Astro.props;
+
+const rows = tokens.filter((t) => {
+  if (!(t.path === prefix || t.path.startsWith(`${prefix}.`))) return false;
+  if (only === 'primitive') return t.reference === null;
+  if (only === 'semantic') return t.reference !== null;
+  return true;
+});
+---
+
+<table class="lazy-token-table">
+  <thead>
+    <tr>
+      <th>Vorschau</th>
+      <th>CSS-Variable</th>
+      <th>Wert</th>
+      <th>Beschreibung</th>
+    </tr>
+  </thead>
+  <tbody>
+    {
+      rows.map((t) => (
+        <tr>
+          <td>
+            {t.type === 'color' && <span class="lazy-swatch" style={`background:${t.value}`} />}
+            {t.type === 'dimension' && t.path.startsWith('space') && (
+              <span class="lazy-space-bar" style={`width:${t.value}`} />
+            )}
+          </td>
+          <td>
+            <code>{`var(${t.cssVar})`}</code>
+          </td>
+          <td>
+            <code>{String(t.value)}</code>
+            {t.reference && (
+              <>
+                <br />
+                <small>→ {t.reference}</small>
+              </>
+            )}
+          </td>
+          <td>{t.description}</td>
+        </tr>
+      ))
+    }
+  </tbody>
+</table>

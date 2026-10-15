@@ -1,0 +1,39 @@
+/* Live-Demos: immer auf hellem Systemhintergrund, unabhängig vom Doku-Theme */
+.lazy-demo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--lazy-space-4);
+  margin-block: 1.5rem;
+  padding: var(--lazy-space-8);
+  background: var(--lazy-color-bg-default);
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: var(--lazy-radius-md);
+}
+
+.lazy-demo--column {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* Token-Tabellen */
+.lazy-token-table code {
+  white-space: nowrap;
+}
+
+.lazy-swatch {
+  display: inline-block;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: var(--lazy-radius-sm);
+  border: 1px solid var(--sl-color-gray-5);
+  vertical-align: middle;
+}
+
+.lazy-space-bar {
+  display: inline-block;
+  height: 0.75rem;
+  background: var(--sl-color-accent);
+  border-radius: 2px;
+  vertical-align: middle;
+}

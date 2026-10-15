@@ -1,0 +1,98 @@
+---
+title: Button
+description: Löst eine Aktion aus.
+---
+
+import { Tabs, TabItem, Aside } from '@astrojs/starlight/components';
+import { Button } from '@lazy-designsystem/svelte';
+import Demo from '../../../components/Demo.astro';
+
+Buttons lösen eine Aktion aus, z. B. Speichern, Absenden oder Öffnen eines Dialogs. Für Navigation zu einer anderen Seite wird ein Link verwendet.
+
+<Demo>
+  <Button variant="primary">Speichern</Button>
+  <Button variant="secondary">Abbrechen</Button>
+  <Button variant="ghost">Mehr erfahren</Button>
+</Demo>
+
+## Spezifikation
+
+Dieser Abschnitt gilt für **alle** Frameworks.
+
+### Anatomie
+
+1. **Container** – Hintergrund, Rahmen, Radius `--lazy-radius-md`
+2. **Label** – kurzes Verb, Schrift `--lazy-font-weight-medium`
+3. **Icon** (optional) – vor oder nach dem Label
+
+### Varianten
+
+| Variante | Verwendung |
+| --- | --- |
+| `primary` | Die wichtigste Aktion einer Ansicht. Höchstens eine pro Bereich. |
+| `secondary` | Alternative Aktionen neben der primären. |
+| `ghost` | Untergeordnete Aktionen mit wenig visuellem Gewicht. |
+
+### Größen
+
+<Demo>
+  <Button size="sm">Klein</Button>
+  <Button size="md">Mittel</Button>
+  <Button size="lg">Groß</Button>
+</Demo>
+
+### Zustände
+
+| Zustand | Verhalten |
+| --- | --- |
+| Default | Grundzustand |
+| Hover | Hintergrund wechselt auf `*-hover`-Token |
+| Focus | Sichtbarer Ring in `--lazy-color-focus-ring`, nur bei Tastaturfokus |
+| Disabled | 50 % Deckkraft, keine Interaktion |
+
+<Demo>
+  <Button disabled>Deaktiviert</Button>
+</Demo>
+
+### Do & Don't
+
+- **Do:** Labels als Verb formulieren („Speichern“, nicht „OK“).
+- **Do:** Pro Bereich nur einen `primary`-Button.
+- **Don't:** Buttons für Navigation verwenden – dafür gibt es Links.
+
+### Accessibility
+
+- Natives `<button>`-Element mit `type="button"` als Standard.
+- Bedienbar mit <kbd>Enter</kbd> und <kbd>Leertaste</kbd>.
+- Kontrast Label zu Hintergrund mindestens 4,5 : 1.
+- Reine Icon-Buttons brauchen ein `aria-label`.
+
+### Tokens
+
+`--lazy-color-action-primary-default`, `--lazy-color-action-primary-hover`, `--lazy-color-action-secondary-default`, `--lazy-color-action-secondary-hover`, `--lazy-color-text-on-action`, `--lazy-color-focus-ring`, `--lazy-radius-md`, `--lazy-space-*`, `--lazy-font-size-*`
+
+## Implementierung
+
+<Tabs syncKey="framework">
+  <TabItem label="Svelte">
+
+```svelte
+<script>
+  import { Button } from '@lazy-designsystem/svelte';
+</script>
+
+<Button variant="primary" onclick={() => save()}>Speichern</Button>
+```
+
+| Prop | Typ | Standard | Beschreibung |
+| --- | --- | --- | --- |
+| `variant` | `'primary' \| 'secondary' \| 'ghost'` | `'primary'` | Visuelle Gewichtung |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Größe |
+| `disabled` | `boolean` | `false` | Deaktiviert den Button |
+| `type` | `'button' \| 'submit' \| 'reset'` | `'button'` | Natives `type`-Attribut |
+| `children` | `Snippet` | – | Beschriftung |
+
+Weitere Attribute (z. B. `onclick`, `aria-label`) werden an das `<button>`-Element durchgereicht.
+
+  </TabItem>
+</Tabs>

@@ -1,0 +1,18 @@
+---
+title: Farbe
+description: Farbpalette und semantische Farbrollen.
+sidebar:
+  order: 1
+---
+
+import TokenTable from '../../../components/TokenTable.astro';
+
+Farben gibt es auf zwei Ebenen. **Primitives** sind die Rohpalette, **semantische Tokens** geben einer Farbe eine Rolle. Komponenten verwenden ausschließlich semantische Tokens – so lässt sich z. B. ein Dark Mode umsetzen, ohne Komponenten anzufassen.
+
+## Semantische Farben
+
+<TokenTable prefix="color" only="semantic" />
+
+## Palette (Primitives)
+
+<TokenTable prefix="color" only="primitive" />

@@ -1,0 +1,31 @@
+---
+title: Lazy Design System
+description: Prinzipien, Tokens und Komponenten des Lazy Design Systems – framework-übergreifend dokumentiert.
+template: splash
+hero:
+  tagline: Ein Design System, einmal in Figma gedacht und in jedem Framework gleich umgesetzt.
+  actions:
+    - text: Loslegen
+      link: einstieg/installation/
+      icon: right-arrow
+    - text: Komponenten
+      link: komponenten/button/
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid>
+  <Card title="Prinzipien" icon="open-book">
+    Die Haltung hinter dem System – unabhängig von Tool und Framework.
+  </Card>
+  <Card title="Tokens" icon="seti:json">
+    Farben, Abstände und Typografie aus den Figma Variables, als CSS-Variablen für jedes Framework.
+  </Card>
+  <Card title="Komponenten" icon="puzzle">
+    Jede Komponente hat eine framework-neutrale Spezifikation und eine Implementierung pro Framework.
+  </Card>
+  <Card title="Frameworks" icon="laptop">
+    Aktuell: **Svelte**. Weitere Frameworks setzen dieselben Spezifikationen um.
+  </Card>
+</CardGrid>

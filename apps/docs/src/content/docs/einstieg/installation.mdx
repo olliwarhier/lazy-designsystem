@@ -1,0 +1,55 @@
+---
+title: Installation
+description: Lazy Design System in einem Projekt einbinden.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+Das System besteht aus zwei Schichten:
+
+1. **Tokens** (`@lazy-designsystem/tokens`) – CSS-Variablen, die jedes Framework nutzt.
+2. **Komponenten** – eine Bibliothek pro Framework, die dieselben Spezifikationen umsetzt.
+
+Wähle unten dein Framework. Die Auswahl gilt für alle Seiten der Doku.
+
+<Tabs syncKey="framework">
+  <TabItem label="Svelte">
+
+```bash
+pnpm add @lazy-designsystem/tokens @lazy-designsystem/svelte
+```
+
+Tokens einmal global laden, z. B. im Root-Layout:
+
+```svelte
+<script>
+  import '@lazy-designsystem/tokens/tokens.css';
+</script>
+```
+
+Komponenten importieren:
+
+```svelte
+<script>
+  import { Button } from '@lazy-designsystem/svelte';
+</script>
+
+<Button variant="primary">Speichern</Button>
+```
+
+  </TabItem>
+  <TabItem label="Nur Tokens (CSS)">
+
+Für Projekte ohne passende Komponentenbibliothek reichen die Tokens:
+
+```css
+@import '@lazy-designsystem/tokens/tokens.css';
+
+.my-button {
+  background: var(--lazy-color-action-primary-default);
+  border-radius: var(--lazy-radius-md);
+}
+```
+
+  </TabItem>
+</Tabs>
