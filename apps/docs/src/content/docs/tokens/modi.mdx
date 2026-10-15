@@ -14,7 +14,7 @@ Ein Modus ist eine alternative Wertetabelle für dieselben Token-Namen. Die Sema
 | Farbschema | System: Light-Mode / Dark-Mode | `prefers-color-scheme` | `data-color-scheme="light"` oder `"dark"` |
 | Kontrast | System: Kontrast-Modi | `prefers-contrast: more` | `data-contrast="more"` oder `"standard"` |
 | Theme | Theme-Collection | – | `data-theme="<name>"` |
-| Responsive | Responsive: Desktop / Mobile (/ Tablet) | Viewport-Breite | – |
+| Responsive | Responsive: Desktop / Mobile | Viewport-Breite | – |
 
 ## Farbschema und Kontrast
 
@@ -86,7 +86,5 @@ Die Formel:
 - Ergebnis: `clamp(Mobile, Steigung × 100vw + Achsenabschnitt, Desktop)`, alle px-Werte in `rem` (÷ 16)
 
 Die Viewport-Breiten kommen aus `Breakpoint` der Responsive-Collection (Desktop- und Mobile-Modus, im DS Template 1440 und 430 px). Sind beide Werte gleich, wird ein fester Wert ausgegeben – bei gleichem Verweis in beiden Modi bleibt der Verweis erhalten (`var(--base-scale-200)`).
-
-**Mit Tablet-Modus** wird in zwei Abschnitten interpoliert: Mobile → Tablet und Tablet → Desktop, umgeschaltet per Media Query an der Tablet-Breite.
 
 **Einheiten:** Größen, Abstände und Laufweite in `rem`, Zeilenhöhen ohne Einheit (`130%` → `1.3`).

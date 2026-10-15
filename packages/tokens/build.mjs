@@ -5,7 +5,7 @@
 import { readFileSync, writeFileSync, readdirSync, mkdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { hexToOklch, rem, fluid } from '@lazy-designsystem/core';
+import { hexToOklch, parseHex, rgbToOklch, rem, fluid } from '@lazy-designsystem/core';
 
 const ROOT = dirname(fileURLToPath(import.meta.url));
 const SRC = join(ROOT, 'src');
@@ -178,16 +178,23 @@ function systemValue(token, theme) {
 
 // ── Ausgabe CSS ──────────────────────────────────────────────────────────────
 
-// Sortierung: Zahlen aufsteigend, Größen und Emphasis nach ihrer Reihe, sonst Figma-Reihenfolge
-const LADDERS = [
-  ['none', '4xsmall', '3xsmall', '2xsmall', 'xsmall', 'small', 'medium', 'large', 'xlarge', '2xlarge', '2large', '3xlarge', '4xlarge', 'full'],
-  ['subtler', 'subtle', 'base', 'bold', 'bolder'],
-];
+// Sortierung: Zahlen aufsteigend, Größen (T-Shirt) und Emphasis nach ihrer Reihe, sonst Figma-Reihenfolge
+const EMPHASIS = ['subtlest', 'subtler', 'subtle', 'base', 'bold', 'bolder', 'boldest'];
+const sizeRank = (s) => {
+  if (s === 'none') return -1000;
+  if (s === 'full') return 1000;
+  if (s === 'medium') return 0;
+  const m = s.match(/^(\d*)x?(small|large)$/);
+  if (!m) return null;
+  const steps = s.includes('x') ? 1 + Number(m[1] || 1) : 1; // small 1, xsmall 2, 2xsmall 3 …
+  return m[2] === 'small' ? -steps : steps;
+};
 const firstSeen = new Map();
 [...tokens.values()].forEach((t, i) => t.path.forEach((s) => firstSeen.has(s) || firstSeen.set(s, i)));
 const rank = (s) => {
   if (/^\d+$/.test(s)) return [0, Number(s)];
-  for (const [i, ladder] of LADDERS.entries()) if (ladder.includes(s)) return [1 + i, ladder.indexOf(s)];
+  if (sizeRank(s) !== null) return [1, sizeRank(s)];
+  if (EMPHASIS.includes(s)) return [2, EMPHASIS.indexOf(s)];
   return [9, firstSeen.get(s)];
 };
 const compare = (a, b) => {
@@ -226,6 +233,40 @@ root.push(
   ]),
 );
 
+// Interaction: Hover und Pressed verschieben die Lightness der Fläche.
+// Die Schrittweiten kommen aus den Overlay-Farben in Figma (Light-Mode):
+// die Deckkraft der dunklen Overlay-Farbe = Schritt nach unten,
+// die der hellen Overlay-Farbe = Schritt nach oben.
+function interactionSteps(state) {
+  const [LIGHT] = SYSTEM.modes;
+  const steps = {};
+  for (const polarity of ['default', 'inverted']) {
+    const token = tokens.get(`color.interaction.${state}.${polarity}.base`);
+    const value = token && resolve(token.values[LIGHT], baseContext);
+    if (!value || typeof value !== 'object') continue;
+    const { l } = rgbToOklch(parseHex(value.ref));
+    steps[l < 0.5 ? 'darker' : 'lighter'] = value.alpha;
+  }
+  return steps;
+}
+const interaction = [];
+for (const state of ['hovered', 'pressed']) {
+  const { darker, lighter } = interactionSteps(state);
+  if (darker === undefined || lighter === undefined) continue;
+  interaction.push(decl(`interaction-${state}-darker`, String(darker)), decl(`interaction-${state}-lighter`, String(lighter)));
+}
+// Richtung: automatisch nach der Lightness der Fläche (hell → dunkler, dunkel → heller).
+// Der Wert enthält „l“ und wirkt erst innerhalb von oklch(from …).
+interaction.push(decl('interaction-direction', 'clamp(-1, (l - 0.5) * 1000, 1)'));
+root.push(...section('Interaction', interaction));
+
+const interactionDerived = ['hovered', 'pressed'].map((state) =>
+  decl(
+    `interaction-${state}-l`,
+    `calc(l - var(--interaction-${state}-darker) * max(var(--interaction-direction), 0) + var(--interaction-${state}-lighter) * max(-1 * var(--interaction-direction), 0))`,
+  ),
+);
+
 // Abgeleitete Radien werden überall dort neu berechnet, wo --shape gesetzt
 // werden kann – sonst würde ein data-shape auf einem Bereich nicht wirken.
 const shapeDerived = [
@@ -249,6 +290,9 @@ for (const theme of themes.slice(1)) {
 
 css += '\n' + shapeModes.map((m, i) => `[data-shape='${slug(m)}'] {\n  --shape: ${shapeValue(i)};\n}\n`).join('\n');
 css += '\n' + block(':root,\n[data-shape]', shapeDerived);
+
+css += "\n[data-interaction='darker'] {\n  --interaction-direction: 1;\n}\n\n[data-interaction='lighter'] {\n  --interaction-direction: -1;\n}\n";
+css += '\n' + block(':root,\n[data-interaction]', interactionDerived);
 
 // ── Ausgabe JSON ─────────────────────────────────────────────────────────────
 
