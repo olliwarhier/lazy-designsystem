@@ -31,7 +31,13 @@ jobs:
       # und bei setup-node "cache: pnpm" ergänzen.
       - run: pnpm install --no-frozen-lockfile
 
-      - run: pnpm build
+      - name: Build
+        run: |
+          set -o pipefail
+          pnpm build 2>&1 | tee build.log || {
+            tail -n 60 build.log | sed 's/%/%25/g' | awk 'BEGIN{ORS="%0A"} {print}' | sed 's/^/::error title=Build-Log::/' ; echo
+            exit 1
+          }
 
       - uses: actions/upload-pages-artifact@v3
         with:
