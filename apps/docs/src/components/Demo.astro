@@ -1,14 +1,15 @@
 ---
 /**
  * Rahmen für Live-Demos. `not-content` verhindert, dass Starlight-Typografie
- * die Komponenten beeinflusst.
+ * die Komponenten beeinflusst. `shape` setzt den Shape-Regler für die Demo.
  */
 interface Props {
   column?: boolean;
+  shape?: 'square' | 'rounded-subtle' | 'rounded-medium' | 'rounded-bold' | 'pill';
 }
-const { column = false } = Astro.props;
+const { column = false, shape = 'rounded-medium' } = Astro.props;
 ---
 
-<div class:list={['lazy-demo', 'not-content', { 'lazy-demo--column': column }]}>
+<div class:list={['lazy-demo', 'not-content', { 'lazy-demo--column': column }]} data-shape={shape}>
   <slot />
 </div>

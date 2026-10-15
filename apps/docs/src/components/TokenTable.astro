@@ -3,61 +3,74 @@
  * Zeigt Tokens direkt aus @lazy-designsystem/tokens an – die Doku kann daher
  * nie von den echten Werten abweichen.
  *
- * <TokenTable prefix="color.action" />
+ * <TokenTable prefix="--color-surface-" />
+ * <TokenTable prefix="--palette-clay-" swatches />
  */
-import tokens from '@lazy-designsystem/tokens/docs.json';
+import data from '@lazy-designsystem/tokens/tokens.json';
 
 interface Props {
-  /** Token-Pfad, z. B. "color", "color.text" oder "space" */
+  /** Anfang des CSS-Namens, z. B. "--color-surface-" oder "--spacing-dynamic-" */
   prefix: string;
-  /** Verweisende Tokens (Referenzen) ausblenden bzw. nur diese zeigen */
-  only?: 'primitive' | 'semantic';
+  /** Nur Tokens mit diesem Ende, z. B. "-size" */
+  suffix?: string;
+  /** Kompakte Farbfelder statt Tabelle (für Paletten) */
+  swatches?: boolean;
 }
 
-const { prefix, only } = Astro.props;
+const { prefix, suffix = '', swatches = false } = Astro.props;
+const rows = data.tokens.filter((t) => t.css.startsWith(prefix) && t.css.endsWith(suffix));
+if (!rows.length) throw new Error(`TokenTable: keine Tokens mit Präfix ${prefix}`);
 
-const rows = tokens.filter((t) => {
-  if (!(t.path === prefix || t.path.startsWith(`${prefix}.`))) return false;
-  if (only === 'primitive') return t.reference === null;
-  if (only === 'semantic') return t.reference !== null;
-  return true;
-});
+const modeNames = Object.keys(rows[0].modes);
+const multiMode = modeNames.length > 1;
+const isColor = rows[0].type === 'color';
+const isSpace = /^--(spacing|base-scale|sizing|base-border)/.test(prefix);
+
+const show = (v: unknown) => (typeof v === 'number' ? `${v}px` : String(v));
+const label = (t: (typeof rows)[number]) => t.css.slice(prefix.length) || t.css;
 ---
 
-<table class="lazy-token-table">
-  <thead>
-    <tr>
-      <th>Vorschau</th>
-      <th>CSS-Variable</th>
-      <th>Wert</th>
-      <th>Beschreibung</th>
-    </tr>
-  </thead>
-  <tbody>
-    {
-      rows.map((t) => (
+{
+  swatches ? (
+    <div class="lazy-swatches not-content">
+      {rows.map((t) => (
+        <div class="lazy-swatches__item" title={`${t.css} · ${t.modes[modeNames[0]]}`}>
+          <span class="lazy-swatches__color" style={`background:${t.modes[modeNames[0]]}`} />
+          <code>{label(t)}</code>
+          <small>{String(t.modes[modeNames[0]])}</small>
+        </div>
+      ))}
+    </div>
+  ) : (
+    <table class="lazy-token-table">
+      <thead>
         <tr>
-          <td>
-            {t.type === 'color' && <span class="lazy-swatch" style={`background:${t.value}`} />}
-            {t.type === 'dimension' && t.path.startsWith('space') && (
-              <span class="lazy-space-bar" style={`width:${t.value}`} />
-            )}
-          </td>
-          <td>
-            <code>{`var(${t.cssVar})`}</code>
-          </td>
-          <td>
-            <code>{String(t.value)}</code>
-            {t.reference && (
-              <>
-                <br />
-                <small>→ {t.reference}</small>
-              </>
-            )}
-          </td>
-          <td>{t.description}</td>
+          <th>CSS-Variable</th>
+          {multiMode ? modeNames.map((m) => <th>{m}</th>) : <th>Wert</th>}
+          <th>Figma</th>
         </tr>
-      ))
-    }
-  </tbody>
-</table>
+      </thead>
+      <tbody>
+        {rows.map((t) => (
+          <tr>
+            <td>
+              <code>{t.css}</code>
+            </td>
+            {modeNames.map((m) => (
+              <td>
+                {isColor && <span class="lazy-swatch" style={`background:${t.modes[m]}`} />}
+                {isSpace && typeof t.modes[m] === 'number' && (
+                  <span class="lazy-space-bar" style={`width:${Math.min(Number(t.modes[m]), 160)}px`} />
+                )}{' '}
+                <small>{show(t.modes[m])}</small>
+              </td>
+            ))}
+            <td>
+              <small>{t.figma}</small>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  )
+}

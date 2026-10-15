@@ -1,24 +1,90 @@
 ---
 title: Farbe
-description: Farbpalette und semantische Farbrollen.
+description: Farbrollen und Paletten des Lazy Design Systems.
 sidebar:
   order: 1
 ---
 
-import { Aside } from '@astrojs/starlight/components';
 import TokenTable from '../../../components/TokenTable.astro';
 
-<Aside type="caution" title="Platzhalter">
-  Die Werte auf dieser Seite sind noch Platzhalter. Sie werden im nächsten Schritt durch die Variablen aus dem DS Template ersetzt und folgen dann der [Token-Spezifikation](../../tokens/uebersicht/).
-</Aside>
+Farben gibt es auf zwei Ebenen. **Paletten** (Primitives) beschreiben Farbtöne, benannt nach ihrer Helligkeit. **Farbrollen** (System) geben einer Farbe eine Funktion – Komponenten verwenden ausschließlich Farbrollen.
 
+Jede Fläche hat eine passende **On-Farbe** für Schrift und Icons darauf, deren Kontrast geprüft ist. Die Werte unten stammen direkt aus dem DS Template; die Spalten zeigen Light- und Dark-Mode. Wie die Namen entstehen, steht unter [Benennung](../../tokens/benennung/).
 
-Farben gibt es auf zwei Ebenen. **Primitives** sind die Rohpalette, **semantische Tokens** geben einer Farbe eine Rolle. Komponenten verwenden ausschließlich semantische Tokens – so lässt sich z. B. ein Dark Mode umsetzen, ohne Komponenten anzufassen.
+## Corporate
 
-## Semantische Farben
+**Brand** für Flächen und Akzente der Marke, **Action** für klickbare Elemente, **Signal** für Hervorhebungen (verweist im Template auf Action).
 
-<TokenTable prefix="color" only="semantic" />
+<TokenTable prefix="--color-brand-" />
+<TokenTable prefix="--color-on-brand-" />
+<TokenTable prefix="--color-action-" />
+<TokenTable prefix="--color-on-action-" />
+<TokenTable prefix="--color-signal-" />
+<TokenTable prefix="--color-on-signal-" />
 
-## Palette (Primitives)
+## Surface
 
-<TokenTable prefix="color" only="primitive" />
+Hintergründe. `Inverted` ist die Gegenfläche – im Light-Mode dunkel, im Dark-Mode hell.
+
+<TokenTable prefix="--color-surface-" />
+
+## On-Surface
+
+Schrift und Icons auf Surface. Neben den Grautönen gibt es farbige Varianten für Brand, Action und Feedback auf neutralem Grund.
+
+<TokenTable prefix="--color-on-surface-default-" />
+<TokenTable prefix="--color-on-surface-inverted-" />
+
+## Outline
+
+<TokenTable prefix="--color-outline-" />
+
+## Feedback
+
+<TokenTable prefix="--color-error-" />
+<TokenTable prefix="--color-on-error-" />
+<TokenTable prefix="--color-warning-" />
+<TokenTable prefix="--color-on-warning-" />
+<TokenTable prefix="--color-success-" />
+<TokenTable prefix="--color-on-success-" />
+<TokenTable prefix="--color-information-" />
+<TokenTable prefix="--color-on-information-" />
+
+## Interaction & Effects
+
+Hover und Pressed werden als halbtransparente Ebene über die Grundfarbe gelegt (siehe [Farbformate](../../tokens/farbformate/#interaction-overlay)).
+
+<TokenTable prefix="--color-hovered-" />
+<TokenTable prefix="--color-pressed-" />
+<TokenTable prefix="--color-focused-" />
+<TokenTable prefix="--color-disabled-" />
+<TokenTable prefix="--color-shadow-" />
+<TokenTable prefix="--color-scrim-" />
+
+## Paletten
+
+Die Zahl einer Stufe ist ihre Lightness im OKLCH-Farbraum (`70` ≙ L 0,70). Paletten werden nie direkt in Komponenten verwendet.
+
+### Clay (neutral)
+
+<TokenTable prefix="--palette-clay-" swatches />
+
+### Bordeaux
+
+<TokenTable prefix="--palette-bordeaux-" swatches />
+
+### Lime
+
+<TokenTable prefix="--palette-lime-" swatches />
+
+### Red
+
+<TokenTable prefix="--palette-red-" swatches />
+
+### Yellow
+
+<TokenTable prefix="--palette-yellow-" swatches />
+
+### Blue
+
+<TokenTable prefix="--palette-blue-" swatches />

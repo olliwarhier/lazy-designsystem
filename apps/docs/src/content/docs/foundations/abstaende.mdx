@@ -1,6 +1,6 @@
 ---
-title: Abstände & Radien
-description: Spacing-Skala und Eckenradien.
+title: Abstände & Größen
+description: Spacing, Größen, Radien und Konturen.
 sidebar:
   order: 2
 ---
@@ -8,17 +8,51 @@ sidebar:
 import { Aside } from '@astrojs/starlight/components';
 import TokenTable from '../../../components/TokenTable.astro';
 
-<Aside type="caution" title="Platzhalter">
-  Die Werte auf dieser Seite sind noch Platzhalter. Sie werden im nächsten Schritt durch die Variablen aus dem DS Template ersetzt und folgen dann der [Token-Spezifikation](../../tokens/uebersicht/).
+Alle Abstände und Größen kommen aus der **Base-Scale** – einem Raster in 4-px-Schritten. Die Benennung der Abstände folgt derselben Logik wie die Schriftgrößen: Ein großes, wichtiges Element darf mehr Raum bekommen. Zusammengehörige Elemente stehen trotzdem immer nah beieinander.
+
+Werte mit zwei Spalten wachsen fließend zwischen Mobile und Desktop (siehe [Modi](../../tokens/modi/#responsive)).
+
+## Spacing
+
+### Dynamisch
+
+Der Standard für Abstände. Sie wachsen mit der Viewport-Breite.
+
+<TokenTable prefix="--spacing-dynamic-" />
+
+### Statisch
+
+Für Abstände, die sich nicht verändern sollen – z. B. innerhalb kleiner Komponenten.
+
+<TokenTable prefix="--spacing-static-" />
+
+### Presets
+
+Feste Abstände für Layout-Bereiche.
+
+<TokenTable prefix="--spacing-presets-" />
+
+## Größen
+
+### Icons
+
+<TokenTable prefix="--sizing-icon-" />
+
+### Breiten und Höhen
+
+<TokenTable prefix="--sizing-max-width-" />
+<TokenTable prefix="--sizing-min-width-" />
+<TokenTable prefix="--sizing-height-" />
+
+## Radien und Konturen
+
+<Aside>
+  Komponenten verwenden Radien nicht direkt, sondern über den [Shape-Regler](../../tokens/shape/).
 </Aside>
 
+<TokenTable prefix="--base-border-radius-" />
+<TokenTable prefix="--base-border-width-" />
 
-Die Abstands-Skala basiert auf einem 4-px-Raster. Abstände zwischen und innerhalb von Elementen kommen immer aus dieser Skala.
+## Base-Scale
 
-## Abstände
-
-<TokenTable prefix="space" />
-
-## Radien
-
-<TokenTable prefix="radius" />
+<TokenTable prefix="--base-scale-" />

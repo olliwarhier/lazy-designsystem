@@ -34,7 +34,7 @@ Komponenten importieren:
   import { Button } from '@lazy-designsystem/svelte';
 </script>
 
-<Button variant="primary">Speichern</Button>
+<Button>Speichern</Button>
 ```
 
   </TabItem>
@@ -46,8 +46,9 @@ Für Projekte ohne passende Komponentenbibliothek reichen die Tokens:
 @import '@lazy-designsystem/tokens/tokens.css';
 
 .my-button {
-  background: var(--lazy-color-action-primary-default);
-  border-radius: var(--lazy-radius-md);
+  background: var(--color-action-default-base);
+  color: var(--color-on-action-default-base);
+  padding: var(--spacing-dynamic-xsmall) var(--spacing-dynamic-small);
 }
 ```
 

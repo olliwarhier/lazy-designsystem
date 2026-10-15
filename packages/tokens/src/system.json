@@ -1,0 +1,1095 @@
+{
+  "$extensions": {
+    "lazy": {
+      "collection": "System",
+      "modes": [
+        "Light-Mode",
+        "Dark-Mode"
+      ]
+    }
+  },
+  "color": {
+    "corporate": {
+      "brand": {
+        "default": {
+          "base": {
+            "$type": "color",
+            "$value": "{light-mode.brand.default.base}",
+            "$extensions": {
+              "lazy": {
+                "figma": "Color/Corporate/Brand/Default/Base",
+                "modes": {
+                  "Dark-Mode": "{dark-mode.brand.default.base}"
+                }
+              }
+            }
+          },
+          "subtle": {
+            "$type": "color",
+            "$value": "{light-mode.brand.default.subtle}",
+            "$extensions": {
+              "lazy": {
+                "figma": "Color/Corporate/Brand/Default/Subtle",
+                "modes": {
+                  "Dark-Mode": "{dark-mode.brand.default.subtle}"
+                }
+              }
+            }
+          },
+          "bold": {
+            "$type": "color",
+            "$value": "{light-mode.brand.default.bold}",
+            "$extensions": {
+              "lazy": {
+                "figma": "Color/Corporate/Brand/Default/Bold",
+                "modes": {
+                  "Dark-Mode": "{dark-mode.brand.default.bold}"
+                }
+              }
+            }
+          }
+        }
+      },
+      "action": {
+        "default": {
+          "subtle": {
+            "$type": "color",
+            "$value": "{light-mode.action.default.subtle}",
+            "$extensions": {
+              "lazy": {
+                "figma": "Color/Corporate/Action/Default/Subtle",
+                "modes": {
+                  "Dark-Mode": "{dark-mode.action.default.subtle}"
+                }
+              }
+            }
+          },
+          "base": {
+            "$type": "color",
+            "$value": "{light-mode.action.default.base}",
+            "$extensions": {
+              "lazy": {
+                "figma": "Color/Corporate/Action/Default/Base",
+                "modes": {
+                  "Dark-Mode": "{dark-mode.action.default.base}"
+                }
+              }
+            }
+          },
+          "bold": {
+            "$type": "color",
+            "$value": "{light-mode.action.default.bold}",
+            "$extensions": {
+              "lazy": {
+                "figma": "Color/Corporate/Action/Default/Bold",
+                "modes": {
+                  "Dark-Mode": "{dark-mode.on-action.default.bold}"
+                }
+              }
+            }
+          }
+        }
+      },
+      "on-action": {
+        "default": {
+          "subtle": {
+            "$type": "color",
+            "$value": "{light-mode.on-action.default.subtle}",
+            "$extensions": {
+              "lazy": {
+                "figma": "Color/Corporate/On-Action/Default/Subtle",
+                "modes": {
+                  "Dark-Mode": "{dark-mode.on-action.default.subtle}"
+                }
+              }
+            }
+          },
+          "base": {
+            "$type": "color",
+            "$value": "{light-mode.on-action.default.base}",
+            "$extensions": {
+              "lazy": {
+                "figma": "Color/Corporate/On-Action/Default/Base",
+                "modes": {
+                  "Dark-Mode": "{dark-mode.on-action.default.base}"
+                }
+              }
+            }
+          },
+          "bold": {
+            "$type": "color",
+            "$value": "{light-mode.on-action.default.bold}",
+            "$extensions": {
+              "lazy": {
+                "figma": "Color/Corporate/On-Action/Default/Bold",
+                "modes": {
+                  "Dark-Mode": "{dark-mode.action.default.bold}"
+                }
+              }
+            }
+          }
+        }
+      },
+      "on-brand": {
+        "default": {
+          "subtle": {
+            "$type": "color",
+            "$value": "{light-mode.on-brand.default.subtle}",
+            "$extensions": {
+              "lazy": {
+                "figma": "Color/Corporate/On-Brand/Default/Subtle",
+                "modes": {
+                  "Dark-Mode": "{dark-mode.on-brand.default.subtle}"
+                }
+              }
+            }
+          },
+          "bold": {
+            "$type": "color",
+            "$value": "{light-mode.on-brand.default.bold}",
+            "$extensions": {
+              "lazy": {
+                "figma": "Color/Corporate/On-Brand/Default/Bold",
+                "modes": {
+                  "Dark-Mode": "{dark-mode.on-brand.default.bold}"
+                }
+              }
+            }
+          },
+          "base": {
+            "$type": "color",
+            "$value": "{light-mode.on-brand.default.base}",
+            "$extensions": {
+              "lazy": {
+                "figma": "Color/Corporate/On-Brand/Default/Base",
+                "modes": {
+                  "Dark-Mode": "{dark-mode.on-brand.default.base}"
+                }
+              }
+            }
+          }
+        }
+      },
+      "signal": {
+        "default": {
+          "bold": {
+            "$type": "color",
+            "$value": "{light-mode.signal.default.bold}",
+            "$extensions": {
+              "lazy": {
+                "figma": "Color/Corporate/Signal/Default/Bold",
+                "modes": {
+                  "Dark-Mode": "{dark-mode.signal.default.bold}"
+                }
+              }
+            }
+          },
+          "base": {
+            "$type": "color",
+            "$value": "{light-mode.signal.default.base}",
+            "$extensions": {
+              "lazy": {
+                "figma": "Color/Corporate/Signal/Default/Base",
+                "modes": {
+                  "Dark-Mode": "{dark-mode.signal.default.base}"
+                }
+              }
+            }
+          },
+          "subtle": {
+            "$type": "color",
+            "$value": "{light-mode.signal.default.subtle}",
+            "$extensions": {
+              "lazy": {
+                "figma": "Color/Corporate/Signal/Default/Subtle",
+                "modes": {
+                  "Dark-Mode": "{dark-mode.signal.default.subtle}"
+                }
+              }
+            }
+          }
+        }
+      },
+      "on-signal": {
+        "default": {
+          "bold": {
+            "$type": "color",
+            "$value": "{light-mode.on-signal.default.bold}",
+            "$extensions": {
+              "lazy": {
+                "figma": "Color/Corporate/On-Signal/Default/Bold",
+                "modes": {
+                  "Dark-Mode": "{dark-mode.on-signal.default.bold}"
+                }
+              }
+            }
+          },
+          "base": {
+            "$type": "color",
+            "$value": "{light-mode.on-signal.default.base}",
+            "$extensions": {
+              "lazy": {
+                "figma": "Color/Corporate/On-Signal/Default/Base",
+                "modes": {
+                  "Dark-Mode": "{dark-mode.on-signal.default.base}"
+                }
+              }
+            }
+          },
+          "subtle": {
+            "$type": "color",
+            "$value": "{light-mode.on-signal.default.subtle}",
+            "$extensions": {
+              "lazy": {
+                "figma": "Color/Corporate/On-Signal/Default/Subtle",
+                "modes": {
+                  "Dark-Mode": "{dark-mode.on-signal.default.subtle}"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "feedback": {
+      "error": {
+        "default": {
+          "subtle": {
+            "$type": "color",
+            "$value": "{palette.red.91}",
+            "$extensions": {
+              "lazy": {
+                "figma": "Color/Feedback/Error/Default/Subtle",
+                "modes": {
+                  "Dark-Mode": "{palette.red.28}"
+                }
+              }
+            }
+          },
+          "base": {
+            "$type": "color",
+            "$value": "{palette.red.60}",
+            "$extensions": {
+              "lazy": {
+                "figma": "Color/Feedback/Error/Default/Base",
+                "modes": {
+                  "Dark-Mode": "{palette.red.79}"
+                }
+              }
+            }
+          }
+        }
+      },
+      "on-error": {
+        "default": {
+          "subtle": {
+            "$type": "color",
+            "$value": "{palette.bordeaux.28}",
+            "$extensions": {
+              "lazy": {
+                "figma": "Color/Feedback/On-Error/Default/Subtle",
+                "modes": {
+                  "Dark-Mode": "{palette.red.91}"
+                }
+              }
+            }
+          },
+          "base": {
+            "$type": "color",
+            "$value": "{palette.red.100}",
+            "$extensions": {
+              "lazy": {
+                "figma": "Color/Feedback/On-Error/Default/Base",
+                "modes": {
+                  "Dark-Mode": "{palette.red.10}"
+                }
+              }
+            }
+          }
+        }
+      },
+      "warning": {
+        "default": {
+          "subtle": {
+            "$type": "color",
+            "$value": "{palette.yellow.91}",
+            "$extensions": {
+              "lazy": {
+                "figma": "Color/Feedback/Warning/Default/Subtle",
+                "modes": {
+                  "Dark-Mode": "{palette.yellow.28}"
+                }
+              }
+            }
+          },
+          "base": {
+            "$type": "color",
+            "$value": "{palette.yellow.60}",
+            "$extensions": {
+              "lazy": {
+                "figma": "Color/Feedback/Warning/Default/Base",
+                "modes": {
+                  "Dark-Mode": "{palette.yellow.79}"
+                }
+              }
+            }
+          }
+        }
+      },
+      "on-warning": {
+        "default": {
+          "subtle": {
+            "$type": "color",
+            "$value": "{palette.yellow.28}",
+            "$extensions": {
+              "lazy": {
+                "figma": "Color/Feedback/On-Warning/Default/Subtle",
+                "modes": {
+                  "Dark-Mode": "{palette.yellow.91}"
+                }
+              }
+            }
+          },
+          "base": {
+            "$type": "color",
+            "$value": "{palette.yellow.100}",
+            "$extensions": {
+              "lazy": {
+                "figma": "Color/Feedback/On-Warning/Default/Base",
+                "modes": {
+                  "Dark-Mode": "{palette.yellow.10}"
+                }
+              }
+            }
+          }
+        }
+      },
+      "information": {
+        "default": {
+          "subtle": {
+            "$type": "color",
+            "$value": "{palette.blue.91}",
+            "$extensions": {
+              "lazy": {
+                "figma": "Color/Feedback/Information/Default/Subtle",
+                "modes": {
+                  "Dark-Mode": "{palette.blue.28}"
+                }
+              }
+            }
+          },
+          "base": {
+            "$type": "color",
+            "$value": "{palette.blue.60}",
+            "$extensions": {
+              "lazy": {
+                "figma": "Color/Feedback/Information/Default/Base",
+                "modes": {
+                  "Dark-Mode": "{palette.blue.79}"
+                }
+              }
+            }
+          }
+        }
+      },
+      "on-information": {
+        "default": {
+          "subtle": {
+            "$type": "color",
+            "$value": "{palette.blue.28}",
+            "$extensions": {
+              "lazy": {
+                "figma": "Color/Feedback/On-Information/Default/Subtle",
+                "modes": {
+                  "Dark-Mode": "{palette.blue.91}"
+                }
+              }
+            }
+          },
+          "base": {
+            "$type": "color",
+            "$value": "{palette.blue.100}",
+            "$extensions": {
+              "lazy": {
+                "figma": "Color/Feedback/On-Information/Default/Base",
+                "modes": {
+                  "Dark-Mode": "{palette.blue.10}"
+                }
+              }
+            }
+          }
+        }
+      },
+      "success": {
+        "default": {
+          "subtle": {
+            "$type": "color",
+            "$value": "{palette.lime.91}",
+            "$extensions": {
+              "lazy": {
+                "figma": "Color/Feedback/Success/Default/Subtle",
+                "modes": {
+                  "Dark-Mode": "{palette.lime.28}"
+                }
+              }
+            }
+          },
+          "base": {
+            "$type": "color",
+            "$value": "{palette.lime.60}",
+            "$extensions": {
+              "lazy": {
+                "figma": "Color/Feedback/Success/Default/Base",
+                "modes": {
+                  "Dark-Mode": "{palette.lime.79}"
+                }
+              }
+            }
+          }
+        }
+      },
+      "on-success": {
+        "default": {
+          "subtle": {
+            "$type": "color",
+            "$value": "{palette.lime.28}",
+            "$extensions": {
+              "lazy": {
+                "figma": "Color/Feedback/On-Success/Default/Subtle",
+                "modes": {
+                  "Dark-Mode": "{palette.lime.91}"
+                }
+              }
+            }
+          },
+          "base": {
+            "$type": "color",
+            "$value": "{palette.lime.100}",
+            "$extensions": {
+              "lazy": {
+                "figma": "Color/Feedback/On-Success/Default/Base",
+                "modes": {
+                  "Dark-Mode": "{palette.lime.10}"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "basic": {
+      "on-surface": {
+        "default": {
+          "warning": {
+            "$type": "color",
+            "$value": "{palette.yellow.49}",
+            "$extensions": {
+              "lazy": {
+                "figma": "Color/Basic/On-Surface/Default/Warning",
+                "modes": {
+                  "Dark-Mode": "{palette.yellow.86}"
+                }
+              }
+            }
+          },
+          "information": {
+            "$type": "color",
+            "$value": "{palette.blue.49}",
+            "$extensions": {
+              "lazy": {
+                "figma": "Color/Basic/On-Surface/Default/Information",
+                "modes": {
+                  "Dark-Mode": "{palette.blue.86}"
+                }
+              }
+            }
+          },
+          "success": {
+            "$type": "color",
+            "$value": "{palette.lime.49}",
+            "$extensions": {
+              "lazy": {
+                "figma": "Color/Basic/On-Surface/Default/Success",
+                "modes": {
+                  "Dark-Mode": "{palette.lime.86}"
+                }
+              }
+            }
+          },
+          "subtle": {
+            "$type": "color",
+            "$value": "{palette.clay.38}",
+            "$extensions": {
+              "lazy": {
+                "figma": "Color/Basic/On-Surface/Default/Subtle",
+                "modes": {
+                  "Dark-Mode": "{palette.clay.91}"
+                }
+              }
+            }
+          },
+          "base": {
+            "$type": "color",
+            "$value": "{palette.clay.18}",
+            "$extensions": {
+              "lazy": {
+                "figma": "Color/Basic/On-Surface/Default/Base",
+                "modes": {
+                  "Dark-Mode": "{palette.clay.98}"
+                }
+              }
+            }
+          },
+          "brand": {
+            "$type": "color",
+            "$value": "{palette.bordeaux.49}",
+            "$extensions": {
+              "lazy": {
+                "figma": "Color/Basic/On-Surface/Default/Brand",
+                "modes": {
+                  "Dark-Mode": "{palette.bordeaux.86}"
+                }
+              }
+            }
+          },
+          "subtler": {
+            "$type": "color",
+            "$value": "{palette.clay.60}",
+            "$extensions": {
+              "lazy": {
+                "figma": "Color/Basic/On-Surface/Default/Subtler",
+                "modes": {
+                  "Dark-Mode": "{palette.clay.79}"
+                }
+              }
+            }
+          },
+          "fixed": {
+            "$type": "color",
+            "$value": "{palette.clay.18}",
+            "$extensions": {
+              "lazy": {
+                "figma": "Color/Basic/On-Surface/Default/Fixed",
+                "modes": {
+                  "Dark-Mode": "{palette.clay.10}"
+                }
+              }
+            }
+          },
+          "action": {
+            "$type": "color",
+            "$value": "{palette.lime.49}",
+            "$extensions": {
+              "lazy": {
+                "figma": "Color/Basic/On-Surface/Default/Action",
+                "modes": {
+                  "Dark-Mode": "{palette.lime.86}"
+                }
+              }
+            }
+          },
+          "error": {
+            "$type": "color",
+            "$value": "{palette.red.49}",
+            "$extensions": {
+              "lazy": {
+                "figma": "Color/Basic/On-Surface/Default/Error",
+                "modes": {
+                  "Dark-Mode": "{palette.red.86}"
+                }
+              }
+            }
+          },
+          "signal": {
+            "$type": "color",
+            "$value": "{color.basic.on-surface.default.action}",
+            "$extensions": {
+              "lazy": {
+                "figma": "Color/Basic/On-Surface/Default/Signal",
+                "modes": {
+                  "Dark-Mode": "{color.basic.on-surface.default.action}"
+                }
+              }
+            }
+          }
+        },
+        "inverted": {
+          "subtle": {
+            "$type": "color",
+            "$value": "{palette.clay.91}",
+            "$extensions": {
+              "lazy": {
+                "figma": "Color/Basic/On-Surface/Inverted/Subtle",
+                "modes": {
+                  "Dark-Mode": "{palette.clay.38}"
+                }
+              }
+            }
+          },
+          "base": {
+            "$type": "color",
+            "$value": "{palette.clay.98}",
+            "$extensions": {
+              "lazy": {
+                "figma": "Color/Basic/On-Surface/Inverted/Base",
+                "modes": {
+                  "Dark-Mode": "{palette.clay.18}"
+                }
+              }
+            }
+          },
+          "subtler": {
+            "$type": "color",
+            "$value": "{palette.clay.79}",
+            "$extensions": {
+              "lazy": {
+                "figma": "Color/Basic/On-Surface/Inverted/Subtler",
+                "modes": {
+                  "Dark-Mode": "{palette.clay.60}"
+                }
+              }
+            }
+          },
+          "brand": {
+            "$type": "color",
+            "$value": "{palette.bordeaux.86}",
+            "$extensions": {
+              "lazy": {
+                "figma": "Color/Basic/On-Surface/Inverted/Brand",
+                "modes": {
+                  "Dark-Mode": "{palette.bordeaux.49}"
+                }
+              }
+            }
+          },
+          "fixed": {
+            "$type": "color",
+            "$value": "{palette.clay.100}",
+            "$extensions": {
+              "lazy": {
+                "figma": "Color/Basic/On-Surface/Inverted/Fixed",
+                "modes": {
+                  "Dark-Mode": "{palette.clay.100}"
+                }
+              }
+            }
+          },
+          "action": {
+            "$type": "color",
+            "$value": "{palette.lime.86}",
+            "$extensions": {
+              "lazy": {
+                "figma": "Color/Basic/On-Surface/Inverted/Action",
+                "modes": {
+                  "Dark-Mode": "{palette.lime.49}"
+                }
+              }
+            }
+          },
+          "error": {
+            "$type": "color",
+            "$value": "{palette.bordeaux.86}",
+            "$extensions": {
+              "lazy": {
+                "figma": "Color/Basic/On-Surface/Inverted/Error",
+                "modes": {
+                  "Dark-Mode": "{palette.red.49}"
+                }
+              }
+            }
+          },
+          "warning": {
+            "$type": "color",
+            "$value": "{palette.yellow.86}",
+            "$extensions": {
+              "lazy": {
+                "figma": "Color/Basic/On-Surface/Inverted/Warning",
+                "modes": {
+                  "Dark-Mode": "{palette.yellow.49}"
+                }
+              }
+            }
+          },
+          "success": {
+            "$type": "color",
+            "$value": "{palette.lime.86}",
+            "$extensions": {
+              "lazy": {
+                "figma": "Color/Basic/On-Surface/Inverted/Success",
+                "modes": {
+                  "Dark-Mode": "{palette.lime.49}"
+                }
+              }
+            }
+          },
+          "information": {
+            "$type": "color",
+            "$value": "{palette.blue.86}",
+            "$extensions": {
+              "lazy": {
+                "figma": "Color/Basic/On-Surface/Inverted/Information",
+                "modes": {
+                  "Dark-Mode": "{palette.blue.49}"
+                }
+              }
+            }
+          },
+          "signal": {
+            "$type": "color",
+            "$value": "{color.basic.on-surface.inverted.action}",
+            "$extensions": {
+              "lazy": {
+                "figma": "Color/Basic/On-Surface/Inverted/Signal",
+                "modes": {
+                  "Dark-Mode": "{color.basic.on-surface.inverted.action}"
+                }
+              }
+            }
+          }
+        }
+      },
+      "surface": {
+        "default": {
+          "subtle": {
+            "$type": "color",
+            "$value": "{palette.clay.100}",
+            "$extensions": {
+              "lazy": {
+                "figma": "Color/Basic/Surface/Default/Subtle",
+                "modes": {
+                  "Dark-Mode": "{palette.clay.10}"
+                }
+              }
+            }
+          },
+          "base": {
+            "$type": "color",
+            "$value": "{palette.clay.98}",
+            "$extensions": {
+              "lazy": {
+                "figma": "Color/Basic/Surface/Default/Base",
+                "modes": {
+                  "Dark-Mode": "{palette.clay.18}"
+                }
+              }
+            }
+          },
+          "bold": {
+            "$type": "color",
+            "$value": "{palette.clay.95}",
+            "$extensions": {
+              "lazy": {
+                "figma": "Color/Basic/Surface/Default/Bold",
+                "modes": {
+                  "Dark-Mode": "{palette.clay.28}"
+                }
+              }
+            }
+          }
+        },
+        "inverted": {
+          "subtle": {
+            "$type": "color",
+            "$value": "{palette.clay.28}",
+            "$extensions": {
+              "lazy": {
+                "figma": "Color/Basic/Surface/Inverted/Subtle",
+                "modes": {
+                  "Dark-Mode": "{palette.clay.91}"
+                }
+              }
+            }
+          },
+          "base": {
+            "$type": "color",
+            "$value": "{palette.clay.18}",
+            "$extensions": {
+              "lazy": {
+                "figma": "Color/Basic/Surface/Inverted/Base",
+                "modes": {
+                  "Dark-Mode": "{palette.clay.95}"
+                }
+              }
+            }
+          },
+          "bold": {
+            "$type": "color",
+            "$value": "{palette.clay.10}",
+            "$extensions": {
+              "lazy": {
+                "figma": "Color/Basic/Surface/Inverted/Bold",
+                "modes": {
+                  "Dark-Mode": "{palette.clay.98}"
+                }
+              }
+            }
+          }
+        }
+      },
+      "outline": {
+        "default": {
+          "subtle": {
+            "$type": "color",
+            "$value": {
+              "ref": "{palette.clay.70}",
+              "alpha": 0.32
+            },
+            "$extensions": {
+              "lazy": {
+                "figma": "Color/Basic/Outline/Default/Subtle",
+                "modes": {
+                  "Dark-Mode": {
+                    "ref": "{palette.clay.70}",
+                    "alpha": 0.32
+                  }
+                }
+              }
+            }
+          },
+          "base": {
+            "$type": "color",
+            "$value": {
+              "ref": "{palette.clay.70}",
+              "alpha": 0.64
+            },
+            "$extensions": {
+              "lazy": {
+                "figma": "Color/Basic/Outline/Default/Base",
+                "modes": {
+                  "Dark-Mode": {
+                    "ref": "{palette.clay.70}",
+                    "alpha": 0.64
+                  }
+                }
+              }
+            }
+          },
+          "bold": {
+            "$type": "color",
+            "$value": "{palette.clay.70}",
+            "$extensions": {
+              "lazy": {
+                "figma": "Color/Basic/Outline/Default/Bold",
+                "modes": {
+                  "Dark-Mode": "{palette.clay.70}"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "interaction": {
+      "hovered": {
+        "inverted": {
+          "base": {
+            "$type": "color",
+            "$value": {
+              "ref": "{palette.clay.100}",
+              "alpha": 0.12
+            },
+            "$extensions": {
+              "lazy": {
+                "figma": "Color/Interaction/Hovered/Inverted/Base",
+                "modes": {
+                  "Dark-Mode": {
+                    "ref": "{palette.clay.10}",
+                    "alpha": 0.08
+                  }
+                }
+              }
+            }
+          }
+        },
+        "default": {
+          "base": {
+            "$type": "color",
+            "$value": {
+              "ref": "{palette.clay.10}",
+              "alpha": 0.08
+            },
+            "$extensions": {
+              "lazy": {
+                "figma": "Color/Interaction/Hovered/Default/Base",
+                "modes": {
+                  "Dark-Mode": {
+                    "ref": "{palette.clay.100}",
+                    "alpha": 0.12
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "pressed": {
+        "inverted": {
+          "base": {
+            "$type": "color",
+            "$value": {
+              "ref": "{palette.clay.100}",
+              "alpha": 0.24
+            },
+            "$extensions": {
+              "lazy": {
+                "figma": "Color/Interaction/Pressed/Inverted/Base",
+                "modes": {
+                  "Dark-Mode": {
+                    "ref": "{palette.clay.10}",
+                    "alpha": 0.16
+                  }
+                }
+              }
+            }
+          }
+        },
+        "default": {
+          "base": {
+            "$type": "color",
+            "$value": {
+              "ref": "{palette.clay.10}",
+              "alpha": 0.16
+            },
+            "$extensions": {
+              "lazy": {
+                "figma": "Color/Interaction/Pressed/Default/Base",
+                "modes": {
+                  "Dark-Mode": {
+                    "ref": "{palette.clay.100}",
+                    "alpha": 0.24
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "focused": {
+        "default": {
+          "base": {
+            "$type": "color",
+            "$value": "{palette.clay.10}",
+            "$extensions": {
+              "lazy": {
+                "figma": "Color/Interaction/Focused/Default/Base",
+                "modes": {
+                  "Dark-Mode": "{palette.clay.100}"
+                }
+              }
+            }
+          }
+        },
+        "inverted": {
+          "base": {
+            "$type": "color",
+            "$value": "{palette.clay.100}",
+            "$extensions": {
+              "lazy": {
+                "figma": "Color/Interaction/Focused/Inverted/Base",
+                "modes": {
+                  "Dark-Mode": "{palette.clay.10}"
+                }
+              }
+            }
+          }
+        }
+      },
+      "disabled": {
+        "opacity": {
+          "$type": "number",
+          "$value": 48,
+          "$extensions": {
+            "lazy": {
+              "figma": "Color/Interaction/Disabled/Opacity",
+              "modes": {
+                "Dark-Mode": 48
+              }
+            }
+          }
+        }
+      }
+    },
+    "effects": {
+      "shadow": {
+        "default": {
+          "base": {
+            "$type": "color",
+            "$value": {
+              "ref": "{palette.clay.10}",
+              "alpha": 0.08
+            },
+            "$extensions": {
+              "lazy": {
+                "figma": "Color/Effects/Shadow/Default/Base",
+                "modes": {
+                  "Dark-Mode": {
+                    "ref": "{palette.clay.100}",
+                    "alpha": 0.08
+                  }
+                }
+              }
+            }
+          },
+          "bold": {
+            "$type": "color",
+            "$value": {
+              "ref": "{palette.clay.10}",
+              "alpha": 0.16
+            },
+            "$extensions": {
+              "lazy": {
+                "figma": "Color/Effects/Shadow/Default/Bold",
+                "modes": {
+                  "Dark-Mode": {
+                    "ref": "{palette.clay.100}",
+                    "alpha": 0.16
+                  }
+                }
+              }
+            }
+          },
+          "subtle": {
+            "$type": "color",
+            "$value": {
+              "ref": "{palette.clay.10}",
+              "alpha": 0.04
+            },
+            "$extensions": {
+              "lazy": {
+                "figma": "Color/Effects/Shadow/Default/Subtle",
+                "modes": {
+                  "Dark-Mode": {
+                    "ref": "{palette.clay.100}",
+                    "alpha": 0.04
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "scrim": {
+        "default": {
+          "base": {
+            "$type": "color",
+            "$value": {
+              "ref": "{palette.clay.10}",
+              "alpha": 0.32
+            },
+            "$extensions": {
+              "lazy": {
+                "figma": "Color/Effects/Scrim/Default/Base",
+                "modes": {
+                  "Dark-Mode": {
+                    "ref": "{palette.clay.100}",
+                    "alpha": 0.32
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

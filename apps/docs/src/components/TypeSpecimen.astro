@@ -1,0 +1,34 @@
+---
+/**
+ * Zeigt Textstile mit den Typescale-Tokens: <TypeSpecimen group="heading" />
+ */
+import data from '@lazy-designsystem/tokens/tokens.json';
+
+interface Props {
+  group: 'display' | 'heading' | 'body';
+  text?: string;
+}
+
+const { group, text = 'Viel hilft viel – gute Abstände auch.' } = Astro.props;
+const prefix = `--typescale-${group}-`;
+const sizes = [
+  ...new Set(data.tokens.filter((t) => t.css.startsWith(prefix) && t.css.endsWith('-size')).map((t) => t.css.slice(prefix.length, -5))),
+].reverse();
+const style = (size: string) =>
+  ['family', 'size', 'weight', 'line-height', 'letter-spacing']
+    .map((p) => `${p === 'family' ? 'font-family' : p === 'size' ? 'font-size' : p === 'weight' ? 'font-weight' : p}: var(${prefix}${size}-${p})`)
+    .join(';');
+---
+
+<div class="lazy-demo lazy-demo--column lazy-type-specimen not-content">
+  {
+    sizes.map((size) => (
+      <div class="lazy-type-specimen__row">
+        <code>
+          {group}-{size}
+        </code>
+        <span style={style(size)}>{text}</span>
+      </div>
+    ))
+  }
+</div>

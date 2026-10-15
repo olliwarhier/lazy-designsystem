@@ -1,14 +1,25 @@
-/* Live-Demos: immer auf hellem Systemhintergrund, unabhängig vom Doku-Theme */
+/* Die Doku-Website steuert Hell/Dunkel über ihren eigenen Umschalter
+   (data-theme auf <html>). Alle Tokens mit light-dark() folgen ihm dadurch. */
+:root {
+  color-scheme: dark;
+}
+:root[data-theme='light'] {
+  color-scheme: light;
+}
+
+/* Live-Demos: Systemfläche des Design Systems, nicht die der Doku */
 .lazy-demo {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: var(--lazy-space-4);
+  gap: var(--spacing-static-small);
   margin-block: 1.5rem;
-  padding: var(--lazy-space-8);
-  background: var(--lazy-color-bg-default);
+  padding: var(--spacing-static-large);
+  background: var(--color-surface-default-base);
+  color: var(--color-on-surface-default-base);
   border: 1px solid var(--sl-color-gray-5);
-  border-radius: var(--lazy-radius-md);
+  border-radius: var(--base-border-radius-medium);
+  font-family: var(--font-family-plain);
 }
 
 .lazy-demo--column {
@@ -20,12 +31,15 @@
 .lazy-token-table code {
   white-space: nowrap;
 }
+.lazy-token-table td small {
+  white-space: nowrap;
+}
 
 .lazy-swatch {
   display: inline-block;
   width: 1.5rem;
   height: 1.5rem;
-  border-radius: var(--lazy-radius-sm);
+  border-radius: var(--base-border-radius-xsmall);
   border: 1px solid var(--sl-color-gray-5);
   vertical-align: middle;
 }
@@ -36,4 +50,40 @@
   background: var(--sl-color-accent);
   border-radius: 2px;
   vertical-align: middle;
+}
+
+/* Paletten */
+.lazy-swatches {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(5.5rem, 1fr));
+  gap: 0.5rem;
+  margin-block: 1rem 2rem;
+}
+.lazy-swatches__item {
+  display: grid;
+  gap: 0.125rem;
+  font-size: 0.75rem;
+}
+.lazy-swatches__color {
+  height: 3rem;
+  border-radius: var(--base-border-radius-small);
+  border: 1px solid var(--sl-color-gray-5);
+}
+.lazy-swatches__item small {
+  color: var(--sl-color-gray-3);
+}
+
+/* Typografie-Muster */
+.lazy-type-specimen {
+  display: grid;
+  gap: var(--spacing-static-small);
+}
+.lazy-type-specimen__row {
+  display: grid;
+  grid-template-columns: 9rem 1fr;
+  gap: var(--spacing-static-small);
+  align-items: baseline;
+}
+.lazy-type-specimen__row code {
+  font-size: 0.75rem;
 }

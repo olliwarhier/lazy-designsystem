@@ -1,20 +1,21 @@
 ---
 title: Austauschformat
-description: Das JSON-Format zwischen Figma, Website und Code – und die Wege dazwischen.
+description: Das JSON-Format zwischen Figma, Website und Code – und wie Tokens aus Figma ins Repo kommen.
 sidebar:
   order: 7
 ---
 
-import { Aside } from '@astrojs/starlight/components';
+import { Aside, Steps } from '@astrojs/starlight/components';
 
 Figma, die Doku-Website und der Code tauschen Tokens über **JSON im Format der W3C Design Tokens Community Group (DTCG)** aus. Das Format ist werkzeugneutral und wird von vielen Tools verstanden.
 
 ## Aufbau
 
-Eine Datei je Figma-Collection. Jeder Token hat `$type` und `$value`; Verweise stehen in geschweiften Klammern. Werte weiterer Modi stehen unter `$extensions`.
+Eine Datei je Figma-Collection in `packages/tokens/src/`. Der Pfad im JSON entspricht dem Figma-Pfad (kleingeschrieben, Leerzeichen als `-`). Jeder Token hat `$type` und `$value` für den Standard-Modus; weitere Modi und der Original-Name aus Figma stehen unter `$extensions.lazy`.
 
 ```json
 {
+  "$extensions": { "lazy": { "collection": "System", "modes": ["Light-Mode", "Dark-Mode"] } },
   "color": {
     "basic": {
       "on-surface": {
@@ -23,7 +24,10 @@ Eine Datei je Figma-Collection. Jeder Token hat `$type` und `$value`; Verweise s
             "$type": "color",
             "$value": "{palette.clay.38}",
             "$extensions": {
-              "lazy": { "modes": { "Dark-Mode": "{palette.clay.91}" } }
+              "lazy": {
+                "figma": "Color/Basic/On-Surface/Default/Subtle",
+                "modes": { "Dark-Mode": "{palette.clay.91}" }
+              }
             }
           }
         }
@@ -33,23 +37,48 @@ Eine Datei je Figma-Collection. Jeder Token hat `$type` und `$value`; Verweise s
 }
 ```
 
-Der Pfad im JSON entspricht dem Figma-Pfad. Die Übersetzung in CSS-Namen passiert erst im Build (siehe [Benennung](../benennung/)).
+| Wert in Figma | Im JSON |
+| --- | --- |
+| Verweis auf eine Variable | `"{palette.clay.70}"` |
+| Verweis mit eigener Deckkraft | `{ "ref": "{palette.clay.70}", "alpha": 0.64 }` |
+| Farbe | `"#9da099"` (sRGB, wie in Figma) |
+| Zahl, Text, Boolean | unverändert, z. B. `16`, `"130%"`, `true` |
 
-Farben mit eigener Deckkraft werden als Verweis plus Alpha gespeichert:
+Die Übersetzung in CSS-Namen und -Werte passiert erst im Build (siehe [Benennung](../benennung/)).
 
-```json
-"$value": { "ref": "{palette.clay.70}", "alpha": 0.64 }
-```
+## Tokens aus Figma holen
 
-## Wege zwischen Figma und Code
+Der Export ist ein Skript für die Figma Plugin API: `packages/tokens/scripts/figma-export.js`. Es läuft über den Figma-MCP-Server – also für alle mit Figma-Zugang und einem KI-Assistenten, ohne eigenes Plugin – oder in einem Plugin.
 
-| Weg | Richtung | Für wen |
+<Steps>
+
+1. **Exportieren.** Das Skript in der Figma-Datei ausführen, z. B. per MCP mit `return await exportVariables()`. Große Collections lassen sich in Teilen holen: `exportVariables({ collection: 'Primitives', from: 0, to: 60 })`. Jedes Ergebnis als JSON-Datei speichern.
+
+2. **Ins Repo schreiben.** Die Teile werden zusammengeführt und je Collection gespeichert:
+
+   ```bash
+   node packages/tokens/scripts/write-export.mjs teil-1.json teil-2.json …
+   ```
+
+3. **Prüfen.** `exportVariables({ fingerprint: true })` liefert eine Prüfsumme je Collection. Damit lässt sich jederzeit kontrollieren, ob Repo und Figma übereinstimmen:
+
+   ```bash
+   node packages/tokens/scripts/write-export.mjs --check fingerprints.json
+   ```
+
+4. **Bauen.** `pnpm tokens` erzeugt `tokens.css` und `tokens.json`. Diff prüfen, Changeset anlegen, Pull Request öffnen.
+
+</Steps>
+
+## Weitere Wege
+
+| Weg | Richtung | Status |
 | --- | --- | --- |
-| **Figma MCP** | Figma → JSON | Alle mit Figma-Zugang und einem KI-Assistenten – ohne Plugin |
-| **Lazy-Plugins** | Figma → JSON / CSS | Designer:innen mit Zugriff auf die Plugins |
-| **Website-Generator** | Website → JSON → Figma | Neues Projekt ohne Figma-Vorarbeit aufsetzen *(geplant)* |
-| **Import-Plugin** | JSON → Figma | Variablen aus dem JSON in eine Figma-Datei schreiben *(geplant)* |
+| Figma MCP | Figma → JSON | verfügbar |
+| Lazy-Plugins | Figma → JSON | geplant – die Plugins können dasselbe Export-Skript nutzen |
+| Website-Generator | Website → JSON → Figma | geplant |
+| Import-Plugin | JSON → Figma | geplant |
 
 <Aside>
-  Die Logik zum Erzeugen von Paletten, zum Prüfen von Kontrasten und zum Berechnen der `clamp()`-Werte liegt einmal im Paket `@lazy-designsystem/core`. Plugins, Website und Build nutzen dieselbe Implementierung – so liefern alle Wege dasselbe Ergebnis.
+  Die Logik zum Umrechnen von Farben, zum Prüfen von Kontrasten und zum Berechnen der `clamp()`-Werte liegt einmal im Paket `@lazy-designsystem/core`. Build, Website und künftig auch die Plugins nutzen dieselbe Implementierung – so liefern alle Wege dasselbe Ergebnis.
 </Aside>

@@ -1,0 +1,123 @@
+{
+  "$extensions": {
+    "lazy": {
+      "collection": "Shapes",
+      "modes": [
+        "Square",
+        "Rounded-Subtle",
+        "Rounded-Medium",
+        "Rounded-Bold",
+        "Pill"
+      ]
+    }
+  },
+  "border-radius": {
+    "general": {
+      "$type": "number",
+      "$value": "{base.border.radius.none}",
+      "$extensions": {
+        "lazy": {
+          "figma": "Border-Radius/General",
+          "modes": {
+            "Rounded-Subtle": "{base.border.radius.xsmall}",
+            "Rounded-Medium": "{base.border.radius.small}",
+            "Rounded-Bold": "{base.border.radius.medium}",
+            "Pill": "{base.border.radius.full}"
+          }
+        }
+      }
+    },
+    "focus": {
+      "$type": "number",
+      "$value": "{base.border.radius.2xsmall}",
+      "$extensions": {
+        "lazy": {
+          "figma": "Border-Radius/Focus",
+          "modes": {
+            "Rounded-Subtle": "{base.border.radius.small}",
+            "Rounded-Medium": "{base.border.radius.medium}",
+            "Rounded-Bold": "{base.border.radius.large}",
+            "Pill": "{base.border.radius.full}"
+          }
+        }
+      }
+    },
+    "components": {
+      "checkbox": {
+        "$type": "number",
+        "$value": "{base.border.radius.none}",
+        "$extensions": {
+          "lazy": {
+            "figma": "Border-Radius/Components/Checkbox",
+            "modes": {
+              "Rounded-Subtle": "{base.border.radius.2xsmall}",
+              "Rounded-Medium": "{base.border.radius.xsmall}",
+              "Rounded-Bold": "{base.border.radius.small}",
+              "Pill": "{base.border.radius.small}"
+            }
+          }
+        }
+      },
+      "tooltip": {
+        "$type": "number",
+        "$value": "{base.border.radius.none}",
+        "$extensions": {
+          "lazy": {
+            "figma": "Border-Radius/Components/Tooltip",
+            "modes": {
+              "Rounded-Subtle": "{base.border.radius.xsmall}",
+              "Rounded-Medium": "{base.border.radius.small}",
+              "Rounded-Bold": "{base.border.radius.large}",
+              "Pill": "{base.border.radius.xlarge}"
+            }
+          }
+        }
+      },
+      "modal": {
+        "$type": "number",
+        "$value": "{base.border.radius.none}",
+        "$extensions": {
+          "lazy": {
+            "figma": "Border-Radius/Components/Modal",
+            "modes": {
+              "Rounded-Subtle": "{base.border.radius.small}",
+              "Rounded-Medium": "{base.border.radius.medium}",
+              "Rounded-Bold": "{base.border.radius.large}",
+              "Pill": "{base.border.radius.xlarge}"
+            }
+          }
+        }
+      },
+      "sheet": {
+        "$type": "number",
+        "$value": "{base.border.radius.none}",
+        "$extensions": {
+          "lazy": {
+            "figma": "Border-Radius/Components/Sheet",
+            "modes": {
+              "Rounded-Subtle": "{base.border.radius.small}",
+              "Rounded-Medium": "{base.border.radius.medium}",
+              "Rounded-Bold": "{base.border.radius.large}",
+              "Pill": "{base.border.radius.xlarge}"
+            }
+          }
+        }
+      },
+      "menu": {
+        "$type": "number",
+        "$value": "{base.border.radius.none}",
+        "$extensions": {
+          "lazy": {
+            "figma": "Border-Radius/Components/Menu",
+            "modes": {
+              "Rounded-Subtle": "{base.border.radius.small}",
+              "Rounded-Medium": "{base.border.radius.medium}",
+              "Rounded-Bold": "{base.border.radius.large}",
+              "Pill": "{base.border.radius.xlarge}"
+            }
+          }
+        }
+      }
+    }
+  }
+}
