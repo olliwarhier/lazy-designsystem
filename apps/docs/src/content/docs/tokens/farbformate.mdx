@@ -28,21 +28,44 @@ Outline, Interaction (Hovered, Pressed), Shadow und Scrim sind in Figma Aliase a
 --color-hovered-default-base: oklch(from var(--palette-clay-10) l c h / 0.08);
 ```
 
-## Interaction-Overlay
+## Interaction: Hover und Pressed
 
-Hover und Pressed werden als halbtransparente Ebene über die Grundfarbe gelegt – nicht als neue Farbe. Komponenten mischen sie mit `color-mix()`:
+Hover und Pressed werden **aus der Farbe der Fläche berechnet**: Ihre Lightness wird um einen festen Schritt verschoben – auf hellen Flächen nach unten, auf dunklen nach oben. Farbton und Sättigung bleiben erhalten.
+
+| Zustand | dunkler | heller |
+| --- | --- | --- |
+| Hovered | `--interaction-hovered-darker` (0,08) | `--interaction-hovered-lighter` (0,12) |
+| Pressed | `--interaction-pressed-darker` (0,16) | `--interaction-pressed-lighter` (0,24) |
+
+Aufhellen braucht größere Schritte, weil helle Abstufungen schwächer wahrgenommen werden. Die Schrittweiten kommen aus Figma: Dort ist Interaction ein halbtransparentes Overlay (`Color/Interaction/…`), dessen Deckkraft im Code als Lightness-Schritt verwendet wird.
 
 ```css
 .button {
   background-color: var(--button-background);
-  background-image: linear-gradient(var(--button-overlay), var(--button-overlay));
 }
 .button:hover {
-  --button-overlay: var(--color-hovered-default-base);
+  background-color: oklch(from var(--button-background) var(--interaction-hovered-l) c h);
+}
+.button:active {
+  background-color: oklch(from var(--button-background) var(--interaction-pressed-l) c h);
 }
 ```
 
-Die Overlay-Farbe bringt ihre Deckkraft selbst mit, deshalb funktioniert das auf jeder Fläche – auch auf transparenten. Auf dunklen Flächen wird die `inverted`-Variante verwendet (heller statt dunkler); in Figma ist das die Eigenschaft *Interaction: Lighter*.
+`--interaction-hovered-l` und `--interaction-pressed-l` enthalten die Rechnung für den neuen Lightness-Wert. Die Richtung ergibt sich **automatisch** aus der Fläche: Lightness über 0,5 → dunkler, darunter → heller. Das funktioniert damit auch im Dark Mode und in jedem Theme ohne weitere Angaben.
+
+Mit `data-interaction="darker"` oder `"lighter"` lässt sich die Richtung erzwingen – das entspricht der Eigenschaft *Interaction* der Figma-Komponenten.
+
+### Ohne Fläche
+
+Hat eine Komponente keine Hintergrundfarbe (z. B. Outlined- und Text-Buttons), gibt es keine Lightness zum Verschieben. Dann wird die halbtransparente Interaction-Farbe als Hintergrund gesetzt:
+
+```css
+.button-text:hover {
+  background-color: var(--color-hovered-default-base);
+}
+```
+
+Auf dunklen Flächen wird die `inverted`-Variante verwendet.
 
 ## Hex als optionaler Export
 

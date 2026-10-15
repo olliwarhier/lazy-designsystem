@@ -48,12 +48,12 @@ Figma: Collection `Components`, Modi Small / Medium / Large.
 | Figma `State` | Verhalten |
 | --- | --- |
 | Enabled | Grundzustand |
-| Hovered | Overlay `--color-hovered-*` über der Fläche |
-| Pressed | Overlay `--color-pressed-*` über der Fläche |
+| Hovered | Lightness der Fläche um `--interaction-hovered-*` verschoben; ohne Fläche `--color-hovered-*` |
+| Pressed | Lightness der Fläche um `--interaction-pressed-*` verschoben; ohne Fläche `--color-pressed-*` |
 | Focused | Ring in `--color-focused-default-base`, nur bei Tastaturfokus |
 | Disabled | Deckkraft `--color-disabled-opacity`, keine Interaktion |
 
-**Interaction** (Figma: `Darker` / `Lighter`) legt fest, ob das Overlay abdunkelt oder aufhellt. `Lighter` ist für dunkle Flächen gedacht.
+**Interaction** (Figma: `Darker` / `Lighter`) legt fest, ob Hover und Pressed abdunkeln oder aufhellen. Im Code ergibt sich die Richtung automatisch aus der Helligkeit der Fläche; `darker` und `lighter` erzwingen sie (siehe [Farbformate](../../tokens/farbformate/#interaction-hover-und-pressed)).
 
 <Demo>
   <Button disabled>Disabled</Button>
@@ -95,7 +95,7 @@ Figma: Collection `Components`, Modi Small / Medium / Large.
 | `--button-font-size` | `--typescale-body-small-size` | `--typescale-body-medium-size` | `--typescale-body-large-size` |
 | `--button-content-min-height` | `--sizing-icon-small` | `--sizing-icon-medium` | `--sizing-icon-large` |
 
-Farben: `--color-action-default-base`, `--color-on-action-default-base`, `--color-on-surface-default-base`, `--color-on-surface-default-action`, `--color-outline-default-base`, `--color-hovered-*`, `--color-pressed-*`, `--color-focused-default-base`.
+Farben: `--color-action-default-base`, `--color-on-action-default-base`, `--color-on-surface-default-base`, `--color-on-surface-default-action`, `--color-outline-default-base`, `--color-hovered-*`, `--color-pressed-*`, `--color-focused-default-base`. Interaction: `--interaction-hovered-l`, `--interaction-pressed-l`.
 
 ## Implementierung
 
@@ -119,7 +119,7 @@ Farben: `--color-action-default-base`, `--color-on-action-default-base`, `--colo
 | --- | --- | --- | --- |
 | `variant` | `'filled' \| 'outlined' \| 'text'` | `'filled'` | Figma: Type |
 | `size` | `'small' \| 'medium' \| 'large'` | aus `SizeProvider`, sonst `'medium'` | Figma: Components-Modus |
-| `interaction` | `'darker' \| 'lighter'` | `'darker'` | Figma: Interaction |
+| `interaction` | `'auto' \| 'darker' \| 'lighter'` | `'auto'` | Figma: Interaction; `auto` richtet sich nach der Fläche |
 | `disabled` | `boolean` | `false` | |
 | `type` | `'button' \| 'submit' \| 'reset'` | `'button'` | Natives `type`-Attribut |
 | `leading`, `trailing` | `Snippet` | – | Icons vor bzw. nach dem Label |

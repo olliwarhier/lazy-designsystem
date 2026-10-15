@@ -6,7 +6,7 @@
    * @typedef {Object} Props
    * @property {'filled' | 'outlined' | 'text'} [variant='filled'] Figma: Type
    * @property {import('./size.js').Size} [size] Small, Medium, Large – sonst vom umgebenden Bereich
-   * @property {'darker' | 'lighter'} [interaction='darker'] Figma: Interaction – Hover dunkler oder heller
+   * @property {'auto' | 'darker' | 'lighter'} [interaction='auto'] Figma: Interaction – Hover dunkler oder heller; auto richtet sich nach der Helligkeit der Fläche
    * @property {boolean} [disabled=false]
    * @property {'button' | 'submit' | 'reset'} [type='button']
    * @property {import('svelte').Snippet} [leading] Icon vor dem Label
@@ -19,7 +19,7 @@
   let {
     variant = 'filled',
     size,
-    interaction = 'darker',
+    interaction = 'auto',
     disabled = false,
     type = 'button',
     leading,
@@ -38,7 +38,7 @@
   class="lazy-button"
   data-variant={variant}
   data-size={currentSize}
-  data-interaction={interaction}
+  data-interaction={interaction === 'auto' ? undefined : interaction}
 >
   {#if leading}<span class="icon">{@render leading()}</span>{/if}
   {@render children?.()}
@@ -59,9 +59,9 @@
     --button-background: var(--color-action-default-base);
     --button-foreground: var(--color-on-action-default-base);
     --button-border: transparent;
+    /* nur für Varianten ohne Fläche */
     --button-hovered: var(--color-hovered-default-base);
     --button-pressed: var(--color-pressed-default-base);
-    --button-overlay: transparent;
 
     display: inline-flex;
     align-items: center;
@@ -72,7 +72,6 @@
     border: var(--base-border-width-xsmall) solid var(--button-border);
     border-radius: calc(var(--shape) * var(--button-height) / 2);
     background-color: var(--button-background);
-    background-image: linear-gradient(var(--button-overlay), var(--button-overlay));
     color: var(--button-foreground);
     font-family: var(--typescale-body-medium-family);
     font-size: var(--button-font-size);
@@ -116,12 +115,22 @@
     --button-pressed: var(--color-pressed-inverted-base);
   }
 
+  /* Mit Fläche: Lightness der Fläche verschieben (Doku → Tokens → Farbformate) */
   .lazy-button:hover:not(:disabled) {
-    --button-overlay: var(--button-hovered);
+    background-color: oklch(from var(--button-background) var(--interaction-hovered-l) c h);
   }
 
   .lazy-button:active:not(:disabled) {
-    --button-overlay: var(--button-pressed);
+    background-color: oklch(from var(--button-background) var(--interaction-pressed-l) c h);
+  }
+
+  /* Ohne Fläche: halbtransparente Interaction-Farbe */
+  .lazy-button:is([data-variant='outlined'], [data-variant='text']):hover:not(:disabled) {
+    background-color: var(--button-hovered);
+  }
+
+  .lazy-button:is([data-variant='outlined'], [data-variant='text']):active:not(:disabled) {
+    background-color: var(--button-pressed);
   }
 
   .lazy-button:focus-visible {
