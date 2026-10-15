@@ -5,7 +5,13 @@ sidebar:
   order: 1
 ---
 
+import { Aside } from '@astrojs/starlight/components';
 import TokenTable from '../../../components/TokenTable.astro';
+
+<Aside type="caution" title="Platzhalter">
+  Die Werte auf dieser Seite sind noch Platzhalter. Sie werden im nächsten Schritt durch die Variablen aus dem DS Template ersetzt und folgen dann der [Token-Spezifikation](../../tokens/uebersicht/).
+</Aside>
+
 
 Farben gibt es auf zwei Ebenen. **Primitives** sind die Rohpalette, **semantische Tokens** geben einer Farbe eine Rolle. Komponenten verwenden ausschließlich semantische Tokens – so lässt sich z. B. ein Dark Mode umsetzen, ohne Komponenten anzufassen.
 

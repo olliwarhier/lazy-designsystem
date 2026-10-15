@@ -1,0 +1,55 @@
+---
+title: Austauschformat
+description: Das JSON-Format zwischen Figma, Website und Code – und die Wege dazwischen.
+sidebar:
+  order: 7
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+Figma, die Doku-Website und der Code tauschen Tokens über **JSON im Format der W3C Design Tokens Community Group (DTCG)** aus. Das Format ist werkzeugneutral und wird von vielen Tools verstanden.
+
+## Aufbau
+
+Eine Datei je Figma-Collection. Jeder Token hat `$type` und `$value`; Verweise stehen in geschweiften Klammern. Werte weiterer Modi stehen unter `$extensions`.
+
+```json
+{
+  "color": {
+    "basic": {
+      "on-surface": {
+        "default": {
+          "subtle": {
+            "$type": "color",
+            "$value": "{palette.clay.38}",
+            "$extensions": {
+              "lazy": { "modes": { "Dark-Mode": "{palette.clay.91}" } }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+Der Pfad im JSON entspricht dem Figma-Pfad. Die Übersetzung in CSS-Namen passiert erst im Build (siehe [Benennung](../benennung/)).
+
+Farben mit eigener Deckkraft werden als Verweis plus Alpha gespeichert:
+
+```json
+"$value": { "ref": "{palette.clay.70}", "alpha": 0.64 }
+```
+
+## Wege zwischen Figma und Code
+
+| Weg | Richtung | Für wen |
+| --- | --- | --- |
+| **Figma MCP** | Figma → JSON | Alle mit Figma-Zugang und einem KI-Assistenten – ohne Plugin |
+| **Lazy-Plugins** | Figma → JSON / CSS | Designer:innen mit Zugriff auf die Plugins |
+| **Website-Generator** | Website → JSON → Figma | Neues Projekt ohne Figma-Vorarbeit aufsetzen *(geplant)* |
+| **Import-Plugin** | JSON → Figma | Variablen aus dem JSON in eine Figma-Datei schreiben *(geplant)* |
+
+<Aside>
+  Die Logik zum Erzeugen von Paletten, zum Prüfen von Kontrasten und zum Berechnen der `clamp()`-Werte liegt einmal im Paket `@lazy-designsystem/core`. Plugins, Website und Build nutzen dieselbe Implementierung – so liefern alle Wege dasselbe Ergebnis.
+</Aside>

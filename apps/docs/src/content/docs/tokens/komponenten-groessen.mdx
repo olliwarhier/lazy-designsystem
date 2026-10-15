@@ -1,0 +1,64 @@
+---
+title: Komponenten-Größen
+description: Small, Medium, Large – wie die Component-Collection im Code umgesetzt wird.
+sidebar:
+  order: 6
+---
+
+Die Figma-Collection `Components` legt für jede Komponente fest, wie sie in den Größen **Small**, **Medium** und **Large** aussieht: Abstände, Icon-Größe, Schriftgröße, Mindesthöhe. Die Werte verweisen immer auf System-Tokens (Responsive) oder die Base-Scale.
+
+## Lokal statt global
+
+Component-Tokens werden **nicht** in die globale Token-Datei geschrieben. Jede Komponente definiert sie selbst, unter genau dem Namen aus Figma, und verwendet sie direkt. Das hält die globale Datei klein und jede Komponente in sich verständlich.
+
+```css
+/* Button – Figma: Components/Button/* */
+.button {
+  /* Medium (Standard) */
+  --button-gap: var(--spacing-dynamic-2xsmall);
+  --button-padding-y: var(--spacing-dynamic-xsmall);
+  --button-padding-x: var(--spacing-dynamic-small);
+  --button-icon-size: var(--sizing-icon-medium);
+  --button-font-size: var(--typescale-body-medium-size);
+
+  gap: var(--button-gap);
+  padding: var(--button-padding-y) var(--button-padding-x);
+}
+
+.button[data-size='small'] {
+  --button-gap: var(--spacing-static-3xsmall);
+  --button-padding-y: var(--spacing-static-2xsmall);
+  --button-padding-x: var(--spacing-dynamic-xsmall);
+  --button-icon-size: var(--sizing-icon-small);
+  --button-font-size: var(--typescale-body-small-size);
+}
+
+.button[data-size='large'] {
+  /* … */
+}
+```
+
+Wer einen einzelnen Wert anpassen muss, kann die lokale Variable von außen überschreiben – ohne die Komponente zu ändern.
+
+## Größe setzen
+
+Wie in Figma kann die Größe an der Komponente selbst **oder** an einem umgebenden Bereich gesetzt werden. Ein Bereich gibt seine Größe an alle enthaltenen Komponenten weiter, wie ein Figma-Modus auf einem Frame. Eine Angabe an der Komponente gewinnt immer.
+
+```svelte
+<!-- einzeln -->
+<Button size="large">Speichern</Button>
+
+<!-- für einen Bereich -->
+<SizeProvider size="small">
+  <Button>Filter</Button>
+  <Chip>Neu</Chip>
+</SizeProvider>
+```
+
+In Svelte wird das über Context umgesetzt. Andere Frameworks verwenden ihren jeweiligen Mechanismus (z. B. React Context, Vue provide/inject).
+
+## Regeln
+
+- Component-Tokens verweisen **nur auf System-Tokens oder die Base-Scale**, nie auf andere Komponenten.
+- Der Name im Code entspricht dem Figma-Pfad: `Button/Padding-X` → `--button-padding-x`.
+- Medium ist immer der Standard.
