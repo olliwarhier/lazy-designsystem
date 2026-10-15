@@ -83,7 +83,7 @@
               "lazy": {
                 "figma": "Color/Corporate/Action/Default/Bold",
                 "modes": {
-                  "Dark-Mode": "{dark-mode.on-action.default.bold}"
+                  "Dark-Mode": "{dark-mode.action.default.bold}"
                 }
               }
             }
@@ -123,7 +123,7 @@
               "lazy": {
                 "figma": "Color/Corporate/On-Action/Default/Bold",
                 "modes": {
-                  "Dark-Mode": "{dark-mode.action.default.bold}"
+                  "Dark-Mode": "{dark-mode.on-action.default.bold}"
                 }
               }
             }
@@ -284,7 +284,7 @@
         "default": {
           "subtle": {
             "$type": "color",
-            "$value": "{palette.bordeaux.28}",
+            "$value": "{palette.red.28}",
             "$extensions": {
               "lazy": {
                 "figma": "Color/Feedback/On-Error/Default/Subtle",
@@ -688,7 +688,7 @@
           },
           "error": {
             "$type": "color",
-            "$value": "{palette.bordeaux.86}",
+            "$value": "{palette.red.86}",
             "$extensions": {
               "lazy": {
                 "figma": "Color/Basic/On-Surface/Inverted/Error",
