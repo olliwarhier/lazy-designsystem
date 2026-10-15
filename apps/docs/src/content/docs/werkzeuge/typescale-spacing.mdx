@@ -1,0 +1,84 @@
+---
+title: Typescale & Spacing
+description: Wie Schriftgrößen aus Root-Größe und Skalenfaktor entstehen und auf die Base-Scale einrasten.
+sidebar:
+  order: 3
+---
+
+import { Aside } from '@astrojs/starlight/components';
+import Typescale from '../../../components/Typescale.astro';
+
+Das Plugin *Lazy Typescale & Spacing* berechnet die Schriftgrößen für Desktop und Mobile und schreibt sie in die Responsive-Collection. Grundlage sind nur zwei Angaben pro Gerät: eine **Root-Größe** und ein **Skalenfaktor**.
+
+<Typescale view="calculator" />
+
+## Skalenfaktoren
+
+Eine Typescale ist eine geometrische Reihe: Jede Stufe ist um denselben Faktor größer als die vorige. Die Faktoren stammen aus der Musik (Intervalle) und dem Goldenen Schnitt.
+
+| Skala | Faktor | Charakter |
+| --- | --- | --- |
+| Minor Second | 1,067 | sehr eng – dichte Oberflächen |
+| Major Second | 1,125 | eng – Dashboards, Mobile |
+| Minor Third | 1,2 | ausgewogen |
+| Major Third | 1,25 | klare Hierarchie – Websites |
+| Perfect Fourth | 1,333 | deutlich |
+| Augmented Fourth | 1,414 | kräftig |
+| Perfect Fifth | 1,5 | sehr kräftig |
+| Golden Ratio | 1,618 | maximal – große Headlines |
+
+Auf kleinen Bildschirmen wird ein engerer Faktor gewählt als auf großen, damit große Überschriften nicht übermäßig viel Platz einnehmen. Das DS Template nutzt **Desktop 18 px · Major Third** und **Mobile 16 px · Major Second** (`Typescale/Specs/*`).
+
+## So wird gerechnet
+
+### 1. Stufen
+
+Von der Root-Größe aus werden acht Stufen berechnet: `Größe = Root × Faktor^n`.
+
+| Stufe | xsmall | small | **medium** | large | xlarge | 2xlarge | 3xlarge | 4xlarge |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| n | −2 | −1 | **0 (Root)** | 1 | 2 | 3 | 4 | 5 |
+
+### 2. Einrasten auf die Base-Scale
+
+Damit alle Größen zum Raster passen, wird jede Stufe auf einen Wert der [Base-Scale](../../foundations/abstaende/#base-scale) gesetzt:
+
+- **Root:** der nächstgelegene Base-Scale-Wert.
+- **Darüber:** der jeweils nächstgelegene Wert – aber immer mindestens einen Schritt größer als die Stufe darunter, damit keine zwei Stufen gleich groß werden.
+- **Darunter:** Für `small` und `xsmall` wird nicht gerechnet. Sie bekommen die nächsten ein bzw. zwei Base-Scale-Werte unterhalb der Root.
+
+### 3. Zuordnung zu den Textstilen
+
+Die Gruppen beginnen versetzt, damit Überschriften immer größer sind als Fließtext derselben Stufe:
+
+| Gruppe | beginnt bei | Beispiel |
+| --- | --- | --- |
+| Body | Root | `Body/Medium` = Root |
+| Heading | eine Stufe höher | `Heading/Small` = Root, `Heading/Medium` = large |
+| Display | zwei Stufen höher | `Display/Small` = large |
+
+So gilt automatisch die Regel `Body/Medium ≤ Heading/Small` und `Body/Large ≤ Heading/Medium`.
+
+### 4. Desktop und Mobile im Code
+
+Beide Werte landen in der Responsive-Collection. Im CSS wächst jede Größe fließend vom Mobile- zum Desktop-Wert (siehe [Modi → Responsive](../../tokens/modi/#responsive)).
+
+## Vergleich mit dem DS Template
+
+Rechnung mit den Specs aus dem Template, verglichen mit den Werten, die tatsächlich in den Variablen stehen:
+
+<Typescale view="comparison" />
+
+<Aside type="caution" title="Zu klären">
+  Die Desktop-Überschriften entsprechen der Rechnung, viele andere Werte nicht – vor allem auf Mobile und bei Display. Entweder wurden sie im Template bewusst von Hand angepasst, oder die Specs (Root, Faktor) passen nicht mehr. Siehe [Bekannte Probleme](../../mitwirken/bekannte-probleme/).
+</Aside>
+
+## Spacing
+
+Abstände verwenden dieselbe Base-Scale wie die Schrift und dieselben T-Shirt-Größen. Das Plugin verwaltet sie noch nicht; die Werte im DS Template folgen diesen Regeln:
+
+- **Dynamic** – auf Mobile kleiner als auf Desktop (z. B. `Spacing/Dynamic/Medium`: 24 → 16 px), dazwischen fließend.
+- **Static** – auf allen Geräten gleich.
+- **Presets** – benannte Abstände für Layout-Bereiche (`Wrapper`, `Banner`).
+
+Die Größenbezeichnung ist ein Anhaltspunkt, keine feste Regel: Wichtige oder große Elemente dürfen mehr Raum bekommen, semantisch zusammengehörige Elemente stehen trotzdem nah beieinander.

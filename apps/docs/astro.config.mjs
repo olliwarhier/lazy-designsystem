@@ -30,6 +30,7 @@ export default defineConfig({
         { label: 'Prinzipien', autogenerate: { directory: 'prinzipien' } },
         { label: 'Foundations', autogenerate: { directory: 'foundations' } },
         { label: 'Tokens', autogenerate: { directory: 'tokens' } },
+        { label: 'Werkzeuge', autogenerate: { directory: 'werkzeuge' } },
         { label: 'Komponenten', autogenerate: { directory: 'komponenten' } },
         { label: 'Mitwirken', autogenerate: { directory: 'mitwirken' } },
       ],

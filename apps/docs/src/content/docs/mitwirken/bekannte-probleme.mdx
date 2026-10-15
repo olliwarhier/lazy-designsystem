@@ -14,6 +14,7 @@ Beim Dokumentieren gefundene Fehler. Ein Eintrag wird entfernt, sobald er behobe
 | 3 | **Shape-Werte nicht linear.** Die Werte der Shapes-Modi weichen von den Formeln des Shape-Reglers ab (siehe [Shape](../../tokens/shape/)). | offen |
 | 4 | **Variable `Clamp` ohne Wirkung.** Beide Modi sind Aliase (Desktop → `Spacing/Presets/Wrapper` = 64, Mobile → `Breakpoint`). Das Typescale-Plugin liest nur feste Zahlen und verwendet daher immer 375–1440 px; der Mobile-Breakpoint ist aber 430 px. Die Viewport-Breiten sollten direkt aus `Breakpoint` kommen. | Token-Build nutzt `Breakpoint` (430–1440 px); Plugin offen |
 | 7 | **Farbige On-Surface-Töne ignorieren das Theme.** `On-Surface/*/Brand`, `…/Action` und `…/Signal` verweisen direkt auf Paletten (Bordeaux, Lime) statt über die Theme-Collection. Im Theme *Wireframe* bleiben Links und Akzente auf neutralem Grund deshalb farbig. | offen |
+| 8 | **Typescale weicht von der Plugin-Rechnung ab.** Mit den Specs des Templates (Desktop 18 px · 1,25, Mobile 16 px · 1,125) ergibt die Rechnung bei 14 von 26 Schriftgrößen andere Werte – vor allem auf Mobile, bei Display und bei `Body/Small`. Entweder sind die Werte bewusst angepasst oder die Specs veraltet (siehe [Typescale & Spacing](../../werkzeuge/typescale-spacing/#vergleich-mit-dem-ds-template)). | zu klären |
 
 ## Lazy-Plugins
 
@@ -21,6 +22,8 @@ Beim Dokumentieren gefundene Fehler. Ein Eintrag wird entfernt, sobald er behobe
 | --- | --- | --- | --- |
 | 5 | Theme Builder | **Farben mit eigener Deckkraft fehlen im Export.** Outline, Hovered, Pressed, Shadow und Scrim sind Aliase mit Deckkraft; der Export kennt diesen Werttyp nicht und schreibt `/* unknown value */`. | Token-Build gibt sie korrekt aus; Plugin-Export offen |
 | 6 | Tints / Theme Builder | **Kontrastmethode hängt am Paletten-Zentrum.** Zentrum 70 bedeutet APCA, Zentrum 60 WCAG. Die Methode sollte eine eigene Einstellung sein. | offen |
+| 9 | Theme Builder | **Keine Kontrast-Schwellen.** Die Kontrastwerte werden angezeigt, aber nicht bewertet. Vorschlag für die Einteilung: [Theme Builder → Prüfregeln](../../werkzeuge/theme-builder/#prüfregeln). | zu entscheiden |
+| 10 | Typescale | **Spacing noch nicht im Plugin.** Abstände werden bisher von Hand gepflegt. | offen |
 
 ## Behoben
 
