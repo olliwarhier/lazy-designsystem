@@ -13,18 +13,12 @@ Barrierefreiheit ist in Lazy kein eigener Arbeitsschritt, sondern in die Werkzeu
 
 Lazy prüft Kontraste mit **APCA** (Accessible Perceptual Contrast Algorithm), dem Verfahren, das für WCAG 3 vorgesehen ist. APCA bewertet, wie gut Text tatsächlich lesbar ist, und berücksichtigt dabei Schriftgröße und -stärke.
 
-| Lc (APCA) | geeignet für |
-| --- | --- |
-| **75** | Fließtext |
-| **60** | Text ab etwa 18 px bzw. kurzer Text |
-| **45** | große Überschriften, fette Schrift ab 24 px |
-| **30** | Icons, Rahmen von Eingabefeldern, nicht-textliche Elemente |
+Jede Farbrolle hat eine feste Kontrast-Anforderung – von **Body** (Lc 75 bzw. 7:1) für Fließtext bis **Subtle Division** (Lc 15) für dezente Flächen. Innerhalb einer Rolle steigt der Kontrast von Subtle zu Bold, mit einem Mindestwert je Stufe. Alle Stufen und Regeln: [Farbrollen → Kontrast-Stufen](../../setup/color-roles/#kontrast-stufen).
 
-Der Theme Builder zeigt den Kontrast jeder Kombination von Fläche und On-Farbe an. Wer On-Farben nur auf ihrer eigenen Fläche verwendet, ist auf der sicheren Seite.
+Daraus folgen zwei einfache Regeln beim Gestalten:
 
-<Aside type="caution" title="Zur Abstimmung">
-  Die Schwellen sind ein Vorschlag nach den APCA-Empfehlungen. Der Theme Builder bewertet die Werte bisher noch nicht (siehe [Bekannte Probleme](../../reference/known-issues/), #9).
-</Aside>
+- **On-Farben nur auf ihrer eigenen Fläche** verwenden – dafür ist ihr Kontrast geprüft.
+- **Für Fließtext** `On-Surface/*/Base` oder stärker; Subtle nur für kurze, große Texte.
 
 ## Schriftgrößen
 

@@ -43,18 +43,43 @@ Der Theme Builder prüft jede Farbe gegen ihren passenden Hintergrund:
 
 **Kontrastmethoden:** Standard ist **APCA** (Accessible Perceptual Contrast Algorithm, Kandidat für WCAG 3). APCA berücksichtigt, dass helle Schrift auf dunklem Grund anders wahrgenommen wird als umgekehrt, und gibt einen Wert *Lc* zwischen etwa −108 und 106 aus. Alternativ wird nach **WCAG 2** gerechnet (Verhältnis 1:1 bis 21:1).
 
-Für die Bewertung dient diese Einteilung nach APCA:
+## Kontrast-Stufen
 
-| \|Lc\| | geeignet für |
-| --- | --- |
-| ab 75 | Fließtext |
-| ab 60 | Text in Komponenten, UI-Elemente |
-| ab 45 | große Schrift, Überschriften |
-| ab 30 | Platzhalter, Deaktiviertes, Dekoration |
-| unter 30 | nicht für Inhalte |
+Jede Farbrolle hat eine feste **Kontrast-Anforderung**. Die Schwellen gibt es für beide Methoden:
 
-<Aside type="caution" title="Zu entscheiden">
-  Das Plugin zeigt die Werte bisher ohne Schwellen an. Die Einteilung oben ist ein Vorschlag nach den APCA-Empfehlungen und sollte als verbindliche Regel festgelegt werden.
+| Stufe | APCA (Lc) | WCAG 2 | wofür |
+| --- | --- | --- | --- |
+| Anti-Glare | 100 | 15:1 | verstärkter Kontrast, Barrierefreiheits-Modus |
+| Caption | 90 | 10:1 | sehr kleine Schrift (ab 12 px) |
+| Body | 75 | 7:1 | Fließtext (ab 16 px) |
+| Large | 60 | 4,5:1 | Überschriften, große Schrift (ab 24 px), Text in Komponenten |
+| Non-Text | 45 | 3:1 | UI-Elemente, Icons |
+| Prominent Division | 30 | 1,8:1 | Karten-Hintergründe, Rahmen, Trennlinien |
+| Subtle Division | 15 | 1,3:1 | Dekoration, dezente Zeilen, Deaktiviertes |
+
+## Kontrast-Leiter
+
+Die Stufen einer Rolle (Subtle, Base, Bold …) haben **keine festen Lightness-Bereiche**. Stattdessen gilt eine Leiter, die sich an die gewählten Farben anpasst:
+
+1. **Mindestwert je Emphasis.** Z. B. bei On-Surface: Subtle mindestens Large (60), Base mindestens Body (75), Bold mindestens Caption (90), Bolder mindestens Anti-Glare (100).
+2. **Reihenfolge bleibt erhalten.** Eine schwächere Stufe darf nie mehr Kontrast haben als die nächst-stärkere – fehlende Stufen werden übersprungen.
+3. **Fließende Obergrenze.** Wie weit eine schwächere Stufe gehen darf, hängt vom **aktuell gewählten** Ton der stärkeren ab. Ändert sich eine Stufe, werden die anderen automatisch nachgezogen.
+
+Geprüft wird je nach Rolle gegen einen anderen Hintergrund:
+
+| Bereich | Grenzen \|Lc\| | Mindestwerte | geprüft gegen |
+| --- | --- | --- | --- |
+| Surface Default (Flächen) | 0–30 | – | Weiß (Light) / Schwarz (Dark) |
+| Surface Inverted (Flächen) | 75–107 | alle Body (75) | Weiß / Schwarz |
+| Brand, Action, Feedback (Flächen) | über 0 bis 106 | Base: Subtle Division (15), Bold: Body (75) | Weiß / Schwarz |
+| On-Surface Default und Inverted | über 45 bis unter 106 | Subtle 60, Base 75, Bold 90, Bolder 100 | die jeweilige Surface-Base |
+| On-Surface-Brand, -Action, -Feedback … | wie On-Surface | fest Large (60) | die jeweilige Surface-Base |
+| On-Brand, On-Action, On-Feedback … | – | Anforderung der Rolle | die eigene Fläche |
+
+Eine Fläche ist nur wählbar, wenn es mindestens einen passenden On-Ton dafür gibt. Passt eine Zuweisung nach einer Änderung nicht mehr (anderer Ton, Dark Mode, andere Methode), wird sie auf den nächsten passenden Ton korrigiert.
+
+<Aside type="note" title="Herkunft">
+  Stufen und Leiter stammen aus **CoColores**, dem selbst entwickelten Nachfolger der Lazy-Plugins. Dort ist die Kontrastmethode auch eine eigene Einstellung. Der Lazy Theme Builder (Figma AI) prüft bisher ohne Schwellen.
 </Aside>
 
 ## Kontrast-Report des DS Templates
