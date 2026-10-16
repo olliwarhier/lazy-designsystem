@@ -51,11 +51,20 @@ Komponenten **ohne Fläche** (Text Button, Menüeintrag) legen stattdessen eine 
 
 ## Focused
 
-Der Fokusring ist immer sichtbar, sobald per Tastatur navigiert wird (`:focus-visible`). Er verwendet `--color-focused-*` und die Strichstärke `--base-border-width-focus`, mit Abstand zur Komponente, damit er auf jeder Fläche erkennbar bleibt.
+Der Fokusring ist immer sichtbar, sobald per Tastatur navigiert wird (`:focus-visible`):
+
+```css
+:focus-visible {
+  outline: var(--base-border-width-focus) solid var(--color-focused-default-base);
+  outline-offset: var(--base-border-width-focus);
+}
+```
+
+Der Abstand trennt den Ring von der Komponente, damit er auch auf Flächen mit ähnlicher Farbe erkennbar bleibt. Auf invertierten Flächen wird `--color-focused-inverted-base` verwendet.
 
 ## Disabled
 
-Deaktivierte Komponenten werden mit `--color-disabled-opacity` (0,48) abgeschwächt und reagieren nicht auf Hover. Text auf deaktivierten Komponenten muss den Kontrast nicht erfüllen – die Funktion darf aber nie **nur** über den Disabled-Zustand erklärt werden.
+Deaktivierte Komponenten werden mit `--color-disabled-opacity` (0,48) abgeschwächt und reagieren nicht auf Hover. Eine Deckkraft statt eigener Disabled-Farben funktioniert auf jedem Untergrund und mit jeder Rollenfarbe – eigene Farben waren nicht auf allen Flächen erkennbar. Text auf deaktivierten Komponenten muss den Kontrast nicht erfüllen – die Funktion darf aber nie **nur** über den Disabled-Zustand erklärt werden.
 
 <Aside type="tip">
   Lieber erklären, warum etwas nicht geht, als es nur auszugrauen – z. B. mit einem Hinweistext unter dem Formular.
