@@ -1,0 +1,51 @@
+---
+title: Übergabe an Code
+description: Wie die Variablen eines Projekts aus Figma in den Code kommen.
+sidebar:
+  order: 5
+---
+
+import { Steps, Aside, Tabs, TabItem } from '@astrojs/starlight/components';
+
+Sind die Variablen in Figma fertig, werden sie als JSON exportiert. Der Token-Build macht daraus CSS-Variablen – Struktur und Namen bleiben dabei immer gleich.
+
+<Tabs>
+  <TabItem label="Mit KI-Assistent (MCP)">
+
+<Steps>
+
+1. Den Figma-MCP-Server im Assistenten verbinden.
+2. Den Assistenten bitten, die Variablen mit `packages/tokens/scripts/figma-export.js` zu exportieren – mit dem Link zur Figma-Datei.
+3. Der Assistent schreibt die Dateien nach `packages/tokens/src/` und prüft sie mit `pnpm --filter @lazy-designsystem/tokens check`.
+4. `pnpm build` erzeugt `tokens.css` und `tokens.json`.
+
+</Steps>
+
+  </TabItem>
+  <TabItem label="Von Hand">
+
+<Steps>
+
+1. Das Export-Skript in Figma über ein Plugin ausführen (z. B. *Scripter*) oder die Variablen als JSON exportieren.
+2. Die Dateien je Collection in `packages/tokens/src/` ablegen.
+3. `pnpm --filter @lazy-designsystem/tokens check` prüft Aufbau und Verweise.
+4. `pnpm build` ausführen.
+
+</Steps>
+
+  </TabItem>
+</Tabs>
+
+## Was übergeben wird
+
+| aus Figma | wird zu |
+| --- | --- |
+| Variablen aller sechs Collections | CSS-Variablen in `tokens.css` |
+| Modi (Light/Dark, Themes, Desktop/Mobile, Größen, Shapes) | `light-dark()`, `data-*`-Attribute, `clamp()` |
+| Beschreibungen der Variablen | `$description` im JSON, Texte in dieser Doku |
+| Textstile | über die Typescale-Variablen abgebildet |
+| Effect Styles | noch nicht (siehe [Elevation](../../foundations/elevation/)) |
+
+<Aside>
+  Einzelheiten zum Format und zu den Prüfungen stehen unter [Austauschformat & Build](../../reference/exchange-format/).
+</Aside>

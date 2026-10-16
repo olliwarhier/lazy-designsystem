@@ -1,0 +1,22 @@
+{
+ "einstieg/installation": "introduction/get-started-code",
+ "prinzipien/uebersicht": "introduction/principles",
+ "foundations/farbe": "foundations/color",
+ "foundations/abstaende": "foundations/spacing",
+ "foundations/typografie": "foundations/typography",
+ "tokens/shape": "foundations/shape",
+ "tokens/komponenten-groessen": "foundations/size",
+ "tokens/uebersicht": "reference/tokens",
+ "tokens/benennung": "reference/naming",
+ "tokens/modi": "reference/modes",
+ "tokens/farbformate": "reference/color-formats",
+ "tokens/austauschformat": "reference/exchange-format",
+ "werkzeuge/uebersicht": "setup/overview",
+ "werkzeuge/tint-generator": "setup/palettes",
+ "werkzeuge/theme-builder": "setup/color-roles",
+ "werkzeuge/typescale-spacing": "setup/typescale-spacing",
+ "komponenten/button": "components/button",
+ "mitwirken/bekannte-probleme": "reference/known-issues",
+ "mitwirken/neue-komponente": "reference/contributing",
+ "mitwirken/neues-framework": "reference/frameworks"
+}

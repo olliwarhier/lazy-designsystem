@@ -1,0 +1,91 @@
+---
+/**
+ * Zeigt live, wie ein Wert durch die Ebenen wandert:
+ * Palette → Farbrolle → Komponente. Werte kommen aus tokens.json.
+ */
+import data from '@lazy-designsystem/tokens/tokens.json';
+import { Button } from '@lazy-designsystem/svelte';
+
+const find = (css: string) => data.tokens.find((t) => t.css === css)!;
+const role = find('--color-action-default-base');
+const paletteVar = String(role.value).match(/--palette-[a-z]+-\d+/)?.[0] ?? '';
+const palette = find(paletteVar);
+const light = Object.keys(role.modes)[0];
+---
+
+<div class="chain not-content" data-shape="rounded-medium">
+  <div class="step">
+    <span class="label">1 · Primitive</span>
+    <span class="swatch" style={`background: var(${palette.css})`}></span>
+    <code>{palette.figma}</code>
+    <small>{String(palette.modes[Object.keys(palette.modes)[0]])} – ein Farbton, noch ohne Aufgabe</small>
+  </div>
+  <span class="arrow" aria-hidden="true">→</span>
+  <div class="step">
+    <span class="label">2 · Farbrolle</span>
+    <span class="swatch" style={`background: var(${role.css})`}></span>
+    <code>{role.figma}</code>
+    <small>bekommt eine Aufgabe: „klickbare Elemente“ – in Light und Dark</small>
+  </div>
+  <span class="arrow" aria-hidden="true">→</span>
+  <div class="step">
+    <span class="label">3 · Komponente</span>
+    <span class="component"><Button>Speichern</Button></span>
+    <code>Button · Filled</code>
+    <small>nutzt nur die Rolle – nie den Farbton direkt</small>
+  </div>
+</div>
+
+<style>
+  .chain {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    gap: var(--spacing-static-small);
+    margin-block: 1.5rem;
+  }
+  .step {
+    flex: 1 1 12rem;
+    display: grid;
+    gap: var(--spacing-static-2xsmall);
+    align-content: start;
+    padding: var(--spacing-static-small);
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: var(--base-border-radius-medium);
+    background: var(--color-surface-default-base);
+    color: var(--color-on-surface-default-base);
+  }
+  .label {
+    font-size: var(--typescale-body-small-size);
+    color: var(--color-on-surface-default-subtle);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .swatch {
+    height: 3rem;
+    border-radius: var(--base-border-radius-small);
+  }
+  .component {
+    display: flex;
+    align-items: center;
+    height: 3rem;
+  }
+  code {
+    font-size: 0.75rem;
+    word-break: break-word;
+  }
+  small {
+    color: var(--color-on-surface-default-subtle);
+    line-height: 1.4;
+  }
+  .arrow {
+    align-self: center;
+    font-size: 1.5rem;
+    color: var(--sl-color-gray-3);
+  }
+  @media (max-width: 50rem) {
+    .arrow {
+      display: none;
+    }
+  }
+</style>

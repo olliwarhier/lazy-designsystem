@@ -1,0 +1,96 @@
+---
+title: 'Loslegen: Code'
+description: Lazy in einem Projekt einbinden – Tokens, Komponenten und Modi.
+sidebar:
+  order: 5
+---
+
+import { Tabs, TabItem, Steps, LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+Lazy besteht im Code aus zwei Schichten:
+
+1. **Tokens** (`@lazy-designsystem/tokens`) – CSS-Variablen, die jedes Framework nutzt.
+2. **Komponenten** – eine Bibliothek pro Framework, die dieselben Spezifikationen umsetzt. Den Anfang macht Svelte.
+
+Die Tokens eines Projekts kommen aus dessen Figma-Datei (siehe [Übergabe an Code](../../setup/handover/)); die Struktur und die Namen sind immer gleich.
+
+## Installieren
+
+Wähle dein Framework – die Auswahl gilt für alle Seiten der Doku.
+
+<Tabs syncKey="framework">
+  <TabItem label="Svelte">
+
+<Steps>
+
+1. Pakete installieren:
+
+   ```bash
+   pnpm add @lazy-designsystem/tokens @lazy-designsystem/svelte
+   ```
+
+2. Tokens einmal global laden, z. B. im Root-Layout:
+
+   ```svelte
+   <script>
+     import '@lazy-designsystem/tokens/tokens.css';
+   </script>
+   ```
+
+3. Komponenten verwenden:
+
+   ```svelte
+   <script>
+     import { Button } from '@lazy-designsystem/svelte';
+   </script>
+
+   <Button>Speichern</Button>
+   ```
+
+</Steps>
+
+  </TabItem>
+  <TabItem label="Nur Tokens (CSS)">
+
+Für Projekte ohne passende Komponentenbibliothek reichen die Tokens:
+
+```css
+@import '@lazy-designsystem/tokens/tokens.css';
+
+.my-button {
+  background: var(--color-action-default-base);
+  color: var(--color-on-action-default-base);
+  padding: var(--spacing-dynamic-xsmall) var(--spacing-dynamic-small);
+}
+```
+
+  </TabItem>
+</Tabs>
+
+## Modi umschalten
+
+Alle Modi lassen sich über Attribute setzen – auf `<html>` für die ganze Seite oder auf einem Element für einen Bereich:
+
+```html
+<html data-color-scheme="dark" data-theme="wireframe" data-shape="pill">
+```
+
+| Attribut | Werte | ohne Attribut |
+| --- | --- | --- |
+| `data-color-scheme` | `light`, `dark` | folgt der Systemeinstellung |
+| `data-theme` | Name eines Themes, z. B. `wireframe` | Standard-Theme |
+| `data-shape` | `square` … `pill` | Standard aus Figma |
+| `data-contrast` | `more`, `standard` (sobald es Kontrast-Modi gibt) | folgt der Systemeinstellung |
+
+Größen von Komponenten werden per Prop gesetzt oder an einen Bereich vererbt (siehe [Größe & Dichte](../../foundations/size/)).
+
+## Grundregeln
+
+- Nur **System-Tokens** verwenden (`--color-*`, `--spacing-*`, `--typescale-*` …), nie Paletten oder die Base-Scale direkt.
+- Keine festen Werte für Farben, Abstände, Schriftgrößen oder Radien.
+- Für Rundungen den [Shape-Regler](../../foundations/shape/) nutzen, nicht feste Radien.
+
+<CardGrid>
+  <LinkCard title="Alle Tokens" description="Nachschlagen nach Name und Zweck" href="../../reference/all-tokens/" />
+  <LinkCard title="Modi im Code" description="Wie Farbschema, Theme und Responsive technisch funktionieren" href="../../reference/modes/" />
+</CardGrid>

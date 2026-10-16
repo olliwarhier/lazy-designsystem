@@ -1,0 +1,40 @@
+---
+title: Komponenten & Form
+description: Größen der Komponenten prüfen und die Rundung des Projekts wählen.
+sidebar:
+  order: 4
+---
+
+import { Steps, Aside } from '@astrojs/starlight/components';
+import Demo from '../../../components/Demo.astro';
+import { Button } from '@lazy-designsystem/svelte';
+
+Nach Farbe und Typografie werden die Komponenten auf das Projekt abgestimmt. Dafür gibt es kein Plugin – zwei Collections in Figma reichen.
+
+## Größen prüfen
+
+Die Collection **Components** legt für jede Komponente Abstände, Icon- und Schriftgrößen in **Small**, **Medium** und **Large** fest. Alle Werte verweisen auf Spacing-, Sizing- und Typescale-Variablen und passen sich deshalb automatisch an.
+
+<Steps>
+
+1. Die Komponenten-Seite im Template öffnen und die drei Größen nebeneinander ansehen.
+2. Wirken Abstände zu eng oder zu weit, die Verweise in *Components* ändern – nie feste Zahlen eintragen.
+3. Festlegen, welche Größe im Projekt der Standard ist (meist Medium).
+
+</Steps>
+
+Mehr dazu unter [Größe & Dichte](../../foundations/size/).
+
+## Form wählen
+
+Die Collection **Shapes** steuert alle Rundungen auf einmal. Fünf Modi stehen zur Wahl:
+
+<Demo shape="square"><Button>Square</Button><Button variant="outlined">Square</Button></Demo>
+<Demo shape="rounded-medium"><Button>Rounded Medium</Button><Button variant="outlined">Rounded Medium</Button></Demo>
+<Demo shape="pill"><Button>Pill</Button><Button variant="outlined">Pill</Button></Demo>
+
+Den Modus auf der obersten Ebene der Datei setzen. Im Code entspricht er dem Regler `--shape` bzw. `data-shape` (siehe [Form](../../foundations/shape/)).
+
+<Aside type="caution">
+  Bei *Pill* brechen in Figma einige Komponenten, weil die Radien fest sind. Im Code rechnet der Shape-Regler den Radius aus der Höhe – dort tritt das Problem nicht auf.
+</Aside>

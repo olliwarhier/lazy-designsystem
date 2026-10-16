@@ -1,0 +1,31 @@
+---
+/**
+ * Weiterleitungen von alten Adressen auf die neue Struktur (Oktober 2026).
+ * Eigene Seiten statt Astro-`redirects`, damit der `base`-Pfad sicher stimmt.
+ */
+import redirects from '../../legacy-redirects.json';
+
+export function getStaticPaths() {
+  return Object.entries(redirects).map(([from, to]) => {
+    const [section, page] = from.split('/');
+    return { params: { section, page }, props: { to } };
+  });
+}
+
+const { to } = Astro.props;
+const target = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/${to}/`;
+---
+
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <title>Weiterleitung …</title>
+    <meta http-equiv="refresh" content={`0;url=${target}`} />
+    <link rel="canonical" href={target} />
+    <meta name="robots" content="noindex" />
+  </head>
+  <body>
+    <p>Diese Seite ist umgezogen: <a href={target}>{target}</a></p>
+  </body>
+</html>

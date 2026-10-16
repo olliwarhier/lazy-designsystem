@@ -1,0 +1,62 @@
+---
+title: Interaktion
+description: Zustände wie Hovered, Pressed, Focused und Disabled – und wie Lazy sie berechnet.
+sidebar:
+  order: 6
+---
+
+import { Aside } from '@astrojs/starlight/components';
+import { Button } from '@lazy-designsystem/svelte';
+import TokenTable from '../../../components/TokenTable.astro';
+
+Jedes klickbare Element zeigt, in welchem Zustand es ist. Lazy legt dafür **keine eigene Farbe pro Zustand** an, sondern verändert die vorhandene Fläche nach einer Regel.
+
+## Die Zustände
+
+| Zustand | wann | sichtbar durch |
+| --- | --- | --- |
+| **Enabled** | Ruhezustand | Rollenfarbe der Komponente |
+| **Hovered** | Mauszeiger darüber | Fläche etwas heller oder dunkler |
+| **Pressed** | wird gerade geklickt oder getippt | Fläche deutlich heller oder dunkler |
+| **Focused** | per Tastatur angewählt | Fokusring in `Focused` |
+| **Disabled** | nicht verfügbar | ganze Komponente mit 48 % Deckkraft |
+
+<div class="not-content" style="display:flex;gap:var(--spacing-dynamic-xsmall);flex-wrap:wrap;margin-block:var(--spacing-dynamic-small)">
+  <Button>Fahr mit der Maus darüber</Button>
+  <Button variant="outlined">Outlined</Button>
+  <Button disabled>Disabled</Button>
+</div>
+
+## Hovered und Pressed: Helligkeit verschieben
+
+Bei Komponenten **mit Fläche** (z. B. Filled Button) wird die Helligkeit (OKLCH-Lightness) der Fläche verschoben:
+
+- **Helle Flächen** (L ≥ 0,5) werden **dunkler**: Hovered −0,08, Pressed −0,16.
+- **Dunkle Flächen** (L < 0,5) werden **heller**: Hovered +0,12, Pressed +0,24.
+
+Ins Helle wird stärker verschoben, weil dunkle Töne kleine Unterschiede schlecht zeigen – ab etwa L 0,3 sieht man kaum noch, ob eine Fläche dunkler wird, und bei L 0,15 würde Pressed rechnerisch ins Negative fallen.
+
+```css
+.button:hover {
+  background: oklch(from var(--button-bg) var(--interaction-hovered-l) c h);
+}
+```
+
+Die Richtung lässt sich für einen Bereich festlegen, z. B. wenn eine Marke immer dunkler werden soll: `data-interaction="darker"` oder `"lighter"`.
+
+Komponenten **ohne Fläche** (Text Button, Menüeintrag) legen stattdessen eine halbtransparente Ebene darüber:
+
+<TokenTable prefix="--color-hovered-" />
+<TokenTable prefix="--color-pressed-" />
+
+## Focused
+
+Der Fokusring ist immer sichtbar, sobald per Tastatur navigiert wird (`:focus-visible`). Er verwendet `--color-focused-*` und die Strichstärke `--base-border-width-focus`, mit Abstand zur Komponente, damit er auf jeder Fläche erkennbar bleibt.
+
+## Disabled
+
+Deaktivierte Komponenten werden mit `--color-disabled-opacity` (0,48) abgeschwächt und reagieren nicht auf Hover. Text auf deaktivierten Komponenten muss den Kontrast nicht erfüllen – die Funktion darf aber nie **nur** über den Disabled-Zustand erklärt werden.
+
+<Aside type="tip">
+  Lieber erklären, warum etwas nicht geht, als es nur auszugrauen – z. B. mit einem Hinweistext unter dem Formular.
+</Aside>

@@ -1,31 +1,47 @@
 ---
 title: Lazy Design System
-description: Prinzipien, Tokens und Komponenten des Lazy Design Systems – framework-übergreifend dokumentiert.
+description: Ein Design System, das in wenigen Klicks aufgesetzt und über Figma-Variablen an jedes Projekt angepasst wird – dokumentiert für Design, Code und KI.
 template: splash
 hero:
-  tagline: Ein Design System, einmal in Figma gedacht und in jedem Framework gleich umgesetzt.
+  tagline: Einmal gedacht, überall angepasst. Ein Design System, das du mit wenigen Klicks aufsetzt – und das Figma, Code und KI dieselbe Sprache sprechen lässt.
   actions:
-    - text: Loslegen
-      link: einstieg/installation/
+    - text: So funktioniert es
+      link: introduction/how-it-works/
       icon: right-arrow
-    - text: Komponenten
-      link: komponenten/button/
+    - text: Was ist Lazy?
+      link: introduction/what-is-lazy/
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+import { CardGrid, LinkCard, Card } from '@astrojs/starlight/components';
+import FacesPreview from '../../components/FacesPreview.astro';
+import MediaPlaceholder from '../../components/MediaPlaceholder.astro';
+
+<FacesPreview />
+
+<MediaPlaceholder kind="video">Hero-Loop, ca. 10 Sekunden: ein Theme entsteht in drei Klicks mit den Lazy-Plugins.</MediaPlaceholder>
+
+## Wo möchtest du anfangen?
 
 <CardGrid>
-  <Card title="Prinzipien" icon="open-book">
-    Die Haltung hinter dem System – unabhängig von Tool und Framework.
-  </Card>
-  <Card title="Tokens" icon="seti:json">
-    Farben, Abstände und Typografie aus den Figma Variables, als CSS-Variablen für jedes Framework.
+  <LinkCard title="Ich gestalte" description="Template übernehmen, Farben, Schrift und Form einstellen, Komponenten nutzen." href="introduction/get-started-design/" />
+  <LinkCard title="Ich entwickle" description="Tokens und Komponenten einbinden, Modi umschalten, Werte nachschlagen." href="introduction/get-started-code/" />
+  <LinkCard title="Ich arbeite mit KI" description="Was ein Assistent wissen muss, um mit Lazy korrekt zu arbeiten." href="introduction/get-started-ai/" />
+</CardGrid>
+
+## Was dich erwartet
+
+<CardGrid>
+  <Card title="Grundlagen" icon="open-book">
+    Farbe, Typografie, Abstände, Form und Interaktion – was sie leisten und wie sie zusammenspielen.
   </Card>
   <Card title="Komponenten" icon="puzzle">
-    Jede Komponente hat eine framework-neutrale Spezifikation und eine Implementierung pro Framework.
+    Jede Komponente mit Gestaltungsregeln und Code – für jedes Framework nach derselben Spezifikation.
   </Card>
-  <Card title="Frameworks" icon="laptop">
-    Aktuell: **Svelte**. Weitere Frameworks setzen dieselben Spezifikationen um.
+  <Card title="Projekt aufsetzen" icon="setting">
+    Der Weg vom leeren Template zum fertigen System – mit den Lazy-Plugins und Live-Rechnern.
+  </Card>
+  <Card title="Referenz" icon="document">
+    Alle Tokens, Benennung, Modi und Build – zum Nachschlagen für Entwicklung und KI.
   </Card>
 </CardGrid>

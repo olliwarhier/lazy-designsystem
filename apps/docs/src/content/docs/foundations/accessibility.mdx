@@ -1,0 +1,55 @@
+---
+title: Barrierefreiheit
+description: Kontraste, Schriftgrößen, Klickflächen und Fokus – wo Lazy bewusst eingrenzt.
+sidebar:
+  order: 9
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+Barrierefreiheit ist in Lazy kein eigener Arbeitsschritt, sondern in die Werkzeuge eingebaut. Diese Seite fasst zusammen, **wo das System eingrenzt** und was beim Gestalten noch zu beachten ist.
+
+## Kontrast
+
+Lazy prüft Kontraste mit **APCA** (Accessible Perceptual Contrast Algorithm), dem Verfahren, das für WCAG 3 vorgesehen ist. APCA bewertet, wie gut Text tatsächlich lesbar ist, und berücksichtigt dabei Schriftgröße und -stärke.
+
+| Lc (APCA) | geeignet für |
+| --- | --- |
+| **75** | Fließtext |
+| **60** | Text ab etwa 18 px bzw. kurzer Text |
+| **45** | große Überschriften, fette Schrift ab 24 px |
+| **30** | Icons, Rahmen von Eingabefeldern, nicht-textliche Elemente |
+
+Der Theme Builder zeigt den Kontrast jeder Kombination von Fläche und On-Farbe an. Wer On-Farben nur auf ihrer eigenen Fläche verwendet, ist auf der sicheren Seite.
+
+<Aside type="caution" title="Zur Abstimmung">
+  Die Schwellen sind ein Vorschlag nach den APCA-Empfehlungen. Der Theme Builder bewertet die Werte bisher noch nicht (siehe [Bekannte Probleme](../../reference/known-issues/), #9).
+</Aside>
+
+## Schriftgrößen
+
+- Fließtext nie kleiner als **`Body/Small`**.
+- Schriftgrößen in `rem`, damit sie mit der Browsereinstellung mitwachsen – das erledigen die Typescale-Tokens.
+- Zeilenlänge begrenzen: `--sizing-max-width-text` (700 px).
+
+## Klickflächen
+
+Jedes klickbare Element hat eine Fläche von mindestens **24 × 24 px** (WCAG 2.2, Stufe AA), besser **44 × 44 px** auf Touch-Geräten. Ist ein Element optisch kleiner (z. B. ein Icon-Button in Small), wird die Klickfläche unsichtbar vergrößert.
+
+<Aside type="caution" title="Zur Abstimmung">
+  Bisher gibt es keinen eigenen Token für die Mindestklickfläche. Vorschlag: `Sizing/Target/Min` mit 24 px (Desktop) und 44 px (Mobile).
+</Aside>
+
+## Fokus
+
+- Jedes interaktive Element ist per Tastatur erreichbar.
+- Der Fokusring ist sichtbar und wird nie entfernt (siehe [Interaktion](../interaction/#focused)).
+- Die Reihenfolge folgt der Lesereihenfolge.
+
+## Bewegung
+
+Animationen berücksichtigen `prefers-reduced-motion`. Motion-Richtlinien folgen später.
+
+## Farbe nicht allein
+
+Informationen nie nur über Farbe vermitteln: Fehler bekommen zusätzlich einen Text oder ein Icon, Links im Fließtext eine Unterstreichung.

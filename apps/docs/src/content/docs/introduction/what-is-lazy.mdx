@@ -1,0 +1,50 @@
+---
+title: Was ist Lazy?
+description: Die Idee hinter dem Lazy Design System – für wen es gedacht ist und was es anders macht.
+sidebar:
+  order: 1
+---
+
+import { CardGrid, Card, LinkCard } from '@astrojs/starlight/components';
+import FacesPreview from '../../../components/FacesPreview.astro';
+
+**Lazy** ist ein Design System, das nicht für ein einzelnes Produkt gebaut ist, sondern als Vorlage für viele. Es wird pro Projekt in Figma aufgesetzt und über Variablen optisch angepasst – Farben, Schrift, Abstände, Rundungen. Die Struktur bleibt immer dieselbe, das Erscheinungsbild ist jedes Mal ein anderes.
+
+<FacesPreview />
+
+## Warum „Lazy“?
+
+Weil das Aufsetzen und Pflegen so wenig Arbeit wie möglich machen soll. Eigene Figma-Plugins rechnen Paletten, prüfen Kontraste und erzeugen die Typescale – mit wenigen Klicks und mit Live-Vorschau. Was sonst Tage dauert, ist in kurzer Zeit eingerichtet. Faul im besten Sinne.
+
+## Eine Schnittstelle zwischen Design und Code
+
+In vielen Projekten wird das Design einmal in Figma gebaut und danach in der Entwicklung neu aufgesetzt – mit anderen Namen, anderen Werten und schleichenden Abweichungen. Lazy dreht das um:
+
+- **Designer:innen** setzen das System mit den Plugins auf und gestalten mit den Komponenten.
+- **Entwickler:innen** übernehmen dieselben Tokens und Komponenten aus dem Code und schlagen in dieser Doku nach.
+- **KI-Assistenten** bekommen dieselben Namen und Regeln in maschinenlesbarer Form.
+
+Alle arbeiten mit derselben Quelle: den Variablen in Figma.
+
+## Für wen ist Lazy gedacht?
+
+Für kleine und mittlere Projekte – Websites, Web-Apps, Kundenprojekte –, die schnell ein solides, barrierefreies Fundament brauchen und trotzdem eigenständig aussehen sollen. Lazy ist bewusst **nicht** für riesige Produktlandschaften mit Dutzenden Teams gemacht: Es setzt auf so wenige Ebenen und Tokens wie möglich.
+
+## Woraus besteht Lazy?
+
+<CardGrid>
+  <Card title="Figma-Template" icon="seti:image">
+    Variablen, Textstile und Komponenten – die Quelle der Wahrheit.
+  </Card>
+  <Card title="Lazy-Plugins" icon="rocket">
+    Tint-Generator, Theme Builder, Typescale & Spacing.
+  </Card>
+  <Card title="Tokens & Komponenten" icon="seti:css">
+    CSS-Variablen für jedes Framework, Komponenten zuerst für Svelte.
+  </Card>
+  <Card title="Diese Doku" icon="open-book">
+    Prinzipien, Regeln und Referenz für Design, Code und KI.
+  </Card>
+</CardGrid>
+
+<LinkCard title="Weiter: So funktioniert es" href="../how-it-works/" />

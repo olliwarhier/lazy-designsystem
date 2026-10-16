@@ -1,0 +1,59 @@
+---
+title: Prinzipien
+description: Die Haltung hinter dem Lazy Design System.
+sidebar:
+  order: 3
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+Prinzipien beschreiben, **warum** Lazy so funktioniert, wie es funktioniert. Sie helfen bei Entscheidungen, die keine Komponente und kein Token vorgibt.
+
+## Volle Kontrolle
+
+**Jeder Wert ist anpassbar – nichts ist fest verdrahtet.**
+Farben, Schrift, Abstände, Rundungen und Größen kommen aus Variablen. Ein Projekt kann Lazy so weit verändern, bis es ganz eigenständig aussieht, ohne die Struktur zu verlassen.
+
+## Geführt statt überfordert
+
+**Freiheit braucht einen Rahmen.**
+Die Werkzeuge begrenzen Eingaben dort, wo Fehler wahrscheinlich sind: Der Theme Builder bietet nur Kombinationen mit ausreichendem Kontrast an, die Typescale entsteht aus einem Skalenfaktor statt aus freien Werten. So können auch Einsteiger:innen ein gutes System aufsetzen.
+
+## Barrierefrei von Anfang an
+
+**Wo es um Zugänglichkeit geht, grenzt das System bewusst ein.**
+Kontraste werden geprüft, Schriftgrößen haben Untergrenzen, klickbare Flächen eine Mindestgröße, Fokus ist immer sichtbar. Barrierefreiheit ist kein späterer Arbeitsschritt, sondern Teil jeder Entscheidung.
+
+## Mühelos
+
+**Aufsetzen und Pflegen mit wenigen Klicks – die Wirkung sieht man sofort.**
+Das ist der Kern von „Lazy“: Plugins übernehmen die Rechenarbeit, Live-Vorschauen zeigen das Ergebnis, bevor es übernommen wird.
+
+## Eine Quelle der Wahrheit
+
+**Figma ist die Quelle, Code und Doku folgen.**
+Werte werden an einer Stelle gepflegt und von dort übernommen – nie doppelt, nie von Hand nachgebaut. Was in Figma steht, steht auch im Code.
+
+## Bedeutung vor Wert
+
+**Gestaltet wird mit Rollen, nicht mit Farben und Pixeln.**
+Eine Komponente verwendet `Action` statt „Grün“ und `Medium` statt „16 px“. Dadurch bleibt das System austauschbar, und jeder Name erklärt seinen Zweck.
+
+## Regeln statt Bauchgefühl
+
+**Werte entstehen aus nachvollziehbaren Regeln.**
+Paletten im OKLCH-Farbraum, Typescale aus einem Skalenfaktor, Abstände aus einem 8-px-Raster: Jeder Wert lässt sich herleiten und erklären – und deshalb auch zuverlässig verändern.
+
+## Einfach vor vollständig
+
+**So wenige Ebenen und Tokens wie möglich.**
+Lazy ist für kleine und mittlere Projekte gemacht. Eine zusätzliche Ebene oder Variante kommt nur dazu, wenn sie wirklich gebraucht wird.
+
+## Unabhängig vom Werkzeug
+
+**Die Regeln gelten überall gleich.**
+Figma, Svelte, React oder ein KI-Assistent: Namen, Rollen und Regeln sind dieselben. Ein Framework setzt die Spezifikation um, es erfindet sie nicht neu.
+
+<Aside type="caution" title="Zur Abstimmung">
+  Die ersten vier Prinzipien stammen aus dem Konzept von Lazy, die übrigen fünf sind ein Vorschlag, abgeleitet aus dem Aufbau des Systems.
+</Aside>

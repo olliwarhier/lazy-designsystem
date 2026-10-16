@@ -1,0 +1,53 @@
+---
+title: Icons
+description: Icon-Bibliothek, Größen, Strichstärken und Farben.
+sidebar:
+  order: 8
+---
+
+import { Aside } from '@astrojs/starlight/components';
+import TokenTable from '../../../components/TokenTable.astro';
+
+Lazy verwendet standardmäßig **[Phosphor Icons](https://phosphoricons.com/)** – Open Source (MIT), über 1.000 Motive, in Figma und für alle gängigen Frameworks verfügbar.
+
+## Andere Bibliotheken
+
+Jede Icon-Bibliothek lässt sich verwenden, wenn sie drei Bedingungen erfüllt:
+
+1. Icons sind **quadratisch** und auf dieselbe Rastergröße ausgelegt.
+2. Die Farbe kommt aus **`currentColor`** – Icons übernehmen die Textfarbe.
+3. Die **Strichstärke** ist einstellbar (Outline-Icons) oder passt zu den Stufen unten.
+
+Gut geeignet sind z. B. Lucide, Tabler oder Material Symbols.
+
+## Größen
+
+Icons nutzen eigene Größen, die mit der Bildschirmbreite mitwachsen:
+
+<TokenTable prefix="--sizing-icon-" />
+
+In Komponenten wird die Icon-Größe nicht direkt gewählt, sondern kommt aus der Komponentengröße (z. B. `--button-icon-size`, siehe [Größe & Dichte](../size/)).
+
+## Strichstärke
+
+Die Strichstärke passt sich der Komponentengröße an:
+
+| Größe | Strichstärke |
+| --- | --- |
+| Small | `--base-border-width-small` |
+| Medium | `--base-border-width-medium` |
+| Large | `--base-border-width-large` |
+
+Im Code: `--icon-stroke-width`; einzelne Komponenten können abweichen (z. B. `--fab-icon-stroke-width`).
+
+## Regeln
+
+- **Icon und Text gehören zusammen.** Ein Icon allein braucht eine Beschriftung für Screenreader (`aria-label`) und am besten einen Tooltip.
+- **Dekorative Icons ausblenden** (`aria-hidden="true"`), wenn daneben schon Text steht.
+- **Eine Bibliothek pro Projekt.** Icons verschiedener Bibliotheken nicht mischen.
+- **Ein Stil pro Projekt.** Gefüllte Icons nur für ausgewählte Zustände (z. B. aktiver Tab), sonst Outline.
+- **Klickflächen beachten.** Auch ein kleines Icon braucht eine ausreichend große Klickfläche (siehe [Barrierefreiheit](../accessibility/)).
+
+<Aside type="caution" title="Zur Abstimmung">
+  Die Regeln zu Stil und Bibliothek sind ein Vorschlag.
+</Aside>
