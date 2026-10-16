@@ -1,0 +1,60 @@
+---
+title: Elevation
+description: Schatten und Ebenen – wie Lazy Tiefe darstellt.
+sidebar:
+  order: 7
+---
+
+import { Aside } from '@astrojs/starlight/components';
+import TokenTable from '../../../components/TokenTable.astro';
+import MediaPlaceholder from '../../../components/MediaPlaceholder.astro';
+
+Elevation zeigt, was **über** etwas anderem liegt: ein Menü über der Seite, ein Dialog über allem. Lazy setzt Tiefe sparsam ein – die meisten Flächen liegen flach und werden über Farbe (`Surface`) unterschieden.
+
+## Ebenen
+
+<div class="not-content" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(10rem,1fr));gap:var(--spacing-dynamic-small);padding:var(--spacing-dynamic-small);margin-block:var(--spacing-dynamic-small);background:var(--color-surface-default-subtle);border-radius:var(--shape-radius-container)">
+  <div style="padding:var(--spacing-dynamic-small);background:var(--color-surface-default-base);color:var(--color-on-surface-default-base);border-radius:var(--shape-radius-container)"><strong>Flach</strong><br />Seite, Abschnitte</div>
+  <div style="padding:var(--spacing-dynamic-small);background:var(--color-surface-default-base);color:var(--color-on-surface-default-base);border-radius:var(--shape-radius-container);box-shadow:0 0 24px var(--color-shadow-default-subtle),0 4px 8px var(--color-shadow-default-subtle)"><strong>Card</strong><br />Karten, Kacheln</div>
+  <div style="padding:var(--spacing-dynamic-small);background:var(--color-surface-default-base);color:var(--color-on-surface-default-base);border-radius:var(--shape-radius-container);box-shadow:0 8px 24px var(--color-shadow-default-base),0 4px 8px var(--color-shadow-default-bold)"><strong>Floating</strong><br />Menüs, Dialoge, FAB</div>
+</div>
+
+| Ebene | Effect Style in Figma | Einsatz |
+| --- | --- | --- |
+| Flach | – | Seiten, Bereiche; Unterscheidung über `Surface`-Stufen |
+| Card | `Shadow/Card` | Karten, die sich leicht abheben |
+| Floating | `Shadow/Floating` | alles, was über der Seite schwebt |
+| Scrim | – | Abdunkelung hinter Dialogen und Sheets |
+
+## Schatten-Farben
+
+Schatten verwenden eigene Farbrollen mit Deckkraft, damit sie im Light und Dark Mode passen:
+
+<TokenTable prefix="--color-shadow-" />
+<TokenTable prefix="--color-scrim-" />
+
+## Effect Styles
+
+Die Effect Styles in Figma kombinieren zwei Schatten – einen weichen für die Tiefe und einen kurzen für die Kante:
+
+```css
+/* Shadow/Card */
+box-shadow:
+  0 0 24px var(--color-shadow-default-subtle),
+  0 4px 8px var(--color-shadow-default-subtle);
+
+/* Shadow/Floating */
+box-shadow:
+  0 8px 24px var(--color-shadow-default-base),
+  0 4px 8px var(--color-shadow-default-bold);
+```
+
+<Aside type="caution" title="Noch nicht im Export">
+  Effect Styles sind keine Variablen und werden deshalb noch nicht exportiert. Bis dahin stehen die Werte nur hier; geplant sind Tokens wie `--elevation-card` und `--elevation-floating` (siehe [Bekannte Probleme](../../reference/known-issues/)).
+</Aside>
+
+## Später
+
+**Verläufe** (Gradients) sind geplant: jeder Farbstopp als eigene Variable, z. B. `Effects/Gradient/Brand/Stop-0`, `…/Stop-50`, `…/Stop-100`, zusammengesetzt in einem Style.
+
+<MediaPlaceholder>Bild: Menü und Dialog über einer Seite, Ebenen seitlich auseinandergezogen (Explosionsansicht).</MediaPlaceholder>

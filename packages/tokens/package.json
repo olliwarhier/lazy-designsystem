@@ -2,6 +2,7 @@
   "name": "@lazy-designsystem/tokens",
   "version": "0.2.0",
   "description": "Design Tokens des Lazy Design Systems, generiert aus den Figma Variables",
+  "license": "MIT",
   "type": "module",
   "files": [
     "dist",

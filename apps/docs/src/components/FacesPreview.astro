@@ -1,0 +1,71 @@
+---
+/**
+ * „Ein System – viele Gesichter“: dieselben Komponenten in verschiedenen
+ * Kombinationen aus Farbschema, Theme und Shape – alles live über data-Attribute.
+ */
+import { Button } from '@lazy-designsystem/svelte';
+
+const faces = [
+  { label: 'Light · Square', attrs: { 'data-color-scheme': 'light', 'data-shape': 'square' } },
+  { label: 'Dark · Pill', attrs: { 'data-color-scheme': 'dark', 'data-shape': 'pill' } },
+  { label: 'Wireframe · Rounded', attrs: { 'data-color-scheme': 'light', 'data-theme': 'wireframe', 'data-shape': 'rounded-bold' } },
+];
+---
+
+<div class="faces not-content">
+  {
+    faces.map((f) => (
+      <div class="face" {...f.attrs}>
+        <span class="title">{f.label}</span>
+        <p class="text">Ein System, viele Gesichter.</p>
+        <div class="row">
+          <Button>Speichern</Button>
+          <Button variant="outlined">Abbrechen</Button>
+        </div>
+        <span class="chip">Neu</span>
+      </div>
+    ))
+  }
+</div>
+
+<style>
+  .faces {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: var(--spacing-static-small);
+    margin-block: 2rem;
+  }
+  .face {
+    display: grid;
+    gap: var(--spacing-static-xsmall);
+    padding: var(--spacing-static-medium);
+    background: var(--color-surface-default-base);
+    color: var(--color-on-surface-default-base);
+    border: 1px solid var(--color-outline-default-subtle);
+    border-radius: var(--shape-radius-container);
+    font-family: var(--font-family-plain);
+  }
+  .title {
+    font-size: var(--typescale-body-small-size);
+    color: var(--color-on-surface-default-subtle);
+  }
+  .text {
+    margin: 0;
+    font-family: var(--typescale-heading-small-family);
+    font-size: var(--typescale-heading-small-size);
+    font-weight: var(--typescale-heading-small-weight);
+  }
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-static-xsmall);
+  }
+  .chip {
+    justify-self: start;
+    padding: var(--spacing-static-3xsmall) var(--spacing-static-xsmall);
+    background: var(--color-brand-default-subtle);
+    color: var(--color-on-brand-default-subtle);
+    border-radius: calc(var(--shape) * 1rem);
+    font-size: var(--typescale-body-small-size);
+  }
+</style>

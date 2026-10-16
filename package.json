@@ -2,6 +2,7 @@
   "name": "lazy-designsystem",
   "private": true,
   "description": "Lazy Design System – Tokens, Komponenten und Dokumentation",
+  "license": "MIT",
   "packageManager": "pnpm@10.28.0",
   "engines": {
     "node": ">=20"

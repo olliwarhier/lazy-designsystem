@@ -1,0 +1,35 @@
+---
+/**
+ * Platzhalter für geplante Bilder und Videos. Macht sichtbar, wo noch
+ * gestaltete Medien ergänzt werden sollen: <MediaPlaceholder kind="video">…</MediaPlaceholder>
+ */
+interface Props {
+  kind?: 'bild' | 'video';
+}
+const { kind = 'bild' } = Astro.props;
+---
+
+<figure class="media-placeholder not-content">
+  <span class="kind">{kind === 'video' ? '▶ Video geplant' : '▣ Bild geplant'}</span>
+  <figcaption><slot /></figcaption>
+</figure>
+
+<style>
+  .media-placeholder {
+    display: grid;
+    gap: 0.25rem;
+    margin-block: 1.5rem;
+    padding: 1.25rem;
+    border: 1px dashed var(--sl-color-gray-4);
+    border-radius: 0.5rem;
+    background: var(--sl-color-gray-7, var(--sl-color-gray-6));
+    font-size: 0.8125rem;
+  }
+  .kind {
+    font-weight: 600;
+    color: var(--sl-color-gray-2);
+  }
+  figcaption {
+    color: var(--sl-color-gray-3);
+  }
+</style>

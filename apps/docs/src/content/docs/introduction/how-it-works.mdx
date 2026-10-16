@@ -1,0 +1,64 @@
+---
+title: So funktioniert es
+description: Das Ebenenmodell des Lazy Design Systems – von Figma über Tokens bis zur Komponente.
+sidebar:
+  order: 2
+---
+
+import { Steps, LinkCard, CardGrid } from '@astrojs/starlight/components';
+import TokenChain from '../../../components/TokenChain.astro';
+import FacesPreview from '../../../components/FacesPreview.astro';
+import MediaPlaceholder from '../../../components/MediaPlaceholder.astro';
+
+Lazy funktioniert über **Ebenen**: Jeder Wert wird einmal festgelegt und dann über Namen weitergereicht. Ändert sich ein Wert, ändert er sich überall, wo er verwendet wird.
+
+## Vom Farbton zur Komponente
+
+<TokenChain />
+
+Komponenten fragen nie „welches Grün?“, sondern „welche Farbe hat eine Aktion?“. Deshalb lässt sich das Grün jederzeit austauschen – im ganzen System auf einmal.
+
+## Die Ebenen
+
+<Steps>
+
+1. **Primitives** – die Rohwerte: Farbpaletten, ein 8-px-Raster, Schriften. Sie haben noch keine Aufgabe und werden nie direkt verwendet.
+
+2. **System** – die Rollen: *Surface* für Hintergründe, *Action* für Klickbares, *Heading* für Überschriften. Hier wird festgelegt, welcher Wert welche Aufgabe übernimmt – für Light und Dark Mode und für jedes Gerät.
+
+3. **Components** – die Größen der Komponenten in Small, Medium und Large.
+
+4. **Shapes** – die Rundung des ganzen Systems, von eckig bis Pill.
+
+</Steps>
+
+<MediaPlaceholder>Illustration der Ebenen: Primitives → System → Components → Shapes, mit Figma-Variablen links und Code rechts.</MediaPlaceholder>
+
+## Ein System, viele Gesichter
+
+Weil jede Ebene austauschbar ist, entstehen aus derselben Struktur ganz unterschiedliche Erscheinungsbilder. Umschalten lässt sich dabei auch zur Laufzeit:
+
+<FacesPreview />
+
+| Was | umgeschaltet über |
+| --- | --- |
+| Light / Dark | Systemeinstellung oder Schalter |
+| Theme (z. B. Wireframe) | Theme-Auswahl |
+| Rundungen | Shape-Regler |
+| Geräte | fließend über die Bildschirmbreite |
+
+## Von Figma in den Code
+
+<Steps>
+
+1. In **Figma** werden die Variablen mit den Lazy-Plugins aufgesetzt.
+2. Ein **Export** überträgt sie als JSON ins Repository – über den Figma-MCP-Server oder ein Plugin.
+3. Der **Build** erzeugt daraus CSS-Variablen, die jedes Framework nutzen kann.
+4. **Komponenten** und **diese Doku** verwenden genau diese Variablen.
+
+</Steps>
+
+<CardGrid>
+  <LinkCard title="Prinzipien" description="Die Haltung hinter dem System" href="../principles/" />
+  <LinkCard title="Grundlagen: Farbe" description="Paletten und Rollen im Detail" href="../../foundations/color/" />
+</CardGrid>

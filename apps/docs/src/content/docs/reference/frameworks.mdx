@@ -1,0 +1,14 @@
+---
+title: Frameworks
+description: Eine weitere Framework-Implementierung hinzufügen.
+sidebar:
+  order: 7
+---
+
+Alle Frameworks setzen dieselben Spezifikationen um und nutzen dieselben Tokens. Für ein neues Framework (z. B. React oder Vue):
+
+1. Paket anlegen: `packages/<framework>/` mit dem Namen `@lazy-designsystem/<framework>` und einer Abhängigkeit auf `@lazy-designsystem/tokens`.
+2. Komponenten entlang der Spezifikationen umsetzen – Props, Varianten und Zustände heißen in jedem Framework gleich.
+3. Astro-Integration für das Framework in `apps/docs/astro.config.mjs` ergänzen (z. B. `@astrojs/react`), damit Live-Demos funktionieren.
+4. Auf jeder Komponentenseite einen zusätzlichen `<TabItem label="<Framework>">` im `<Tabs syncKey="framework">` ergänzen.
+5. Auf der Seite [Installation](../../introduction/get-started-code/) einen Tab ergänzen.

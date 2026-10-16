@@ -1,7 +1,9 @@
 // Kontrastberechnung – dieselben Verfahren wie im Plugin „Lazy Theme Builder APCA“.
 /** @typedef {import('./color.js').Rgb} Rgb */
 
-// APCA 0.1.9 (apca-w3, W3-Lizenz)
+// APCA 0.1.9 – Portierung aus apca-w3 (© Andrew Somers / Myndex Research).
+// Nicht MIT-lizenziert, sondern unter der apca-w3-Lizenz; Konstanten nicht verändern.
+// Siehe THIRD_PARTY_NOTICES.md.
 const SA98G = {
   mainTRC: 2.4,
   sRco: 0.2126729,

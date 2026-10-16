@@ -1,0 +1,39 @@
+---
+title: Übersicht
+description: Alle Komponenten des Lazy Design Systems und ihr Stand in Figma und Code.
+sidebar:
+  order: 0
+---
+
+import { LinkCard } from '@astrojs/starlight/components';
+
+Jede Komponente wird zuerst in Figma gestaltet und dann pro Framework umgesetzt. Die Svelte-Komponenten bauen auf [bits-ui](https://bits-ui.com/) auf – das liefert Verhalten und Barrierefreiheit, Lazy liefert das Aussehen über Tokens.
+
+<LinkCard title="Button" description="Löst eine Aktion aus – Filled, Outlined, Text" href="button/" />
+
+## Stand
+
+| Komponente | Figma | Svelte | Größen-Tokens |
+| --- | --- | --- | --- |
+| [Button](button/) | ✓ | ✓ | `--button-*` |
+| FAB | ✓ | geplant | `--fab-*` |
+| Link | ✓ | geplant | `--link-*` |
+| Chip | ✓ | geplant | `--chip-*` |
+| Badge | ✓ | geplant | `--badge-*` |
+| Tabs | ✓ | geplant | `--tab-*` |
+| Text Field | ✓ | geplant | `--text-field-*` |
+| Menu | ✓ | geplant | `--menu-item-*`, `--menu-label-*` |
+| Date Picker | ✓ | geplant | `--date-picker-*` |
+| Divider | ✓ | geplant | `--divider-*` |
+| Icon | ✓ | geplant | `--icon-stroke-width` |
+| Card | in Arbeit | – | – |
+
+✓ = fertig · geplant = Spezifikation in Figma vorhanden, Code folgt
+
+## Aufbau jeder Komponentenseite
+
+- **Übersicht** – wofür, Varianten, Do & Don't
+- **Gestaltung** – Anatomie, Größen, Zustände, Tokens
+- **Code** – Props, Beispiele, Barrierefreiheit
+
+Neue Komponenten entstehen nach der [Vorlage für neue Komponenten](../reference/contributing/).

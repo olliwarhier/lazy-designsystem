@@ -2,6 +2,7 @@
   "name": "@lazy-designsystem/svelte",
   "version": "0.1.0",
   "description": "Svelte-Implementierung des Lazy Design Systems",
+  "license": "MIT",
   "type": "module",
   "files": [
     "dist"

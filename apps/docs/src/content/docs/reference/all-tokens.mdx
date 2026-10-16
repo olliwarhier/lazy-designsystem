@@ -1,0 +1,101 @@
+---
+title: Alle Tokens
+description: Alle Tokens des Lazy Design Systems mit Werten je Modus.
+sidebar:
+  order: 1
+tableOfContents:
+  maxHeadingLevel: 3
+---
+
+import { Aside } from '@astrojs/starlight/components';
+import TokenTable from '../../../components/TokenTable.astro';
+
+Alle Werte kommen direkt aus `@lazy-designsystem/tokens` und sind deshalb immer aktuell.
+
+<Aside>
+  Hier entsteht ein Token-Explorer mit Suche, Filtern und Einsatzzweck je Token.
+</Aside>
+
+## Farbe
+
+### Marke und Aktion
+
+<TokenTable prefix="--color-brand-" />
+<TokenTable prefix="--color-action-" />
+<TokenTable prefix="--color-signal-" />
+
+### Flächen und Text
+
+<TokenTable prefix="--color-surface-" />
+<TokenTable prefix="--color-on-" />
+<TokenTable prefix="--color-outline-" />
+
+### Feedback
+
+<TokenTable prefix="--color-error-" />
+<TokenTable prefix="--color-warning-" />
+<TokenTable prefix="--color-information-" />
+<TokenTable prefix="--color-success-" />
+
+### Zustände und Effekte
+
+<TokenTable prefix="--color-hovered-" />
+<TokenTable prefix="--color-pressed-" />
+<TokenTable prefix="--color-focused-" />
+<TokenTable prefix="--color-disabled-" />
+<TokenTable prefix="--color-shadow-" />
+<TokenTable prefix="--color-scrim-" />
+
+## Typografie
+
+### Display
+
+<TokenTable prefix="--typescale-display-" />
+
+### Heading
+
+<TokenTable prefix="--typescale-heading-" />
+
+### Body
+
+<TokenTable prefix="--typescale-body-" />
+
+## Abstände
+
+### Dynamic
+
+<TokenTable prefix="--spacing-dynamic-" />
+
+### Static
+
+<TokenTable prefix="--spacing-static-" />
+
+### Presets
+
+<TokenTable prefix="--spacing-presets-" />
+
+## Größen
+
+<TokenTable prefix="--sizing-" />
+
+## Primitives
+
+Nur zum Nachschlagen – nie direkt verwenden.
+
+### Paletten
+
+<TokenTable prefix="--palette-clay-" swatches />
+<TokenTable prefix="--palette-bordeaux-" swatches />
+<TokenTable prefix="--palette-lime-" swatches />
+<TokenTable prefix="--palette-red-" swatches />
+<TokenTable prefix="--palette-yellow-" swatches />
+<TokenTable prefix="--palette-blue-" swatches />
+
+### Base-Scale und Strichstärken
+
+<TokenTable prefix="--base-scale-" />
+<TokenTable prefix="--base-border-" />
+
+### Schrift
+
+<TokenTable prefix="--font-" />

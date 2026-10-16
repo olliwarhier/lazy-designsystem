@@ -2,6 +2,7 @@
   "name": "@lazy-designsystem/core",
   "version": "0.1.0",
   "description": "Gemeinsame Logik des Lazy Design Systems: Farbräume, Kontrast, fließende Werte",
+  "license": "MIT",
   "type": "module",
   "files": [
     "src"

@@ -1,0 +1,59 @@
+---
+title: 'Loslegen: Design'
+description: Lazy für ein neues Projekt in Figma aufsetzen und damit gestalten.
+sidebar:
+  order: 4
+---
+
+import { Steps, Aside, LinkCard, CardGrid } from '@astrojs/starlight/components';
+import MediaPlaceholder from '../../../components/MediaPlaceholder.astro';
+
+Für jedes Projekt entsteht aus dem **DS Template** eine eigene Figma-Datei. Darin werden die Variablen auf das Projekt angepasst – die Komponenten übernehmen die neuen Werte automatisch.
+
+<Steps>
+
+1. **Template übernehmen**
+   Das DS Template duplizieren und nach dem Projekt benennen. Es enthält alle Variablen-Collections, Textstile und Komponenten.
+
+2. **Paletten erzeugen**
+   Mit dem Plugin *Lazy Tints OKLCH* die Farbtöne des Projekts anlegen: mindestens eine neutrale Palette, die Markenfarben und Feedback-Farben. → [Paletten](../../setup/palettes/)
+
+3. **Farbrollen zuweisen**
+   Mit dem *Lazy Theme Builder* den Rollen Paletten und Stufen zuordnen. Die Kontraste werden dabei live geprüft. → [Farbrollen](../../setup/color-roles/)
+
+4. **Typescale und Abstände festlegen**
+   Mit *Lazy Typescale & Spacing* Root-Größe und Skalenfaktor für Desktop und Mobile wählen. → [Typescale & Spacing](../../setup/typescale-spacing/)
+
+5. **Form wählen**
+   In der Collection *Shapes* den Modus wählen – von Square bis Pill. → [Form](../../foundations/shape/)
+
+6. **Gestalten**
+   Screens mit den Komponenten bauen. Für Flächen, Schrift und Abstände immer Variablen verwenden, nie feste Werte.
+
+7. **Übergeben**
+   Die Variablen in den Code übernehmen lassen. → [Übergabe an Code](../../setup/handover/)
+
+</Steps>
+
+<MediaPlaceholder>Screenshot: die Variable Collections im DS Template (Primitives, Theme, System, Responsive, Components, Shapes) und das Umschalten der Modi auf einem Frame.</MediaPlaceholder>
+
+## Arbeiten mit Modi
+
+Jede Collection mit mehreren Modi lässt sich auf einem Frame umschalten – genau so wird im Code umgeschaltet:
+
+| Collection | Modi | wofür |
+| --- | --- | --- |
+| System | Light-Mode, Dark-Mode | Farbschema |
+| Theme | z. B. Main-Theme, Wireframe | Markenvarianten |
+| Responsive | Desktop, Mobile | Bildschirmgrößen |
+| Components | Small, Medium, Large | Größe von Komponenten |
+| Shapes | Square … Pill | Rundungen |
+
+<Aside>
+  Primitives (Paletten, Base-Scale) nie direkt in Screens verwenden – immer die Rollen aus System, Responsive und Components. Nur so lässt sich das Projekt später umstellen.
+</Aside>
+
+<CardGrid>
+  <LinkCard title="Grundlagen" description="Was Farbe, Typografie und Abstände leisten" href="../../foundations/color/" />
+  <LinkCard title="Projekt aufsetzen" description="Der ganze Ablauf mit allen Werkzeugen" href="../../setup/overview/" />
+</CardGrid>

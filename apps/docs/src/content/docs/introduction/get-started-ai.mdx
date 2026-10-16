@@ -1,0 +1,37 @@
+---
+title: 'Loslegen: mit KI'
+description: Was ein KI-Assistent über Lazy wissen muss – Quellen, Regeln und Arbeitsweise.
+sidebar:
+  order: 6
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+Lazy ist so aufgebaut, dass KI-Assistenten beim Gestalten und Entwickeln zuverlässig helfen können: Namen folgen festen Regeln, alle Werte liegen maschinenlesbar vor, und Figma ist über den MCP-Server direkt erreichbar.
+
+## Quellen für Assistenten
+
+| Quelle | Inhalt | Status |
+| --- | --- | --- |
+| `@lazy-designsystem/tokens/tokens.json` | alle Tokens mit Figma-Name, CSS-Name, Werten je Modus und Hex-Werten | verfügbar |
+| `@lazy-designsystem/tokens/tokens.css` | die CSS-Variablen selbst | verfügbar |
+| Figma-MCP-Server | Variablen, Komponenten und Screens direkt aus der Figma-Datei | verfügbar |
+| `packages/tokens/scripts/figma-export.js` | Export der Variablen über den MCP-Server | verfügbar |
+| `llms.txt` / `llms-full.txt` | diese Doku als reiner Text | geplant |
+| Kurzfassung je Komponente | Props, Varianten, Regeln, Tokens als Text | geplant |
+
+## Regeln für Assistenten
+
+Diese Regeln gelten für jeden Code und jedes Design, das mit Lazy entsteht:
+
+1. **Nur Rollen verwenden.** Farben ausschließlich über `--color-<rolle>-<polarität>-<emphasis>`, nie über `--palette-*` oder feste Werte.
+2. **Fläche und On-Farbe gehören zusammen.** Auf `--color-brand-default-base` steht Text in `--color-on-brand-default-base`.
+3. **Abstände und Größen aus den Tokens.** `--spacing-dynamic-*` für Layout, `--spacing-static-*` in kleinen Komponenten, `--sizing-*` für Icons und Breiten.
+4. **Schrift über die Typescale.** Größe, Schnitt, Zeilenhöhe immer aus `--typescale-<gruppe>-<größe>-*`.
+5. **Rundungen über den Shape-Regler.** `--shape-radius-container` für Flächen, für Controls `calc(var(--shape) * Höhe / 2)`.
+6. **Namen ableiten, nicht erfinden.** Ein Figma-Pfad wird nach festen Regeln zum CSS-Namen (siehe [Benennung](../../reference/naming/)). Gibt es einen Token nicht, wird er in Figma ergänzt – nicht im Code erfunden.
+7. **Barrierefreiheit einhalten.** Kontraste der On-Farben nicht unterschreiten, Fokus sichtbar lassen, Klickflächen nicht verkleinern.
+
+<Aside>
+  Kopiere diese Regeln in die Projektanweisungen deines Assistenten (z. B. `CLAUDE.md` oder vergleichbare Dateien). Sobald `llms.txt` verfügbar ist, genügt ein Verweis darauf.
+</Aside>

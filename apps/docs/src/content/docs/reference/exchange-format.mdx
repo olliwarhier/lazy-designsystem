@@ -1,0 +1,84 @@
+---
+title: Austauschformat & Build
+description: Das JSON-Format zwischen Figma, Website und Code – und wie Tokens aus Figma ins Repo kommen.
+sidebar:
+  order: 6
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+Figma, die Doku-Website und der Code tauschen Tokens über **JSON im Format der W3C Design Tokens Community Group (DTCG)** aus. Das Format ist werkzeugneutral und wird von vielen Tools verstanden.
+
+## Aufbau
+
+Eine Datei je Figma-Collection in `packages/tokens/src/`. Der Pfad im JSON entspricht dem Figma-Pfad (kleingeschrieben, Leerzeichen als `-`). Jeder Token hat `$type` und `$value` für den Standard-Modus; weitere Modi und der Original-Name aus Figma stehen unter `$extensions.lazy`.
+
+```json
+{
+  "$extensions": { "lazy": { "collection": "System", "modes": ["Light-Mode", "Dark-Mode"] } },
+  "color": {
+    "basic": {
+      "on-surface": {
+        "default": {
+          "subtle": {
+            "$type": "color",
+            "$value": "{palette.clay.38}",
+            "$extensions": {
+              "lazy": {
+                "figma": "Color/Basic/On-Surface/Default/Subtle",
+                "modes": { "Dark-Mode": "{palette.clay.91}" }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+| Wert in Figma | Im JSON |
+| --- | --- |
+| Verweis auf eine Variable | `"{palette.clay.70}"` |
+| Verweis mit eigener Deckkraft | `{ "ref": "{palette.clay.70}", "alpha": 0.64 }` |
+| Farbe | `"#9da099"` (sRGB, wie in Figma) |
+| Zahl, Text, Boolean | unverändert, z. B. `16`, `"130%"`, `true` |
+
+Die Übersetzung in CSS-Namen und -Werte passiert erst im Build (siehe [Benennung](../naming/)).
+
+## Tokens aus Figma holen
+
+Der Export ist ein Skript für die Figma Plugin API: `packages/tokens/scripts/figma-export.js`. Es läuft über den Figma-MCP-Server – also für alle mit Figma-Zugang und einem KI-Assistenten, ohne eigenes Plugin – oder in einem Plugin.
+
+<Steps>
+
+1. **Exportieren.** Das Skript in der Figma-Datei ausführen, z. B. per MCP mit `return await exportVariables()`. Große Collections lassen sich in Teilen holen: `exportVariables({ collection: 'Primitives', from: 0, to: 60 })`. Jedes Ergebnis als JSON-Datei speichern.
+
+2. **Ins Repo schreiben.** Die Teile werden zusammengeführt und je Collection gespeichert:
+
+   ```bash
+   node packages/tokens/scripts/write-export.mjs teil-1.json teil-2.json …
+   ```
+
+3. **Prüfen.** `exportVariables({ fingerprint: true })` liefert eine Prüfsumme je Collection. Damit lässt sich jederzeit kontrollieren, ob Repo und Figma übereinstimmen:
+
+   ```bash
+   node packages/tokens/scripts/write-export.mjs --check fingerprints.json
+   ```
+
+4. **Bauen.** `pnpm tokens` erzeugt `tokens.css` und `tokens.json`. Diff prüfen, Changeset anlegen, Pull Request öffnen.
+
+</Steps>
+
+## Weitere Wege
+
+| Weg | Richtung | Status |
+| --- | --- | --- |
+| Figma MCP | Figma → JSON | verfügbar |
+| Lazy-Plugins | Figma → JSON | geplant – die Plugins können dasselbe Export-Skript nutzen |
+| Website-Generator | Website → JSON → Figma | geplant |
+| Import-Plugin | JSON → Figma | geplant |
+
+<Aside>
+  Die Logik zum Umrechnen von Farben, zum Prüfen von Kontrasten und zum Berechnen der `clamp()`-Werte liegt einmal im Paket `@lazy-designsystem/core`. Build, Website und künftig auch die Plugins nutzen dieselbe Implementierung – so liefern alle Wege dasselbe Ergebnis.
+</Aside>
