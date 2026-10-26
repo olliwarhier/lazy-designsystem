@@ -34,6 +34,7 @@ export default defineConfig({
         section('Grundlagen', 'Foundations', 'foundations'),
         section('Komponenten', 'Components', 'components'),
         section('Projekt aufsetzen', 'Set up a project', 'setup'),
+        section('Werkzeuge (Prototyp)', 'Tools (prototype)', 'tools'),
         section('Referenz', 'Reference', 'reference'),
       ],
     }),

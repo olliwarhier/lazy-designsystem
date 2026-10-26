@@ -12,6 +12,7 @@
     "@astrojs/starlight": "^0.35.0",
     "@astrojs/svelte": "^7.1.0",
     "@lazy-designsystem/core": "workspace:*",
+    "@lazy-designsystem/engine": "workspace:*",
     "@lazy-designsystem/svelte": "workspace:*",
     "@lazy-designsystem/tokens": "workspace:*",
     "astro": "^5.13.0",

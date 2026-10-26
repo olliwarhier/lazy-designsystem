@@ -9,10 +9,12 @@ Design Tokens, Komponenten und Dokumentation des Lazy Design Systems. Quelle der
 ```
 packages/
   core/      @lazy-designsystem/core – gemeinsame Logik (Farbräume, Kontrast, clamp)
+  engine/    @lazy-designsystem/engine – Tint-Generator und Theme-Builder (TypeScript, Prototyp)
   tokens/    @lazy-designsystem/tokens – Figma-Variablen (JSON) → tokens.css, tokens.json
   svelte/    @lazy-designsystem/svelte – Svelte-5-Komponenten
 apps/
   docs/      Astro + Starlight – die Doku-Website
+             src/tools/ – Svelte-Inseln der Werkzeuge (Doku → Werkzeuge)
 docs-templates/
   komponente.mdx – Vorlage für neue Komponentenseiten
 ```

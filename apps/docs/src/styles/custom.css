@@ -87,3 +87,8 @@
 .lazy-type-specimen__row code {
   font-size: 0.75rem;
 }
+
+/* Werkzeuge (Prototyp): mehr Breite für Tint-Generator und Theme-Builder */
+:root:has(.tool) {
+  --sl-content-width: 80rem;
+}

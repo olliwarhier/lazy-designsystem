@@ -1,0 +1,24 @@
+---
+title: Tint-Generator
+description: Paletten nach Spezifikation 02 – geometrische Lightness-Verteilung, Chroma-Kurve über Lightness, Gamut-Mapping auf sRGB.
+tableOfContents: false
+sidebar:
+  order: 1
+  badge:
+    text: Prototyp
+    variant: caution
+---
+
+import TintGenerator from '../../../tools/TintGenerator.svelte';
+
+Stepzahl, Kontrastsystem, Verteilung und Außenpunkte gelten für alle Paletten. Das gestrichelte Feld markiert das **Zentrum**: Dort haben Schwarz und Weiß den gleichen Kontrast, es wird nur für Outlines genutzt. ◆ zeigt an, dass das sRGB-Gamut das Chroma gekappt hat. Die Paletten stehen danach im [Theme-Builder](../theme-builder/) zur Verfügung.
+
+<TintGenerator client:only="svelte" />
+
+## So wird gerechnet
+
+- **Zentrum:** APCA L 70, WCAG L 57.
+- **Zentrumsabstand g:** bevorzugt 10, bei zu wenig Spanne bis 8.
+- **Verteilung:** Abstände g, a, a·r, a·r², … Regler 1 nutzt den kleinsten Faktor, bei dem der letzte Abstand noch 2 ist; die dunkle Seite bekommt den halben Schub.
+- **Chroma:** C = Min + (Max − Min) × (1 − d²), d über die Lightness gemessen. Das Minimum wirkt hell voll, dunkel halb. Danach Gamut-Mapping nach CSS Color 4 (Lightness und Hue fest).
+- **Zum Testen:** „r mindestens 0,5" (offener Punkt bei wenigen Steps) und „Chroma relativ zum Gamut" (falls helle Tints zu blass wirken).

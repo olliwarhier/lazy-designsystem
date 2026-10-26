@@ -1,0 +1,16 @@
+---
+title: Theme-Builder
+description: Rollen den Tints zuweisen, Kontraste nach APCA und WCAG prüfen und Dark Mode sowie High Contrast ableiten.
+tableOfContents: false
+sidebar:
+  order: 2
+  badge:
+    text: Prototyp
+    variant: caution
+---
+
+import ThemeBuilder from '../../../tools/ThemeBuilder.svelte';
+
+Der Theme-Builder nutzt die Paletten aus dem [Tint-Generator](../tint-generator/). Jeder Rolle wird eine Palette zugewiesen, die Tints wählt er nach den Regeln aus Spezifikation 05 automatisch. Nur gültige Tints sind wählbar; Light ist die Basis, Dark wird nach Kontrast gespiegelt, High Contrast macht den Vordergrund härter.
+
+<ThemeBuilder client:only="svelte" />

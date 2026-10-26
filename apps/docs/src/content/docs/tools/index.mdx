@@ -1,0 +1,38 @@
+---
+title: Werkzeuge
+description: Prototypen von Tint-Generator und Theme-Builder mit Kontrastprüfung nach APCA und WCAG.
+sidebar:
+  order: 0
+  label: Übersicht
+  badge:
+    text: Prototyp
+    variant: caution
+---
+
+import { Aside, LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+Hier entstehen die Werkzeuge, mit denen ein Projekt seine Farben aufsetzt. Sie laufen direkt im Browser und rechnen mit dem Paket `@lazy-designsystem/engine` – derselben Logik, die später auch das Figma-Plugin und der MCP-Server nutzen.
+
+<CardGrid>
+  <LinkCard title="Tint-Generator" href="tint-generator/" description="Paletten aus Hue und Chroma nach der neuen Lightness-Formel, mit Gamut-Anzeige." />
+  <LinkCard title="Theme-Builder" href="theme-builder/" description="Rollen den Tints zuweisen, Kontraste prüfen, Dark Mode und High Contrast ableiten." />
+</CardGrid>
+
+<Aside type="caution" title="Prototyp">
+  Die Werkzeuge setzen die Konzeptstände der Spezifikationen 02 (Tint-Generator), 04 (Farbrollen), 05 (Tint-Zuweisung) und 11 (Theming) um. Sie sind zum Ausprobieren gedacht und ersetzen noch nicht die Plugins. Einstellungen werden nur in diesem Browser gespeichert.
+</Aside>
+
+## Aufbau im Code
+
+```
+packages/engine/      @lazy-designsystem/engine (TypeScript)
+  src/scale.ts        Lightness-Skala: Zentrum, Zentrumsabstand, Faktor r
+  src/palette.ts      Chroma-Kurve, Gamut-Mapping, Tints
+  src/contrast.ts     Kontrast-Presets (APCA / WCAG AAA)
+  src/roles.ts        Rollen, Pfade, Modes
+  src/theme.ts        Tint-Zuweisung, Kontrast-Leiter, Dark-Spiegel, High Contrast
+  src/export.ts       CSS mit data-scheme und data-contrast
+apps/docs/src/tools/  Svelte-Inseln der Werkzeuge
+```
+
+Farbräume und Kontrastformeln kommen weiter aus `@lazy-designsystem/core`.

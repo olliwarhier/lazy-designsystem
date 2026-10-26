@@ -1,0 +1,27 @@
+{
+  "name": "@lazy-designsystem/engine",
+  "version": "0.1.0",
+  "description": "Farb- und Kontrastlogik des Lazy Design Systems: Tint-Generator, Farbrollen, Theme-Builder. Gemeinsame Basis für Doku-Werkzeuge, Figma-Plugin und MCP.",
+  "license": "MIT",
+  "type": "module",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "tsc -p tsconfig.json && node --test"
+  },
+  "dependencies": {
+    "@lazy-designsystem/core": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.0"
+  }
+}

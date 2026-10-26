@@ -1,0 +1,133 @@
+/* Gemeinsame Oberfläche der Werkzeuge (Prototyp). Nutzt die Farben der Doku (Starlight). */
+.tool {
+  display: grid;
+  gap: 1rem;
+  margin-block: 1.5rem;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+}
+.tool .panel {
+  padding: 1rem 1.125rem;
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 0.5rem;
+  background: var(--sl-color-bg);
+  min-width: 0;
+}
+.tool .panel > header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem 1rem;
+  margin-bottom: 0.75rem;
+}
+.tool h3 {
+  margin: 0;
+  font-size: 1rem;
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  color: var(--sl-color-white);
+}
+.tool h3 small,
+.tool label small,
+.tool .hint {
+  font-weight: 400;
+  font-size: 0.75rem;
+  color: var(--sl-color-gray-3);
+}
+.tool .actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+  align-items: center;
+}
+.tool .grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+  gap: 0.75rem 1.25rem;
+  align-items: start;
+}
+.tool label {
+  display: grid;
+  gap: 0.25rem;
+  color: var(--sl-color-gray-2);
+}
+.tool label > span {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+.tool label.check {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  align-self: center;
+}
+.tool label.check > span {
+  display: block;
+}
+.tool output {
+  font-variant-numeric: tabular-nums;
+  color: var(--sl-color-white);
+}
+.tool input[type='range'] {
+  width: 100%;
+  accent-color: var(--sl-color-accent);
+}
+.tool select,
+.tool input[type='text'],
+.tool textarea {
+  font: inherit;
+  padding: 0.25rem 0.375rem;
+  background: var(--sl-color-bg);
+  color: var(--sl-color-text);
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 0.25rem;
+  min-width: 0;
+}
+.tool button {
+  font: inherit;
+  cursor: pointer;
+  padding: 0.3rem 0.65rem;
+  border-radius: 0.375rem;
+  border: 1px solid var(--sl-color-accent);
+  background: var(--sl-color-accent);
+  color: var(--sl-color-black);
+}
+.tool button.ghost {
+  background: transparent;
+  color: var(--sl-color-text);
+  border-color: var(--sl-color-gray-5);
+}
+.tool button.danger {
+  color: var(--sl-color-red-high, #f87171);
+}
+.tool button:focus-visible,
+.tool select:focus-visible,
+.tool input:focus-visible {
+  outline: 2px solid var(--sl-color-text-accent);
+  outline-offset: 2px;
+}
+.tool .badge {
+  display: inline-block;
+  padding: 0.05rem 0.4rem;
+  border-radius: 999px;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  white-space: nowrap;
+  border: 1px solid currentColor;
+}
+.tool .badge.ok {
+  color: var(--sl-color-green-high, #4ade80);
+}
+.tool .badge.override {
+  color: var(--sl-color-blue-high, #60a5fa);
+}
+.tool .badge.adjusted,
+.tool .badge.warning {
+  color: var(--sl-color-orange-high, #fb923c);
+}
+.tool .badge.error {
+  color: var(--sl-color-red-high, #f87171);
+}
