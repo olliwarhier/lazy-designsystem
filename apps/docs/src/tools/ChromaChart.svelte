@@ -17,9 +17,10 @@
       .map((l) => `${x(l)},${y(maxChroma(l, hue))}`)
       .join(' '),
   );
-  const sorted = $derived([...tints].sort((a, b) => a.l - b.l));
-  const requested = $derived(sorted.map((t) => `${x(t.l)},${y(t.c)}`).join(' '));
-  const mapped = $derived(sorted.map((t) => `${x(t.l)},${y(t.cMapped)}`).join(' '));
+  // x = echtes L (im Modus Kontrast weicht es von der Stufe ab)
+  const sorted = $derived([...tints].sort((a, b) => a.lReal - b.lReal));
+  const requested = $derived(sorted.map((t) => `${x(t.lReal)},${y(t.c)}`).join(' '));
+  const mapped = $derived(sorted.map((t) => `${x(t.lReal)},${y(t.cMapped)}`).join(' '));
   const ticks = $derived([0, yMax / 2, yMax]);
 </script>
 
@@ -37,7 +38,7 @@
     <polyline points={requested} class="requested" />
     <polyline points={mapped} class="mapped" />
     {#each sorted as t}
-      <circle cx={x(t.l)} cy={y(t.cMapped)} r="3.5" fill={t.hex} class:clipped={t.clipped} />
+      <circle cx={x(t.lReal)} cy={y(t.cMapped)} r="3.5" fill={t.hex} class:clipped={t.clipped} />
     {/each}
   </svg>
   <figcaption>

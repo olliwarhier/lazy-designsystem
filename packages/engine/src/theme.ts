@@ -10,7 +10,7 @@ import {
   presetValue,
   type PresetKey,
 } from './contrast.js';
-import { generatePalette, type PaletteSettings, type Rgb, type Tint } from './palette.js';
+import { DEFAULT_CATEGORIES, generatePalette, resolvePalette, type PaletteCategory, type PaletteSettings, type Rgb, type Tint } from './palette.js';
 import {
   MODES,
   buildSlots,
@@ -22,7 +22,7 @@ import {
   type Scheme,
   type SlotDef,
 } from './roles.js';
-import { lightnessScale, normalizeScale, type ContrastSystem, type Scale, type ScaleSettings } from './scale.js';
+import { buildScale, normalizeScale, type ContrastSystem, type Scale, type ScaleSettings } from './scale.js';
 
 export interface OpacitySet {
   outlineSubtle: number;
@@ -48,6 +48,12 @@ export interface ThemeOptions extends RoleOptions {
 export interface ThemeConfig {
   scale: ScaleSettings;
   palettes: PaletteSettings[];
+  /** Kategorien der Matrix (Neutral, Color, eigene) mit gemeinsamem Chroma */
+  categories: PaletteCategory[];
+  /** Gemeinsames Chroma: Paletten ohne „Eigenes Chroma" nutzen die Werte ihrer Kategorie */
+  sharedChroma: boolean;
+  /** Chroma relativ zum Gamut (Spec 02, 8: Test-Option) für alle Paletten */
+  chromaRelative?: boolean;
   /** Palette (ID) je Rollengruppe; Signal und Information optional */
   groups: Partial<Record<GroupKey, string | null>>;
   /** Fokusring außen: Palette (ID) oder null = Schwarz */
@@ -629,11 +635,21 @@ function resolveMode(input: ResolveInput, mode: Mode, results: Partial<Record<Mo
 
 /** Normalisiert eine (z. B. aus localStorage geladene) Konfiguration */
 export function withDefaults(config: Partial<ThemeConfig> & Pick<ThemeConfig, 'scale' | 'palettes'>): ThemeConfig {
+  const categories = config.categories?.length ? config.categories : DEFAULT_CATEGORIES.map((c) => ({ ...c }));
+  // ältere Konfigurationen: Kategorie aus dem Typ, Chroma-Verlauf aus „harmonize"
+  const palettes = config.palettes.map((p) => {
+    const cat = categories.find((c) => c.id === p.category) ?? categories.find((c) => c.type === p.type) ?? categories[0];
+    const { harmonize, ...rest } = p;
+    return { ...rest, category: cat.id, type: cat.type, curve: p.curve ?? (harmonize === false ? 'constant' : 'falling'), ownChroma: p.ownChroma ?? false } as PaletteSettings;
+  });
   return {
     groups: {},
     focus: null,
     overrides: {},
+    sharedChroma: true,
     ...config,
+    categories,
+    palettes,
     scale: normalizeScale(config.scale),
     options: {
       ...DEFAULT_OPTIONS,
@@ -646,14 +662,20 @@ export function withDefaults(config: Partial<ThemeConfig> & Pick<ThemeConfig, 's
   };
 }
 
+/** Palette mit wirksamen Chroma-Werten (Kategorie, gemeinsames Chroma, relativ zum Gamut) */
+export function effectivePalette(p: PaletteSettings, config: Pick<ThemeConfig, 'categories' | 'sharedChroma' | 'chromaRelative'>): PaletteSettings {
+  return { ...resolvePalette(p, config.categories, config.sharedChroma), chromaMode: config.chromaRelative ? 'relative' : 'absolute' };
+}
+
 /** Berechnet alle vier Modes. Reihenfolge: Light → Dark (gespiegelt) → Light HC → Dark HC. */
 export function buildTheme(input: Partial<ThemeConfig> & Pick<ThemeConfig, 'scale' | 'palettes'>): ThemeResult {
   const config = withDefaults(input);
-  const scale = lightnessScale(config.scale);
+  const scale = buildScale(config.scale);
   const slots = buildSlots(config.options);
   const factor = config.options.darkChromaFactor;
   const tints: Record<Scheme, Record<string, Tint[]>> = { light: {}, dark: {} };
-  for (const p of config.palettes) {
+  for (const raw of config.palettes) {
+    const p = effectivePalette(raw, config);
     tints.light[p.id] = generatePalette(p, scale);
     tints.dark[p.id] = factor === 1 ? tints.light[p.id] : generatePalette(p, scale, { chromaFactor: factor, chromaFactorFrom: scale.center });
   }
