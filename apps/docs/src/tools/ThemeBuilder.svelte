@@ -60,6 +60,7 @@
     studio.overrides[mode] = {};
   }
 
+  const presetValue = (key: PresetKey) => (system === 'apca' ? `Lc ${PRESETS[key].apca}` : `${PRESETS[key].wcag}:1`.replace('.', ','));
   const presetText = (key: PresetKey | undefined, kind: 'min' | 'max') =>
     key ? `${kind === 'min' ? 'min' : 'max'} ${PRESETS[key].label} (${system === 'apca' ? `Lc ${PRESETS[key].apca}` : `${PRESETS[key].wcag}:1`})` : '';
 
@@ -110,22 +111,11 @@
         <a href="../tint-generator/">Paletten bearbeiten →</a>
       </div>
     </header>
+    <p class="readonly">
+      Aus dem Tint-Generator: <strong>{system === 'apca' ? 'APCA' : 'WCAG 2 (AAA-Presets)'}</strong> · Skala {theme.scale.values[0]}–{theme.scale.values.at(-1)}, dunkelster Hintergrund <strong>L {theme.scale.values.at(-1)}</strong> ·
+      <a href="../tint-generator/">im Tint-Generator ändern</a>
+    </p>
     <div class="grid">
-      <label>
-        <span>Kontrastsystem</span>
-        <select bind:value={studio.scale.system}>
-          <option value="apca">APCA</option>
-          <option value="wcag">WCAG 2 (AAA-Presets)</option>
-        </select>
-      </label>
-      <label class="check">
-        <input type="checkbox" bind:checked={studio.options.checkBoth} />
-        <span>anderes System zusätzlich prüfen</span>
-      </label>
-      <label class="check">
-        <input type="checkbox" bind:checked={studio.options.warningDecoupled} />
-        <span>Warning entkoppelt <small>(sonst synchron mit Error)</small></span>
-      </label>
       <label>
         <span>Fokusring außen</span>
         <select bind:value={studio.focus}>
@@ -156,20 +146,16 @@
     {/if}
   </section>
 
-  <section class="panel">
-    <header>
-      <h3>Offene Punkte zum Ausprobieren <small>Spec 11, 2.3 und Funde aus dem Prototyp</small></h3>
-    </header>
+  <details class="panel advanced">
+    <summary><h3>Erweiterte Einstellungen</h3></summary>
     <div class="grid">
-      <label>
-        <span>Dark-Faktor Chroma <output>{studio.options.darkChromaFactor.toFixed(2)}</output></span>
-        <input type="range" min="0.4" max="1" step="0.05" bind:value={studio.options.darkChromaFactor} />
-        <small>reduziert Chroma heller Tints im Dark Mode, 1 = aus</small>
+      <label class="check">
+        <input type="checkbox" bind:checked={studio.options.checkBoth} />
+        <span>anderes System zusätzlich prüfen</span>
       </label>
-      <label>
-        <span>Dunkelster Hintergrund <output>L {studio.scale.lower}</output></span>
-        <input type="range" min="0" max="20" step="1" bind:value={studio.scale.lower} />
-        <small>unterer Außenpunkt (Material ≈ 6, Tailwind ≈ 15)</small>
+      <label class="check">
+        <input type="checkbox" bind:checked={studio.options.warningDecoupled} />
+        <span>Warning entkoppelt <small>(sonst synchron mit Error)</small></span>
       </label>
       <label>
         <span>Hover-Grenze gefüllter Elemente</span>
@@ -182,10 +168,10 @@
       <label>
         <span>On-Rollen auf Base-Flächen</span>
         <select bind:value={studio.options.onBasePreset}>
-          <option value="body">Body (Spec 05)</option>
-          <option value="large">Large</option>
+          <option value="body">Body ({presetValue('body')}, Spec 05)</option>
+          <option value="large">Large ({presetValue('large')})</option>
         </select>
-        <small>Bei APCA findet sich mit Body kaum eine Base-Fläche</small>
+        <small>Base-Flächen liegen zwischen Subtle Division ({presetValue('subtle')}) und Caption ({presetValue('caption')})</small>
       </label>
     </div>
     <table class="opacity">
@@ -204,7 +190,7 @@
         {/each}
       </tbody>
     </table>
-  </section>
+  </details>
 
   <section class="panel">
     <header>
@@ -342,6 +328,20 @@
 </div>
 
 <style>
+  .readonly {
+    margin: 0 0 0.75rem;
+    color: var(--sl-color-gray-2);
+  }
+  .advanced > summary {
+    cursor: pointer;
+    list-style: revert;
+  }
+  .advanced > summary h3 {
+    display: inline-flex;
+  }
+  .advanced[open] > summary {
+    margin-bottom: 0.75rem;
+  }
   h4 {
     margin: 1rem 0 0.5rem;
     font-size: 0.875rem;

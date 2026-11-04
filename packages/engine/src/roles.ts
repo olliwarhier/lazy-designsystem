@@ -125,7 +125,8 @@ export function buildSlots(o: RoleOptions): SlotDef[] {
     const order = [...emphases].reverse(); // stärkste zuerst
     order.forEach((e, i) => {
       const range: Partial<SlotDef> =
-        e === 'bold' ? { min: 'body' } : e === 'base' ? { min: 'prominent', max: 'body' } : { max: 'prominent' };
+        // Base: Spanne Subtle Division bis Caption (Olli, 04.11.)
+        e === 'bold' ? { min: 'body' } : e === 'base' ? { min: 'subtle', max: 'caption' } : { max: 'prominent' };
       s.push(
         slot('surface', category, group, role, false, 'default', e, {
           ...range,

@@ -38,8 +38,6 @@ export interface ThemeOptions extends RoleOptions {
   hoverThreshold: number;
   hoverDelta: number;
   pressedDelta: number;
-  /** Chroma-Faktor für helle Tints (über dem Zentrum) im Dark Mode. 1 = aus. */
-  darkChromaFactor: number;
   opacity: Record<Scheme, OpacitySet>;
   /** zusätzlich zum gewählten System auch das andere anzeigen und warnen */
   checkBoth: boolean;
@@ -52,8 +50,6 @@ export interface ThemeConfig {
   categories: PaletteCategory[];
   /** Gemeinsames Chroma: Paletten ohne „Eigenes Chroma" nutzen die Werte ihrer Kategorie */
   sharedChroma: boolean;
-  /** Chroma relativ zum Gamut (Spec 02, 8: Test-Option) für alle Paletten */
-  chromaRelative?: boolean;
   /** Palette (ID) je Rollengruppe; Signal und Information optional */
   groups: Partial<Record<GroupKey, string | null>>;
   /** Fokusring außen: Palette (ID) oder null = Schwarz */
@@ -66,12 +62,11 @@ export interface ThemeConfig {
 export const DEFAULT_OPTIONS: ThemeOptions = {
   signal: false,
   information: true,
-  warningDecoupled: true,
+  warningDecoupled: false,
   onBasePreset: 'body',
   hoverThreshold: 30,
   hoverDelta: 8,
   pressedDelta: 16,
-  darkChromaFactor: 1,
   opacity: {
     light: { outlineSubtle: 0.32, outlineSubtler: 0.16, hovered: 0.08, pressed: 0.12, scrim: 0.32, shadow: 0.16 },
     dark: { outlineSubtle: 0.4, outlineSubtler: 0.24, hovered: 0.1, pressed: 0.16, scrim: 0.48, shadow: 0.4 },
@@ -639,21 +634,22 @@ export function withDefaults(config: Partial<ThemeConfig> & Pick<ThemeConfig, 's
   // ältere Konfigurationen: Kategorie aus dem Typ, Chroma-Verlauf aus „harmonize"
   const palettes = config.palettes.map((p) => {
     const cat = categories.find((c) => c.id === p.category) ?? categories.find((c) => c.type === p.type) ?? categories[0];
-    const { harmonize, ...rest } = p;
+    const { harmonize, chromaMode, ...rest } = p as PaletteSettings & { chromaMode?: string };
     return { ...rest, category: cat.id, type: cat.type, curve: p.curve ?? (harmonize === false ? 'constant' : 'falling'), ownChroma: p.ownChroma ?? false } as PaletteSettings;
   });
+  const { chromaRelative, ...base } = config as typeof config & { chromaRelative?: boolean };
   return {
     groups: {},
     focus: null,
     overrides: {},
     sharedChroma: true,
-    ...config,
+    ...base,
     categories,
     palettes,
     scale: normalizeScale(config.scale),
     options: {
       ...DEFAULT_OPTIONS,
-      ...config.options,
+      ...withoutDarkFactor(config.options),
       opacity: {
         light: { ...DEFAULT_OPTIONS.opacity.light, ...config.options?.opacity?.light },
         dark: { ...DEFAULT_OPTIONS.opacity.dark, ...config.options?.opacity?.dark },
@@ -662,9 +658,15 @@ export function withDefaults(config: Partial<ThemeConfig> & Pick<ThemeConfig, 's
   };
 }
 
-/** Palette mit wirksamen Chroma-Werten (Kategorie, gemeinsames Chroma, relativ zum Gamut) */
-export function effectivePalette(p: PaletteSettings, config: Pick<ThemeConfig, 'categories' | 'sharedChroma' | 'chromaRelative'>): PaletteSettings {
-  return { ...resolvePalette(p, config.categories, config.sharedChroma), chromaMode: config.chromaRelative ? 'relative' : 'absolute' };
+/** entfernt den früheren Dark-Faktor Chroma aus gespeicherten Konfigurationen */
+function withoutDarkFactor(o: Partial<ThemeOptions> | undefined): Partial<ThemeOptions> {
+  const { darkChromaFactor, ...rest } = (o ?? {}) as Partial<ThemeOptions> & { darkChromaFactor?: number };
+  return rest;
+}
+
+/** Palette mit wirksamen Chroma-Werten (Kategorie, gemeinsames Chroma) */
+export function effectivePalette(p: PaletteSettings, config: Pick<ThemeConfig, 'categories' | 'sharedChroma'>): PaletteSettings {
+  return resolvePalette(p, config.categories, config.sharedChroma);
 }
 
 /** Berechnet alle vier Modes. Reihenfolge: Light → Dark (gespiegelt) → Light HC → Dark HC. */
@@ -672,12 +674,12 @@ export function buildTheme(input: Partial<ThemeConfig> & Pick<ThemeConfig, 'scal
   const config = withDefaults(input);
   const scale = buildScale(config.scale);
   const slots = buildSlots(config.options);
-  const factor = config.options.darkChromaFactor;
   const tints: Record<Scheme, Record<string, Tint[]>> = { light: {}, dark: {} };
   for (const raw of config.palettes) {
     const p = effectivePalette(raw, config);
     tints.light[p.id] = generatePalette(p, scale);
-    tints.dark[p.id] = factor === 1 ? tints.light[p.id] : generatePalette(p, scale, { chromaFactor: factor, chromaFactorFrom: scale.center });
+    // Dark nutzt dieselben Tints, die Palette wird nicht überschrieben
+    tints.dark[p.id] = tints.light[p.id];
   }
 
   const results: Partial<Record<Mode, ModeResult>> = {};

@@ -16,7 +16,6 @@ export const defaultConfig = (): ThemeConfig =>
     scale: structuredClone(DEFAULT_SCALE),
     categories: structuredClone(DEFAULT_CATEGORIES),
     sharedChroma: true,
-    chromaRelative: false,
     palettes: [
       palette('slate', 'slate', 250, 'neutral'),
       palette('blue', 'blue', 250, 'color'),
@@ -97,7 +96,6 @@ export function replaceStudio(next: ThemeConfig) {
   studio.scale = n.scale;
   studio.categories = n.categories;
   studio.sharedChroma = n.sharedChroma;
-  studio.chromaRelative = n.chromaRelative;
   studio.palettes = n.palettes;
   studio.groups = n.groups;
   studio.focus = n.focus;
