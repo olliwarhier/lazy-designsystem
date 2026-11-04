@@ -46,11 +46,6 @@ export interface PaletteSettings {
   curve?: ChromaCurve;
   /** @deprecated alter Name für curve: true = abfallend */
   harmonize?: boolean;
-  /**
-   * absolute: Kurve in absoluten Chroma-Werten, danach Gamut-Kappung (Spec).
-   * relative: Kurve als Anteil am möglichen Chroma der jeweiligen Lightness (Spec 02, 7: vorgemerkt, zum Testen).
-   */
-  chromaMode?: 'absolute' | 'relative';
 }
 
 export const CHROMA_CAP: Record<PaletteType, number> = { color: 0.25, neutral: 0.05 };
@@ -155,17 +150,9 @@ export function generatePalette(
   { chromaFactor = 1, chromaFactorFrom = -1 }: { chromaFactor?: number; chromaFactorFrom?: number } = {},
 ): Tint[] {
   const scale = 'values' in scaleOrSettings ? scaleOrSettings : buildScale(scaleOrSettings);
-  const max = Math.min(p.chromaMax, CHROMA_CAP[p.type]);
-  const centerGamut = maxChroma(scale.center, p.hue) || 1;
   return scale.values.map((l) => {
     // Weiß und Schwarz haben kein Chroma
     let c = l >= 100 || l <= 0 ? 0 : chromaAt(l, scale, p);
-    if (p.chromaMode === 'relative' && l > 0 && l < 100) {
-      // Anteil der Kurve am Maximum, angewendet auf das mögliche Chroma bei dieser Lightness.
-      // Der Faktor max/centerGamut hält das Zentrum gleich wie im absoluten Modus.
-      const share = max > 0 ? c / max : 0;
-      c = Math.min(max, share * maxChroma(l, p.hue) * Math.min(1, max / centerGamut));
-    }
     // Dark-Faktor (Spec 11, 2.3: zum Testen): Chroma heller Tints im Dark Mode reduzieren
     if (chromaFactorFrom >= 0 && l > chromaFactorFrom) c *= chromaFactor;
     const real = scale.basis === 'contrast' ? matchContrast(scale, l, c, p.hue) : l;
