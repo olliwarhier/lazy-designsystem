@@ -147,14 +147,11 @@ function makeTint(name: string, step: number, l: number, c: number, h: number, i
 export function generatePalette(
   p: PaletteSettings,
   scaleOrSettings: Scale | Partial<ScaleSettings>,
-  { chromaFactor = 1, chromaFactorFrom = -1 }: { chromaFactor?: number; chromaFactorFrom?: number } = {},
 ): Tint[] {
   const scale = 'values' in scaleOrSettings ? scaleOrSettings : buildScale(scaleOrSettings);
   return scale.values.map((l) => {
     // Weiß und Schwarz haben kein Chroma
-    let c = l >= 100 || l <= 0 ? 0 : chromaAt(l, scale, p);
-    // Dark-Faktor (Spec 11, 2.3: zum Testen): Chroma heller Tints im Dark Mode reduzieren
-    if (chromaFactorFrom >= 0 && l > chromaFactorFrom) c *= chromaFactor;
+    const c = l >= 100 || l <= 0 ? 0 : chromaAt(l, scale, p);
     const real = scale.basis === 'contrast' ? matchContrast(scale, l, c, p.hue) : l;
     return makeTint(p.name, l, real, c, p.hue, l === scale.center);
   });
