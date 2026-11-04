@@ -29,8 +29,9 @@
       const tints = generatePalette(eff, scale).map((t) => {
         const w = contrast(t.rgb, WHITE, system);
         const k = contrast(t.rgb, BLACK, system);
-        // Wert im Swatch (nur Lightness): helle Stufen gegen Schwarz, dunkle gegen Weiß
-        return { ...t, text: w > k ? '#fff' : '#000', value: t.l >= scale.center ? k : w };
+        // Wert im Swatch (nur Lightness): gegen den Messbezug, helle Stufen gegen den dunklen Hintergrund, dunkle gegen den hellen
+        const value = contrast(t.rgb, t.l >= scale.center ? scale.darkBg : scale.lightBg, system);
+        return { ...t, text: w > k ? '#fff' : '#000', value };
       });
       return { p, eff, tints };
     }),
@@ -196,38 +197,8 @@
     </div>
   </div>
 
-  <!-- 2. Globale Einstellungen -->
+  <!-- 2. Globale Einstellungen: sichtbar nur Stufen und Chroma, der Rest unter „Erweitert" -->
   <section class="panel global">
-    <div class="row">
-      <span class="lbl">Algorithmus</span>
-      <div class="seg" role="radiogroup" aria-label="Algorithmus">
-        <button type="button" role="radio" aria-checked={system === 'apca'} onclick={() => (studio.scale.system = 'apca')}>APCA</button>
-        <button type="button" role="radio" aria-checked={system === 'wcag'} onclick={() => (studio.scale.system = 'wcag')}>WCAG 2</button>
-      </div>
-      <small>{system === 'apca' ? 'Wahrnehmungsbasiert, genauer bei dunklen Farben und Schriftgrößen.' : 'Gesetzlicher Standard (EU: European Accessibility Act).'}</small>
-    </div>
-    <div class="row">
-      <span class="lbl">Stufen-Basis</span>
-      <div class="seg" role="radiogroup" aria-label="Stufen-Basis">
-        <button type="button" role="radio" aria-checked={isContrast} onclick={() => (studio.scale.basis = 'contrast')}>Kontrast</button>
-        <button type="button" role="radio" aria-checked={!isContrast} onclick={() => (studio.scale.basis = 'lightness')}>Lightness</button>
-      </div>
-      <small>{isContrast ? 'Gleiche Stufe = gleicher Kontrast in allen Paletten.' : 'Gleiche Stufe = gleiche OKLCH-Lightness, Verteilung über eine Kurve.'}</small>
-    </div>
-    {#if isContrast}
-      <div class="row">
-        <span class="lbl">Hintergründe</span>
-        <label class="bg">
-          <i style:background={css(studio.scale.lightBg)}></i> Hell
-          <input type="text" value={bgText(studio.scale.lightBg)} onchange={(e) => setBg('lightBg', e.currentTarget.value)} aria-label="Heller Kontrast-Hintergrund" />
-        </label>
-        <label class="bg">
-          <i style:background={css(studio.scale.darkBg)}></i> Dunkel
-          <input type="text" value={bgText(studio.scale.darkBg)} onchange={(e) => setBg('darkBg', e.currentTarget.value)} aria-label="Dunkler Kontrast-Hintergrund" />
-        </label>
-        <small>Nur Messbezug für die Stufen.</small>
-      </div>
-    {/if}
     <div class="row">
       <span class="lbl">Stufen</span>
       <div class="seg" role="radiogroup" aria-label="Stufenzahl">
@@ -257,35 +228,61 @@
       {/if}
     </div>
     <details class="advanced">
-      <summary>Erweitert</summary>
-      <div class="grid">
-        {#if !isContrast}
-          <label>
-            <span>Verteilung <output>{studio.scale.distribution.toFixed(2)}</output></span>
-            <input type="range" min="0" max="1" step="0.05" bind:value={studio.scale.distribution} />
-            <small>1 = dynamisch (Stufen zum Rand), 0 = linear</small>
+      <summary>Erweitert <small>{system === 'apca' ? 'APCA' : 'WCAG 2'} · {isContrast ? 'Kontrast' : 'Lightness'} · {studio.scale.upper}–{studio.scale.lower}</small></summary>
+      <div class="adv">
+        <div class="row">
+          <span class="lbl">Algorithmus</span>
+          <div class="seg" role="radiogroup" aria-label="Algorithmus">
+            <button type="button" role="radio" aria-checked={system === 'apca'} onclick={() => (studio.scale.system = 'apca')}>APCA</button>
+            <button type="button" role="radio" aria-checked={system === 'wcag'} onclick={() => (studio.scale.system = 'wcag')}>WCAG 2</button>
+          </div>
+          <small>{system === 'apca' ? 'Wahrnehmungsbasiert, genauer bei dunklen Farben und Schriftgrößen.' : 'Gesetzlicher Standard (EU: European Accessibility Act).'}</small>
+        </div>
+        <div class="row">
+          <span class="lbl">Stufen-Basis</span>
+          <div class="seg" role="radiogroup" aria-label="Stufen-Basis">
+            <button type="button" role="radio" aria-checked={isContrast} onclick={() => (studio.scale.basis = 'contrast')}>Kontrast</button>
+            <button type="button" role="radio" aria-checked={!isContrast} onclick={() => (studio.scale.basis = 'lightness')}>Lightness</button>
+          </div>
+          <small>{isContrast ? 'Gleiche Stufe = gleicher Kontrast in allen Paletten.' : 'Gleiche Stufe = gleiche OKLCH-Lightness, Verteilung über eine Kurve.'}</small>
+        </div>
+        <div class="row">
+          <span class="lbl">Kontrast-Hintergründe</span>
+          <label class="bg">
+            <i style:background={css(studio.scale.lightBg)}></i> Hell
+            <input type="text" value={bgText(studio.scale.lightBg)} onchange={(e) => setBg('lightBg', e.currentTarget.value)} aria-label="Heller Kontrast-Hintergrund" />
           </label>
+          <label class="bg">
+            <i style:background={css(studio.scale.darkBg)}></i> Dunkel
+            <input type="text" value={bgText(studio.scale.darkBg)} onchange={(e) => setBg('darkBg', e.currentTarget.value)} aria-label="Dunkler Kontrast-Hintergrund" />
+          </label>
+          <small>{isContrast ? 'Messbezug: legt die Stufen fest.' : 'Messbezug für die Kontrastwerte in den Swatches.'}</small>
+        </div>
+        <div class="grid">
+          {#if !isContrast}
+            <label>
+              <span>Verteilung <output>{studio.scale.distribution.toFixed(2)}</output></span>
+              <input type="range" min="0" max="1" step="0.05" bind:value={studio.scale.distribution} />
+              <small>1 = dynamisch (Stufen zum Rand), 0 = linear</small>
+            </label>
+          {/if}
+          <label>
+            <span>Oberer Außenpunkt <output>{studio.scale.upper}</output></span>
+            <input type="range" min="90" max="100" step="1" bind:value={studio.scale.upper} />
+            <small>Mindestabstand {scale.minGap} L</small>
+          </label>
+          <label>
+            <span>Unterer Außenpunkt <output>{studio.scale.lower}</output></span>
+            <input type="range" min="0" max="20" step="1" bind:value={studio.scale.lower} />
+          </label>
+        </div>
+        {#if !isContrast}
+          <p class="meta">
+            Hell: erster Abstand {scale.light.g.toFixed(1)}{scale.light.fixedG ? ' (festgesetzt)' : ''}, r {scale.light.r.toFixed(2)} ·
+            Dunkel: erster Abstand {scale.dark.g.toFixed(1)}{scale.dark.fixedG ? ' (festgesetzt)' : ''}, r {scale.dark.r.toFixed(2)}
+          </p>
         {/if}
-        <label>
-          <span>Oberer Außenpunkt <output>{studio.scale.upper}</output></span>
-          <input type="range" min="90" max="100" step="1" bind:value={studio.scale.upper} />
-          <small>Mindestabstand {scale.minGap} L</small>
-        </label>
-        <label>
-          <span>Unterer Außenpunkt <output>{studio.scale.lower}</output></span>
-          <input type="range" min="0" max="20" step="1" bind:value={studio.scale.lower} />
-        </label>
-        <label class="check">
-          <input type="checkbox" bind:checked={studio.chromaRelative} />
-          <span>Chroma relativ zum Gamut <small>(Test)</small></span>
-        </label>
       </div>
-      {#if !isContrast}
-        <p class="meta">
-          Hell: erster Abstand {scale.light.g.toFixed(1)}{scale.light.fixedG ? ' (festgesetzt)' : ''}, r {scale.light.r.toFixed(2)} ·
-          Dunkel: erster Abstand {scale.dark.g.toFixed(1)}{scale.dark.fixedG ? ' (festgesetzt)' : ''}, r {scale.dark.r.toFixed(2)}
-        </p>
-      {/if}
     </details>
   </section>
 
@@ -358,7 +355,7 @@
     {#if isContrast}
       Kopfzeile: Kontrast jeder Stufe, hell gegen den dunklen Hintergrund, dunkel gegen den hellen. Er gilt für alle Paletten. Im Swatch: echtes L und Chroma.
     {:else}
-      Im Swatch: Kontrast ({system === 'apca' ? 'Lc' : 'Verhältnis'}), helle Stufen gegen Schwarz, dunkle gegen Weiß, darunter das Chroma.
+      Im Swatch: Kontrast ({system === 'apca' ? 'Lc' : 'Verhältnis'}), helle Stufen gegen den dunklen Hintergrund, dunkle gegen den hellen, darunter das Chroma.
     {/if}
     Die markierte Spalte ist das Zentrum (nur für Outlines). Zeile anklicken öffnet die Einstellungen der Palette.
   </p>
@@ -546,7 +543,13 @@
     cursor: pointer;
     color: var(--sl-color-gray-2);
   }
-  .advanced .grid {
+  .advanced summary small {
+    margin-left: 0.5rem;
+    color: var(--sl-color-gray-3);
+  }
+  .adv {
+    display: grid;
+    gap: 0.625rem;
     margin-top: 0.625rem;
   }
   .meta {

@@ -52,8 +52,6 @@ export interface ThemeConfig {
   categories: PaletteCategory[];
   /** Gemeinsames Chroma: Paletten ohne „Eigenes Chroma" nutzen die Werte ihrer Kategorie */
   sharedChroma: boolean;
-  /** Chroma relativ zum Gamut (Spec 02, 8: Test-Option) für alle Paletten */
-  chromaRelative?: boolean;
   /** Palette (ID) je Rollengruppe; Signal und Information optional */
   groups: Partial<Record<GroupKey, string | null>>;
   /** Fokusring außen: Palette (ID) oder null = Schwarz */
@@ -639,15 +637,16 @@ export function withDefaults(config: Partial<ThemeConfig> & Pick<ThemeConfig, 's
   // ältere Konfigurationen: Kategorie aus dem Typ, Chroma-Verlauf aus „harmonize"
   const palettes = config.palettes.map((p) => {
     const cat = categories.find((c) => c.id === p.category) ?? categories.find((c) => c.type === p.type) ?? categories[0];
-    const { harmonize, ...rest } = p;
+    const { harmonize, chromaMode, ...rest } = p as PaletteSettings & { chromaMode?: string };
     return { ...rest, category: cat.id, type: cat.type, curve: p.curve ?? (harmonize === false ? 'constant' : 'falling'), ownChroma: p.ownChroma ?? false } as PaletteSettings;
   });
+  const { chromaRelative, ...base } = config as typeof config & { chromaRelative?: boolean };
   return {
     groups: {},
     focus: null,
     overrides: {},
     sharedChroma: true,
-    ...config,
+    ...base,
     categories,
     palettes,
     scale: normalizeScale(config.scale),
@@ -662,9 +661,9 @@ export function withDefaults(config: Partial<ThemeConfig> & Pick<ThemeConfig, 's
   };
 }
 
-/** Palette mit wirksamen Chroma-Werten (Kategorie, gemeinsames Chroma, relativ zum Gamut) */
-export function effectivePalette(p: PaletteSettings, config: Pick<ThemeConfig, 'categories' | 'sharedChroma' | 'chromaRelative'>): PaletteSettings {
-  return { ...resolvePalette(p, config.categories, config.sharedChroma), chromaMode: config.chromaRelative ? 'relative' : 'absolute' };
+/** Palette mit wirksamen Chroma-Werten (Kategorie, gemeinsames Chroma) */
+export function effectivePalette(p: PaletteSettings, config: Pick<ThemeConfig, 'categories' | 'sharedChroma'>): PaletteSettings {
+  return resolvePalette(p, config.categories, config.sharedChroma);
 }
 
 /** Berechnet alle vier Modes. Reihenfolge: Light → Dark (gespiegelt) → Light HC → Dark HC. */
